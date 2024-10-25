@@ -2,8 +2,8 @@
 pragma solidity ^0.8.0;
 
 import {MutableERC165Struct, MutableERC165Layout} from "../libs/MutableERC165Layout.sol";
-import "../../interfaces/IERC165.sol";
-import "../../libs/ERC165Utils.sol";
+import {IERC165} from "../../interfaces/IERC165.sol";
+import {ERC165Utils} from "../../libs/ERC165Utils.sol";
 
 abstract contract MutableERC165Storage {
 

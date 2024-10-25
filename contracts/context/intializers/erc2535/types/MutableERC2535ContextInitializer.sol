@@ -5,25 +5,27 @@ pragma solidity ^0.8.0;
 // import "forge-std/console.sol";
 // import "forge-std/console2.sol";
 
-import "contracts/context/intializers/interfaces/IContextInitializer.sol";
-import "contracts/utils/Address.sol";
-import "contracts/resolvers/proxy/erc2535/types/MutableERC2535ProxyResolver.sol";
-import "contracts/dcdi/aware/types/DCDIAware.sol";
-import "contracts/resolvers/proxy/libs/ProxyResolverService.sol";
-import "contracts/resolvers/proxy/libs/ProxyResolverAdaptor.sol";
-import "contracts/dcdi/aware/libs/PackageAdaptor.sol";
+import {IContextInitializer} from "contracts/context/intializers/interfaces/IContextInitializer.sol";
+import {Address} from "contracts/primitives/Address.sol";
+import {DCDIAware} from "contracts/dcdi/aware/types/DCDIAware.sol";
+import {ProxyResolverService} from "contracts/resolvers/proxy/libs/ProxyResolverService.sol";
+import {ProxyResolverAdaptor} from "contracts/resolvers/proxy/libs/ProxyResolverAdaptor.sol";
+import {PackageAdaptor} from "contracts/context/libs/PackageAdaptor.sol";
 import {
+    IDiamondLoupe,
     MutableDiamondLoupeStorage
-} from "contracts/ercs/introspection/erc2535/types/MutableDiamondLoupeStorage.sol";
-import "contracts/context/libs/ContextInitializerService.sol";
-import "contracts/factory/libs/FactoryService.sol";
-import "contracts/dcdi/aware/libs/PackageService.sol";
-import "contracts/proxy/resolver/ResolverProxy.sol";
-import "contracts/context/libs/ContextInitializerService.sol";
-import "contracts/context/interfaces/IContext.sol";
+} from "contracts/introspection/erc2535/mutable/types/MutableDiamondLoupeStorage.sol";
+import {ContextInitializerService} from "contracts/context/intializers/libs/ContextInitializerService.sol";
+import {FactoryService} from "contracts/factory/libs/FactoryService.sol";
+import {IPackage, PackageService} from "contracts/context/libs/PackageService.sol";
+import {ResolverProxy} from "contracts/proxy/resolver/ResolverProxy.sol";
+// import "contracts/context/libs/ContextInitializerService.sol";
+import {IContext} from "contracts/context/interfaces/IContext.sol";
 // import "contracts/ercs/introspection/erc2535/interfaces/IDiamondLoupe.sol";
-import "contracts/resolvers/proxy/interfaces/IProxyResolver.sol";
-import "contracts/ercs/introspection/erc2535/types/MutableDiamondLoupeTarget.sol";
+import {IProxyResolver} from "contracts/resolvers/proxy/interfaces/IProxyResolver.sol";
+import {MutableDiamondLoupeTarget} from "contracts/introspection/erc2535/mutable/types/MutableDiamondLoupeTarget.sol";
+import {IDiamond} from "contracts/introspection/erc2535/interfaces/IDiamond.sol";
+import {IDiamondPackage} from "contracts/context/erc2535/interfaces/IDiamondPackage.sol";
 
 contract MutableERC2535ContextInitializer
 is
@@ -57,47 +59,47 @@ IContextInitializer
         bytes memory pkgArgs
     ) public returns(
         bytes memory initCode,
-        bytes32 salt,
+        bytes32 salt_,
         bytes memory initData_
     ) {
-        console.log("entering initContext");
-        // 0x15cF58144EF33af1e14b5208015d11F9143E27b9
-        console.log(
-            "Execution context: %s",
-            address(this)
-        );
-        salt = pkg._processArgs(pkgArgs);
+        // console.log("entering initContext");
+        // // 0x15cF58144EF33af1e14b5208015d11F9143E27b9
+        // console.log(
+        //     "Execution context: %s",
+        //     address(this)
+        // );
+        salt_ = pkg._processArgs(pkgArgs);
         // 0x404db9398374873bc26c0d105e2e7e6d5209aa005625ede1907ca590b9dcf37d
-        console.log(
-            "salt = "
-        );
-        console.logBytes32(salt);
+        // console.log(
+        //     "salt = "
+        // );
+        // console.logBytes32(salt);
         // 0x0d8fd63e6426e1660f7f5ace07d76ef320121a115835e17a28386486012b469d
-        console.log(
-            "PROXY_INIT_CODE_HASH = "
-        );
-        console.logBytes32(PROXY_INIT_CODE_HASH);
-        console.log(
-            "Deploying from %s",
-            address(this)
-        );
+        // console.log(
+        //     "PROXY_INIT_CODE_HASH = "
+        // );
+        // console.logBytes32(PROXY_INIT_CODE_HASH);
+        // console.log(
+        //     "Deploying from %s",
+        //     address(this)
+        // );
         address consumer_ = address(this)
             ._create2AddressFrom(
                 PROXY_INIT_CODE_HASH,
-                salt
+                salt_
             );
-        console.log(
-            "Deploying to %s",
-            consumer_
-        );
+        // console.log(
+        //     "Deploying to %s",
+        //     consumer_
+        // );
         // 0xD0f6eDEdB507aF1665b9eEf0E6578DE3EEdb869c.
         // 0xD0f6eDEdB507aF1665b9eEf0E6578DE3EEdb869c.
-        console.log(
-            "Injecting context initer data for consumer %s.",
-            consumer_
-        );
+        // console.log(
+        //     "Injecting context initer data for consumer %s.",
+        //     consumer_
+        // );
         bytes memory initerData_ = abi.encode(address(pkg));
-        console.logBytes(initerData_);
+        // console.logBytes(initerData_);
         initerData_
             ._injectIniterData(
                 IContextInitializer(_self()),
@@ -106,7 +108,7 @@ IContextInitializer
         pkg._initContext(consumer_, pkgArgs);
         initData_ = abi.encode(_self());
         initCode = PROXY_INIT_CODE;
-        console.log("exiting initContext");
+        // console.log("exiting initContext");
     }
 
     function initAccount()
@@ -120,8 +122,8 @@ IContextInitializer
                 IContextInitializer(_self()),
                 address(this)
             );
-        console.log("Loaded context initer data.");
-        console.logBytes(initerData_);
+        // console.log("Loaded context initer data.");
+        // console.logBytes(initerData_);
         emit IDiamond.DiamondCut(
             loupeFacetCuts_,
             _self(),
@@ -134,7 +136,7 @@ IContextInitializer
             )
         );
         // TODO add ERC165 support.
-        IDiamond.FacetCut[] memory pkgFacetCuts_ = pkg.facetCuts();
+        IDiamond.FacetCut[] memory pkgFacetCuts_ = IDiamondPackage(address(pkg)).facetCuts();
         _processFacetCuts(
             pkgFacetCuts_
         );

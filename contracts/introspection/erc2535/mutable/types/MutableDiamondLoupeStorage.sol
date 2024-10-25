@@ -3,10 +3,11 @@ pragma solidity ^0.8.0;
 
 import {
     MutableERC2535Service,
-    MutableDiamondLoupeStorage,
-    IDiamondLoupe
-} from "./MutableDiamondLoupeStorage.sol";
+    IDiamondLoupe,
+    IDiamond
+} from "contracts/introspection/erc2535/mutable/libs/MutableERC2535Service.sol";
 import {
+    ERC165Utils,
     MutableERC165Storage
 } from "../../../erc165/mutable/types/MutableERC165Storage.sol";
 

@@ -33,11 +33,29 @@ library BetterMath {
     }
 
     /**
-     * @dev Expects percentage to be trailed by 00,
+     * @dev Expects percentage to be trailed by 0,
      */
+    // 1 = 0.1%
+    // 10 = 1%
+    // 30 = 3%
+    // 50 = 5%
+    // 100 = 10%
     function _percentageAmount(uint256 total_, uint256 percentage_)
     internal pure returns ( uint256 percentAmount_ ) {
         return ( ( total_ * percentage_ ) / 1000 );
+    }
+
+    /**
+     * @dev Expects percentage to be trailed by 000,
+     */
+    // 100 = 0.1%
+    // 1000 = 1%
+    // 3000 = 3%
+    // 5000 = 5%
+    // 10000 = 10%
+    function _percentageAmountExpanded(uint256 total_, uint256 percentage_)
+    internal pure returns ( uint256 percentAmount_ ) {
+        return ( ( total_ * percentage_ ) / 100000 );
     }
 
     function _convertDecimalsFromTo(

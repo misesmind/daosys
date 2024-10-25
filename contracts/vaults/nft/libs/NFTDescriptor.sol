@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity ^0.8.0;
 
-import "../../../primitives/String.sol";
-import "../../../encoding/Base64.sol";
-import "../../../primitives/UInt.sol";
+import {String} from "../../../primitives/String.sol";
+import {Base64} from "../../../encoding/Base64.sol";
+import {UInt} from "../../../primitives/UInt.sol";
 // import "thefactory/utils/primitives/Primitives.sol";
 
 library NFTDescriptor {
