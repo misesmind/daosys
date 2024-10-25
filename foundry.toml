@@ -11,7 +11,8 @@ remappings = [
   "eth-gas-reporter/=node_modules/eth-gas-reporter/",
   "forge-std/=lib/forge-std/src/",
   "hardhat/=node_modules/hardhat/",
-  "solplot/=lib/solplot/"
+  "solplot/=lib/solplot/contracts/",
+  "daosys/=contracts/"
 ]
     # The Solc instance to use if any.
     # This takes precedence over `auto_detect_solc`, if a version is set then this overrides auto-detection.
