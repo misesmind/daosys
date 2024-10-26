@@ -12,7 +12,7 @@ import {
     AddressSetRepo,
     AddressFuzzingConstraints,
     FuzzingConstraints
-} from "./constraints/FuzzingConstraints.sol";
+} from "daosys/test/fuzzing/constraints/FuzzingConstraints.sol";
 
 /**
  * @dev This is an objectively better test.

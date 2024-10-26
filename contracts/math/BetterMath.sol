@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../Constants.sol";
+import "daosys/Constants.sol";
 
 struct Uint512 {
     uint256 hi; // 256 most significant bits

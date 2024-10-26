@@ -14,16 +14,16 @@
 
 pragma solidity ^0.8.0;
 
-import {IERC20} from "contracts/tokens/erc20/interfaces/IERC20.sol";
-import {IAuthentication} from "./IAuthentication.sol";
-import {ISignaturesValidator} from "./ISignaturesValidator.sol";
-import {ITemporarilyPausable} from "./ITemporarilyPausable.sol";
-import {IWETH} from "contracts/protocols/tokens/wrappers/weth/9/interfaces/IWETH.sol";
+// import {IERC20} from "../../../../../tokens/erc20/interfaces/IERC20.sol";
+import {IAuthentication} from "daosys/protocols/dexes/balancer/v2/interfaces/IAuthentication.sol";
+import {ISignaturesValidator} from "daosys/protocols/dexes/balancer/v2/interfaces/ISignaturesValidator.sol";
+import {ITemporarilyPausable} from "daosys/protocols/dexes/balancer/v2/interfaces/ITemporarilyPausable.sol";
+import {IERC20, IWETH} from "daosys/protocols/tokens/wrappers/weth/9/interfaces/IWETH.sol";
 
-import {IAsset} from "./IAsset.sol";
-import {IAuthorizer} from "./IAuthorizer.sol";
-import {IFlashLoanRecipient} from "./IFlashLoanRecipient.sol";
-import {IProtocolFeesCollector} from "./IProtocolFeesCollector.sol";
+import {IAsset} from "daosys/protocols/dexes/balancer/v2/interfaces/IAsset.sol";
+import {IAuthorizer} from "daosys/protocols/dexes/balancer/v2/interfaces/IAuthorizer.sol";
+import {IFlashLoanRecipient} from "daosys/protocols/dexes/balancer/v2/interfaces/IFlashLoanRecipient.sol";
+import {IProtocolFeesCollector} from "daosys/protocols/dexes/balancer/v2/interfaces/IProtocolFeesCollector.sol";
 
 /**
  * @dev Full external interface for the Vault core contract - no external or public methods exist in the contract that

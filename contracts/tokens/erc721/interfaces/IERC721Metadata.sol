@@ -3,7 +3,7 @@
 
 pragma solidity ^0.8.20;
 
-import {IERC721} from "./IERC721.sol";
+import {IERC721} from "daosys/tokens/erc721/interfaces/IERC721.sol";
 
 /**
  * @title ERC-721 Non-Fungible Token Standard, optional metadata extension

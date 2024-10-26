@@ -15,8 +15,8 @@
 pragma solidity >=0.7.0 <0.9.0;
 pragma experimental ABIEncoderV2;
 
-import "./IVault.sol";
-import "./IPoolSwapStructs.sol";
+import "daosys/protocols/dexes/balancer/v2/interfaces/IVault.sol";
+import "daosys/protocols/dexes/balancer/v2/interfaces/IPoolSwapStructs.sol";
 
 /**
  * @dev Interface for adding and removing liquidity that all Pool contracts should implement. Note that this is not

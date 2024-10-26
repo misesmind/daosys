@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import {
     IPackage,
     IContextInitializer
-} from "contracts/context/intializers/interfaces/IContextInitializer.sol";
+} from "daosys/context/intializers/interfaces/IContextInitializer.sol";
 // import "./IPackage.sol";
 
 interface IContext {

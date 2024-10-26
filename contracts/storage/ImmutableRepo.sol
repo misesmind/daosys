@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import {Address} from "../primitives/Address.sol";
-import {Bytecode} from "../primitives/Bytecode.sol";
+import {Address} from "daosys/primitives/Address.sol";
+import {Bytecode} from "daosys/primitives/Bytecode.sol";
 
 /**
  * @title Library to serve as the primary integration point for consumers of immutable blob storage.

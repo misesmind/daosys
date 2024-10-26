@@ -6,7 +6,7 @@ import {
     IERC20,
     IERC2612,
     IUniswapV2ERC20
-} from "./IUniswapV2ERC20.sol";
+} from "daosys/protocols/dexes/uniswap/v2/interfaces/IUniswapV2ERC20.sol";
 
 interface IUniswapV2Pair is IUniswapV2ERC20 {
 

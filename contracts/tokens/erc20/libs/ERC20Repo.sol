@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 /* ---------------------------------- ERC20 --------------------------------- */
 
-import {IERC20} from "contracts/tokens/erc20/interfaces/IERC20.sol";
+import {IERC20} from "daosys/tokens/erc20/interfaces/IERC20.sol";
 
 // tag::ERC20Layout[]
 // Named with Struct suffix to ensure no namespace collisions.

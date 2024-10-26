@@ -10,7 +10,7 @@ import "forge-std/Test.sol";
 import {
     AddressSet,
     AddressSetRepo
-} from "contracts/collections/sets/AddressSetRepo.sol";
+} from "daosys/collections/sets/AddressSetRepo.sol";
 
 struct AddressFuzzingStruct {
     AddressSet usedAddresses;

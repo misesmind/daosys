@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
-import {IPackage} from "../../interfaces/IPackage.sol";
+import {IPackage} from "daosys/context/interfaces/IPackage.sol";
 
 interface IContextInitializer {
 

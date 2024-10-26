@@ -5,7 +5,7 @@ import {
     IERC20Errors,
     IERC20,
     ERC20Storage
-} from "./ERC20Storage.sol";
+} from "daosys/tokens/erc20/types/ERC20Storage.sol";
 
 /**
  * @title ERC20Target - Proxy Logic target exposing ERC20 standard.

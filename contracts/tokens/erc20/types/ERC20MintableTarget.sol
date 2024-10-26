@@ -7,8 +7,8 @@ import {
     IERC20,
     ERC20Storage,
     ERC20Target
-} from "./ERC20Target.sol";
-import {IERC20Mintable} from "contracts/tokens/erc20/interfaces/IERC20Mintable.sol";
+} from "daosys/tokens/erc20/types/ERC20Target.sol";
+import {IERC20Mintable} from "daosys/tokens/erc20/interfaces/IERC20Mintable.sol";
 // import {ERC20Storage} from "./ERC20Storage.sol";
 
 abstract contract ERC20MintableTarget is ERC20Target, IERC20Mintable {

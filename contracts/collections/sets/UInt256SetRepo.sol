@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
-import {Array} from "../arrays/Array.sol";
+import {Array} from "daosys/collections/arrays/Array.sol";
 
 struct UInt256Set {
     // 1-indexed to allow 0 to signify nonexistence

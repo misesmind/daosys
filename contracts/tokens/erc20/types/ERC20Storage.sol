@@ -5,8 +5,8 @@ pragma solidity ^0.8.0;
 
 /* ---------------------------------- ERC20 --------------------------------- */
 
-import {IERC20Errors, IERC20} from "contracts/tokens/erc20/interfaces/IERC20.sol";
-import {ERC20Layout, ERC20Repo} from "contracts/tokens/erc20/libs/ERC20Repo.sol";
+import {IERC20Errors, IERC20} from "daosys/tokens/erc20/interfaces/IERC20.sol";
+import {ERC20Layout, ERC20Repo} from "daosys/tokens/erc20/libs/ERC20Repo.sol";
 
 /**
  * @title ERC20Storage Diamond Storage ERC20 logic.

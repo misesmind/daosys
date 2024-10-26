@@ -3,8 +3,8 @@
 
 pragma solidity ^0.8.20;
 
-import {IERC165} from "contracts/introspection/erc165/interfaces/IERC165.sol";
-import {IERC721Errors} from "contracts/tokens/erc6903/interfaces/IERC6093.sol";
+import {IERC165} from "daosys/introspection/erc165/interfaces/IERC165.sol";
+import {IERC721Errors} from "daosys/tokens/erc6903/interfaces/IERC6093.sol";
 
 /**
  * @dev Required interface of an ERC721 compliant contract.

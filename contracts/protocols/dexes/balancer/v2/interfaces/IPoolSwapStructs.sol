@@ -15,9 +15,9 @@
 pragma solidity >=0.7.0 <0.9.0;
 pragma experimental ABIEncoderV2;
 
-import {IERC20} from "contracts/tokens/erc20/interfaces/IERC20.sol";
+import {IERC20} from "daosys/tokens/erc20/interfaces/IERC20.sol";
 
-import {IVault} from "./IVault.sol";
+import {IVault} from "daosys/protocols/dexes/balancer/v2/interfaces/IVault.sol";
 
 interface IPoolSwapStructs {
     // This is not really an interface - it just defines common structs used by other interfaces: IGeneralPool and

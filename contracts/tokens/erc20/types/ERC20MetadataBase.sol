@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
-import {IERC20Errors, IERC20, ERC20BaseStorage} from "./ERC20BaseStorage.sol";
+import {IERC20Errors, IERC20, ERC20BaseStorage} from "daosys/tokens/erc20/types/ERC20BaseStorage.sol";
 
 abstract contract ERC20MetadataBase
 is

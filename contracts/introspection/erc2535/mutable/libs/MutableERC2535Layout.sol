@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import {AddressSet, AddressSetRepo} from "contracts/collections/sets/AddressSetRepo.sol";
-import {FacetSetLayout, IDiamondLoupe} from "./FacetSetLayout.sol";
-import {IDiamondLoupe} from "../../interfaces/IDiamondLoupe.sol";
+import {AddressSet, AddressSetRepo} from "daosys/collections/sets/AddressSetRepo.sol";
+import {FacetSetLayout, IDiamondLoupe} from "daosys/introspection/erc2535/mutable/libs/FacetSetLayout.sol";
+import {IDiamondLoupe} from "daosys/introspection/erc2535/interfaces/IDiamondLoupe.sol";
 
     // TODO Implement Faceet replacement,
     // TODO Implement Faceet removal,

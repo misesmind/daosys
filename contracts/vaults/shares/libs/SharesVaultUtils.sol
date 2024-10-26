@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import {BetterMath} from "../../../math/BetterMath.sol";
+import {BetterMath} from "daosys/math/BetterMath.sol";
 
 /**
  * @title SharesVautlUtils - Utility functions for shares based vaults.

@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import {
     IERC20Errors,
     IERC20
-} from "./IERC20.sol";
+} from "daosys/tokens/erc20/interfaces/IERC20.sol";
 
 interface IERC20Mintable is IERC20 {
     

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import {IERC20, SafeERC20} from "contracts/tokens/erc20/libs/SafeERC20.sol";
-import {IUniswapV2Pair} from "../interfaces/IUniswapV2Pair.sol";
-import {BetterUniV2Utils} from "./BetterUniV2Utils.sol";
+import {IERC20, SafeERC20} from "daosys/tokens/erc20/libs/SafeERC20.sol";
+import {IUniswapV2Pair} from "daosys/protocols/dexes/uniswap/v2/interfaces/IUniswapV2Pair.sol";
+import {BetterUniV2Utils} from "daosys/protocols/dexes/uniswap/v2/libs/BetterUniV2Utils.sol";
 
 library BetterUniV2Service {
 

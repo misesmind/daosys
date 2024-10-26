@@ -2,8 +2,8 @@
 pragma solidity ^0.8.0;
 
 // import "thefactory/utils/primitives/Primitives.sol";
-import {Address} from "contracts/primitives/Address.sol";
-import {IERC20Errors, IERC20} from "contracts/tokens/erc20/interfaces/IERC20.sol";
+import {Address} from "daosys/primitives/Address.sol";
+import {IERC20Errors, IERC20} from "daosys/tokens/erc20/interfaces/IERC20.sol";
 
 /**
  * @title SafeERC20

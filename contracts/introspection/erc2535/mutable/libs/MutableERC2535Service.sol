@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import {MutableERC2535Repo, IDiamondLoupe} from "./MutableERC2535Repo.sol";
-import {IDiamond} from "contracts/introspection/erc2535/interfaces/IDiamond.sol";
-import {ERC165Utils} from "../../../erc165/libs/ERC165Utils.sol";
+import {MutableERC2535Repo, IDiamondLoupe} from "daosys/introspection/erc2535/mutable/libs/MutableERC2535Repo.sol";
+import {IDiamond} from "daosys/introspection/erc2535/interfaces/IDiamond.sol";
+import {ERC165Utils} from "daosys/introspection/erc165/libs/ERC165Utils.sol";
 
 // TODO Write NatSpec comments.
 // TODO Complete unit testinfg for all functions.

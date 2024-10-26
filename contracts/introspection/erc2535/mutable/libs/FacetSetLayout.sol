@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import {IDiamondLoupe} from "../../interfaces/IDiamondLoupe.sol";
+import {IDiamondLoupe} from "daosys/introspection/erc2535/interfaces/IDiamondLoupe.sol";
 
 library FacetSetLayout {
 

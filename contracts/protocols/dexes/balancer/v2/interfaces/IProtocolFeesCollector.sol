@@ -14,10 +14,10 @@
 
 pragma solidity ^0.8.0;
 
-import {IERC20} from "contracts/tokens/erc20/interfaces/IERC20.sol";
+import {IERC20} from "daosys/tokens/erc20/interfaces/IERC20.sol";
 
-import {IVault} from "./IVault.sol";
-import {IAuthorizer} from "./IAuthorizer.sol";
+import {IVault} from "daosys/protocols/dexes/balancer/v2/interfaces/IVault.sol";
+import {IAuthorizer} from "daosys/protocols/dexes/balancer/v2/interfaces/IAuthorizer.sol";
 
 interface IProtocolFeesCollector {
     event SwapFeePercentageChanged(uint256 newSwapFeePercentage);

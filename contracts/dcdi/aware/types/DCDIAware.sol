@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
-import {IDCDI} from "../../interfaces/IDCDI.sol";
-import {DCDIAwareService} from "../libs/DCDIAwareService.sol";
+import {IDCDI} from "daosys/dcdi/interfaces/IDCDI.sol";
+import {DCDIAwareService} from "daosys/dcdi/aware/libs/DCDIAwareService.sol";
 
 abstract contract DCDIAware is IDCDI {
 

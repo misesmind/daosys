@@ -5,27 +5,27 @@ pragma solidity ^0.8.0;
 // import "forge-std/console.sol";
 // import "forge-std/console2.sol";
 
-import {IContextInitializer} from "contracts/context/intializers/interfaces/IContextInitializer.sol";
-import {Address} from "contracts/primitives/Address.sol";
-import {DCDIAware} from "contracts/dcdi/aware/types/DCDIAware.sol";
-import {ProxyResolverService} from "contracts/resolvers/proxy/libs/ProxyResolverService.sol";
-import {ProxyResolverAdaptor} from "contracts/resolvers/proxy/libs/ProxyResolverAdaptor.sol";
-import {PackageAdaptor} from "contracts/context/libs/PackageAdaptor.sol";
+import {IContextInitializer} from "daosys/context/intializers/interfaces/IContextInitializer.sol";
+import {Address} from "daosys/primitives/Address.sol";
+import {DCDIAware} from "daosys/dcdi/aware/types/DCDIAware.sol";
+import {ProxyResolverService} from "daosys/resolvers/proxy/libs/ProxyResolverService.sol";
+import {ProxyResolverAdaptor} from "daosys/resolvers/proxy/libs/ProxyResolverAdaptor.sol";
+import {PackageAdaptor} from "daosys/context/libs/PackageAdaptor.sol";
 import {
     IDiamondLoupe,
     MutableDiamondLoupeStorage
-} from "contracts/introspection/erc2535/mutable/types/MutableDiamondLoupeStorage.sol";
-import {ContextInitializerService} from "contracts/context/intializers/libs/ContextInitializerService.sol";
-import {FactoryService} from "contracts/factory/libs/FactoryService.sol";
-import {IPackage, PackageService} from "contracts/context/libs/PackageService.sol";
-import {ResolverProxy} from "contracts/proxy/resolver/ResolverProxy.sol";
+} from "daosys/introspection/erc2535/mutable/types/MutableDiamondLoupeStorage.sol";
+import {ContextInitializerService} from "daosys/context/intializers/libs/ContextInitializerService.sol";
+import {FactoryService} from "daosys/factory/libs/FactoryService.sol";
+import {IPackage, PackageService} from "daosys/context/libs/PackageService.sol";
+import {ResolverProxy} from "daosys/proxy/resolver/ResolverProxy.sol";
 // import "contracts/context/libs/ContextInitializerService.sol";
-import {IContext} from "contracts/context/interfaces/IContext.sol";
+import {IContext} from "daosys/context/interfaces/IContext.sol";
 // import "contracts/ercs/introspection/erc2535/interfaces/IDiamondLoupe.sol";
-import {IProxyResolver} from "contracts/resolvers/proxy/interfaces/IProxyResolver.sol";
-import {MutableDiamondLoupeTarget} from "contracts/introspection/erc2535/mutable/types/MutableDiamondLoupeTarget.sol";
-import {IDiamond} from "contracts/introspection/erc2535/interfaces/IDiamond.sol";
-import {IDiamondPackage} from "contracts/context/erc2535/interfaces/IDiamondPackage.sol";
+import {IProxyResolver} from "daosys/resolvers/proxy/interfaces/IProxyResolver.sol";
+import {MutableDiamondLoupeTarget} from "daosys/introspection/erc2535/mutable/types/MutableDiamondLoupeTarget.sol";
+import {IDiamond} from "daosys/introspection/erc2535/interfaces/IDiamond.sol";
+import {IDiamondPackage} from "daosys/context/erc2535/interfaces/IDiamondPackage.sol";
 
 contract MutableERC2535ContextInitializer
 is

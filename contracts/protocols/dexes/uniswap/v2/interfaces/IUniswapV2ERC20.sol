@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 import {
     IERC20Errors,
     IERC20
-} from "contracts/tokens/erc20/interfaces/IERC20.sol";
-import {IERC2612} from "contracts/access/erc2612/interfaces/IERC2612.sol";
+} from "daosys/tokens/erc20/interfaces/IERC20.sol";
+import {IERC2612} from "daosys/access/erc2612/interfaces/IERC2612.sol";
 
 interface IUniswapV2ERC20 is IERC20, IERC2612 {
 

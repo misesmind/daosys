@@ -1,8 +1,13 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
-import {IVault, IAsset, IERC20} from "contracts/protocols/dexes/balancer/v2/interfaces/IVault.sol";
-// import {IBalancerQueries} from "lib/balancer-v2-monorepo/pkg/interfaces/contracts/standalone-utils/IBalancerQueries.sol";
+import {
+    // IERC20,
+    IAsset,
+    IVault
+} from "daosys/protocols/dexes/balancer/v2/interfaces/IVault.sol";
+import "daosys/tokens/erc20/interfaces/IERC20.sol";
+
 enum JoinKind {
     INIT,
     EXACT_TOKENS_IN_FOR_BPT_OUT,
@@ -19,6 +24,7 @@ enum ExitKindComposableStable {
     BPT_IN_FOR_EXACT_TOKENS_OUT,
     EXACT_BPT_IN_FOR_ALL_TOKENS_OUT
 }
+
 library BalancerUtils {
     struct SingleSwapBase {
         bytes32 poolId;

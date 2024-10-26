@@ -5,11 +5,11 @@ import {
     MutableERC2535Service,
     IDiamondLoupe,
     IDiamond
-} from "contracts/introspection/erc2535/mutable/libs/MutableERC2535Service.sol";
+} from "daosys/introspection/erc2535/mutable/libs/MutableERC2535Service.sol";
 import {
     ERC165Utils,
     MutableERC165Storage
-} from "../../../erc165/mutable/types/MutableERC165Storage.sol";
+} from "daosys/introspection/erc165/mutable/types/MutableERC165Storage.sol";
 
 abstract contract MutableDiamondLoupeStorage is MutableERC165Storage {
 

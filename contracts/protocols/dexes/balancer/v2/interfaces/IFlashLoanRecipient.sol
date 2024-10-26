@@ -16,7 +16,7 @@ pragma solidity ^0.8.0;
 
 // Inspired by Aave Protocol's IFlashLoanReceiver.
 
-import {IERC20} from "../../../../../tokens/erc20/interfaces/IERC20.sol";
+import {IERC20} from "daosys/tokens/erc20/interfaces/IERC20.sol";
 
 interface IFlashLoanRecipient {
     /**

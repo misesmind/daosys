@@ -6,7 +6,7 @@ pragma solidity ^0.8.8;
 // solhint-disable reason-string
 // solhint-disable no-inline-assembly
 // import {Address} from "contracts/libs/primitives/Address.sol";
-import {Address} from "contracts/primitives/Address.sol";
+import {Address} from "daosys/primitives/Address.sol";
 
 /**
  * @title Base proxy contract

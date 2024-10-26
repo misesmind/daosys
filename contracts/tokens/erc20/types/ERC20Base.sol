@@ -9,7 +9,7 @@ import {
     IERC20Errors,
     IERC20,
     ERC20BaseStorage
-} from "contracts/tokens/erc20/types/ERC20BaseStorage.sol";
+} from "daosys/tokens/erc20/types/ERC20BaseStorage.sol";
 
 
 contract ERC20Base is ERC20BaseStorage, IERC20 {

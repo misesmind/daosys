@@ -6,8 +6,8 @@ pragma solidity ^0.8.0;
 // import "forge-std/console2.sol";
 
 // import {IDCDI} from "../../interfaces/IDCDI.sol";
-import {IDCDI, DCDIAwareService} from "contracts/dcdi/aware/libs/DCDIAwareService.sol";
-import {FactoryService} from "contracts/factory/libs/FactoryService.sol";
+import {IDCDI, DCDIAwareService} from "daosys/dcdi/aware/libs/DCDIAwareService.sol";
+import {FactoryService} from "daosys/factory/libs/FactoryService.sol";
 
 library DCDIFactoryService {
 

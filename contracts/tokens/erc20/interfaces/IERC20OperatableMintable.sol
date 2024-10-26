@@ -5,8 +5,8 @@ import {
     IERC20Errors,
     IERC20,
     IERC20Mintable
-} from "./IERC20Mintable.sol";
-import {IOperatable} from "contracts/access/operatable/interface/IOperatable.sol";
+} from "daosys/tokens/erc20/interfaces/IERC20Mintable.sol";
+import {IOperatable} from "daosys/access/operatable/interface/IOperatable.sol";
 
 interface IERC20OperatableMintable is IERC20Mintable, IOperatable {
 

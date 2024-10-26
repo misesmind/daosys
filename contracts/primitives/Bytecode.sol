@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 // solhint-disable no-inline-assembly
 import {
   Bytes32
-} from "./Bytes32.sol";
+} from "daosys/primitives/Bytes32.sol";
 
 /**
  * @title A library for deploying contracts EIP-3171 style.

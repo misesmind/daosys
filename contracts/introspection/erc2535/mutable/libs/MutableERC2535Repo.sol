@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import {UInt} from "../../../../primitives/UInt.sol";
-import {MutableERC2535Layout, IDiamondLoupe} from "./MutableERC2535Layout.sol";
+import {UInt} from "daosys/primitives/UInt.sol";
+import {MutableERC2535Layout, IDiamondLoupe} from "daosys/introspection/erc2535/mutable/libs/MutableERC2535Layout.sol";
 
 /*
 Each FacetCut struct contains a facet address and array of function selectors that are updated in a diamond.

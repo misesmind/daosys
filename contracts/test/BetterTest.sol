@@ -13,7 +13,7 @@ import {
     AddressFuzzingConstraints,
     FuzzingConstraints,
     BetterFuzzing
-} from "./fuzzing/BetterFuzzing.sol";
+} from "daosys/test/fuzzing/BetterFuzzing.sol";
 
 /**
  * @dev This is an objectively better test.

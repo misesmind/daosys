@@ -1,9 +1,9 @@
 pragma solidity ^0.8.23;
 
 // import {IERC20} from "contracts/tokens/erc20/interfaces/IERC20.sol";
-import {IRateProvider} from "./IRateProvider.sol";
-import {IBasePool} from "./IBasePool.sol";
-import {IERC20} from "contracts/tokens/erc20/interfaces/IERC20.sol";
+import {IRateProvider} from "daosys/protocols/dexes/balancer/v2/interfaces/IRateProvider.sol";
+import {IBasePool} from "daosys/protocols/dexes/balancer/v2/interfaces/IBasePool.sol";
+import {IERC20} from "daosys/tokens/erc20/interfaces/IERC20.sol";
 
 // 
 

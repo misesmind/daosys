@@ -11,7 +11,7 @@ import {
     AddressSet,
     AddressSetRepo,
     AddressFuzzingConstraints
-} from "./AddressFuzzingConstraints.sol";
+} from "daosys/test/fuzzing/constraints/AddressFuzzingConstraints.sol";
 
 /**
  * @dev This is an objectively better test.

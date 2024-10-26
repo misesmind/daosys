@@ -2,11 +2,11 @@
 pragma solidity ^0.8.0;
 
 // import "../libs/OperatableRepo.sol";
-import {IOperatable} from "../interface/IOperatable.sol";
+import {IOperatable} from "daosys/access/operatable/interface/IOperatable.sol";
 import {
     OwnableStorage,
     OwnableTarget
-} from "../../ownable/types/OwnableTarget.sol";
+} from "daosys/access/ownable/types/OwnableTarget.sol";
 
 struct OperatableLayout {
     mapping(address => bool) isOperator;

@@ -5,13 +5,13 @@ pragma solidity ^0.8.0;
 // import "forge-std/console.sol";
 // import "forge-std/console2.sol";
 
-import {DCDIFactoryService} from "contracts/dcdi/factory/libs/DCDIFactoryService.sol";
-import {IContext} from "contracts/context/interfaces/IContext.sol";
-import {IContextInitializer} from "contracts/context/intializers/interfaces/IContextInitializer.sol";
-import {IPackage} from "contracts/context/interfaces/IPackage.sol";
-import {OperatableTarget} from "contracts/access/operatable/types/OperatableTarget.sol";
-import {ContextInitializerAdaptor} from "contracts/context/intializers/libs/ContextInitializerAdaptor.sol";
-import {FactoryService} from "contracts/factory/libs/FactoryService.sol";
+import {DCDIFactoryService} from "daosys/dcdi/factory/libs/DCDIFactoryService.sol";
+import {IContext} from "daosys/context/interfaces/IContext.sol";
+import {IContextInitializer} from "daosys/context/intializers/interfaces/IContextInitializer.sol";
+import {IPackage} from "daosys/context/interfaces/IPackage.sol";
+import {OperatableTarget} from "daosys/access/operatable/types/OperatableTarget.sol";
+import {ContextInitializerAdaptor} from "daosys/context/intializers/libs/ContextInitializerAdaptor.sol";
+import {FactoryService} from "daosys/factory/libs/FactoryService.sol";
 
 contract Context
 is

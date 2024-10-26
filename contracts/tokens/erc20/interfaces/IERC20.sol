@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import {IERC20Errors} from "../../erc6903/interfaces/IERC6093.sol";
+import {IERC20Errors} from "daosys/tokens/erc6903/interfaces/IERC6093.sol";
 
 // tag::IERC20[]
 /**

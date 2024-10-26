@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
-import {DCDIAwareService} from "contracts/dcdi/aware/libs/DCDIAwareService.sol";
-import {IContext} from "contracts/context/interfaces/IContext.sol";
-import {IProxyResolver} from "contracts/resolvers/proxy/interfaces/IProxyResolver.sol";
+import {DCDIAwareService} from "daosys/dcdi/aware/libs/DCDIAwareService.sol";
+import {IContext} from "daosys/context/interfaces/IContext.sol";
+import {IProxyResolver} from "daosys/resolvers/proxy/interfaces/IProxyResolver.sol";
 
 library ProxyResolverService {
 

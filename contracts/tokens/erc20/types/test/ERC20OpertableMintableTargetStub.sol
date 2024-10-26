@@ -9,7 +9,7 @@ import {
     ERC20MintableTarget,
     IERC20OperatableMintable,
     ERC20OpertableMintableTarget
-} from "contracts/tokens/erc20/types/ERC20OpertableMintableTarget.sol";
+} from "daosys/tokens/erc20/types/ERC20OpertableMintableTarget.sol";
 // import "contracts/tokens/erc20/interfaces/IERC20OperatableMintable.sol";
 
 contract ERC20OpertableMintableTargetStub is ERC20OpertableMintableTarget {

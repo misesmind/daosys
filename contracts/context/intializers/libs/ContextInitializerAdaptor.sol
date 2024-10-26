@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
-import {Address} from "contracts/primitives/Address.sol";
-import {IPackage, IContextInitializer} from "contracts/context/intializers/interfaces/IContextInitializer.sol";
+import {Address} from "daosys/primitives/Address.sol";
+import {IPackage, IContextInitializer} from "daosys/context/intializers/interfaces/IContextInitializer.sol";
 
 library ContextInitializerAdaptor {
 

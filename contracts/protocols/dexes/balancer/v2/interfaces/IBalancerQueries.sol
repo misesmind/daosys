@@ -14,7 +14,7 @@
 
 pragma solidity ^0.8.0;
 
-import "./IVault.sol";
+import "daosys/protocols/dexes/balancer/v2/interfaces/IVault.sol";
 
 /**
  * @dev Provides a way to perform queries on swaps, joins and exits, simulating these operations and returning the exact

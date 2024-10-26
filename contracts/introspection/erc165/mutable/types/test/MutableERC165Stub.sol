@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
-import {IERC165} from "../../../interfaces/IERC165.sol";
-import {ERC165Utils} from "../../../libs/ERC165Utils.sol";
+import {IERC165} from "daosys/introspection/erc165/interfaces/IERC165.sol";
+import {ERC165Utils} from "daosys/introspection/erc165/libs/ERC165Utils.sol";
 
 // TODO switch to enumerated version
 contract MutableERC165Stub is IERC165 {

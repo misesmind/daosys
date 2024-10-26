@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import {MutableDiamondLoupeTarget, MutableERC2535Service} from "contracts/introspection/erc2535/mutable/types/MutableDiamondLoupeTarget.sol";
-import {Proxy} from "../Proxy.sol";
+import {MutableDiamondLoupeTarget, MutableERC2535Service} from "daosys/introspection/erc2535/mutable/types/MutableDiamondLoupeTarget.sol";
+import {Proxy} from "daosys/proxy/Proxy.sol";
 
 contract MutableDiamondProxy is Proxy, MutableDiamondLoupeTarget {
 

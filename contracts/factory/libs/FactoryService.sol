@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import {Bytecode} from "../../primitives/Bytecode.sol";
+import {Bytecode} from "daosys/primitives/Bytecode.sol";
 
 // TODO Write NatSpec comments.
 // TODO Complete unit testinfg for all functions.

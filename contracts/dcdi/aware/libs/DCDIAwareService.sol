@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
-import {IDCDI} from "../../interfaces/IDCDI.sol";
-import {FactoryService} from "../../../factory/libs/FactoryService.sol";
-import {ImmutableRepo} from "../../../storage/ImmutableRepo.sol";
-import {Address} from "../../../primitives/Address.sol";
+import {IDCDI} from "daosys/dcdi/interfaces/IDCDI.sol";
+import {FactoryService} from "daosys/factory/libs/FactoryService.sol";
+import {ImmutableRepo} from "daosys/storage/ImmutableRepo.sol";
+import {Address} from "daosys/primitives/Address.sol";
 
 library DCDIAwareService {
 

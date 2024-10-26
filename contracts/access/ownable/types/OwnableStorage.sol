@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 // import "../libs/OwnableRepo.sol";
-import {IOwnable} from "../interfaces/IOwnable.sol";
+import {IOwnable} from "daosys/access/ownable/interfaces/IOwnable.sol";
 
 struct OwnableLayout {
     address owner;

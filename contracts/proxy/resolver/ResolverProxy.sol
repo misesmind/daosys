@@ -5,11 +5,11 @@ pragma solidity ^0.8.0;
 // import "forge-std/console.sol";
 // import "forge-std/console2.sol";
 
-import {Proxy} from "contracts/proxy/Proxy.sol";
-import {DCDIAware} from "contracts/dcdi/aware/types/DCDIAware.sol";
-import {Address} from "contracts/primitives/Address.sol";
-import {IProxyResolver} from "contracts/resolvers/proxy/interfaces/IProxyResolver.sol";
-import {ProxyResolverAdaptor} from "contracts/resolvers/proxy/libs/ProxyResolverAdaptor.sol";
+import {Proxy} from "daosys/proxy/Proxy.sol";
+import {DCDIAware} from "daosys/dcdi/aware/types/DCDIAware.sol";
+import {Address} from "daosys/primitives/Address.sol";
+import {IProxyResolver} from "daosys/resolvers/proxy/interfaces/IProxyResolver.sol";
+import {ProxyResolverAdaptor} from "daosys/resolvers/proxy/libs/ProxyResolverAdaptor.sol";
 
 contract ResolverProxy
 is

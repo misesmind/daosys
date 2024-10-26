@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import {MutableERC165Storage, IERC165} from "./MutableERC165Storage.sol";
+import {MutableERC165Storage, IERC165} from "daosys/introspection/erc165/mutable/types/MutableERC165Storage.sol";
 
 abstract contract MutableERC165Target is IERC165, MutableERC165Storage {
 

@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.8;
 
-import { Bytecode } from "./Bytecode.sol";
+import { Bytecode } from "daosys/primitives/Bytecode.sol";
 import {
   UInt
-} from "./UInt.sol";
+} from "daosys/primitives/UInt.sol";
 
 /**
  * @title Library with standardized operations involving address variables.
