@@ -167,6 +167,28 @@ library AddressSetRepo {
         return true;
     }
 
+    function _addExclusive(
+        AddressSet storage set,
+        address value
+    ) internal returns (bool success) {
+        if (!_contains(set, value)) {
+        set.values.push(value);
+        set.indexes[value] = set.values.length;
+        return true;
+        }
+        return false;
+    }
+
+    function _addExclusive(
+        AddressSet storage set,
+        address[] memory values
+    ) internal returns (bool success) {
+        for(uint256 iteration = 0; iteration < values.length; iteration++) {
+        success = _addExclusive(set, values[iteration]);
+        require(success == true, "AddressSet: value already present.");
+        }
+    }
+
     /**
      * @dev Writen to be idempotent.
      * @dev Sets care about ensuring desired state.

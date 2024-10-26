@@ -17,3 +17,5 @@ remappings.txt
 cache_forge/
 
 lib/
+
+out/
