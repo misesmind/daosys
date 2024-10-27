@@ -163,7 +163,7 @@ abstract contract OwnableStorage {
     }
 
     function _renounceOwnership() internal returns(bool) {
-        require(_ownable().proposedOwner == address(0));
+        require(_ownable().proposedOwner == address(0), "MUST NOT have proposed owner");
         address prevOwner = _ownable().owner;
         _ownable().owner = address(0);
         emit IOwnable.OwnershipTransfered(prevOwner, address(0));
