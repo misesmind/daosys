@@ -23,7 +23,7 @@ MutableDiamondLoupeStorage
         address initTarget,
         bytes memory initCalldata
     ) internal {
-        _processFacetCut(diamondCut_);
+        _processFacetCuts(diamondCut_);
         // bytes memory returnData
         if(initCalldata.length > 0 && initTarget != address(0)) {
             // (bool result, ) = initTarget.delegatecall(initCalldata);
@@ -38,10 +38,10 @@ MutableDiamondLoupeStorage
     }
 
     function diamondCut(
-        IDiamond.FacetCut[] calldata diamondCut_,
+        IDiamond.FacetCut[] memory diamondCut_,
         address initTarget,
-        bytes calldata initCalldata
-    ) external {
+        bytes memory initCalldata
+    ) public virtual {
         _diamondCut(
             diamondCut_,
             initTarget,

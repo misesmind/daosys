@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 // import "../libs/OperatableRepo.sol";
 import {IOperatable} from "daosys/access/operatable/interface/IOperatable.sol";
 import {
+    IOwnable,
     OwnableStorage,
     OwnableTarget
 } from "daosys/access/ownable/types/OwnableTarget.sol";

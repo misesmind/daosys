@@ -50,9 +50,9 @@ IContextInitializer
 
     // IProxyResolver immutable resolver_;
 
-    constructor() {
-        // resolver_ = abi.decode(_initData(), (IProxyResolver));
-    }
+    // constructor() {
+    //     // resolver_ = abi.decode(_initData(), (IProxyResolver));
+    // }
 
     function initContext(
         IPackage pkg,

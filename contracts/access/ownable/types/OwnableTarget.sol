@@ -174,23 +174,23 @@ abstract contract OwnableStorage {
 
 contract OwnableTarget is OwnableStorage, IOwnable {
 
-    function owner() external view returns(address) {
+    function owner() public view returns(address) {
         return _owner();
     }
 
-    function proposedOwner() external view returns(address) {
+    function proposedOwner() public view returns(address) {
         return _proposedOwner();
     }
 
-    function transferOwnership(address proposedOwner_) onlyOwner(msg.sender) external returns(bool) {
+    function transferOwnership(address proposedOwner_) onlyOwner(msg.sender) public returns(bool) {
         return _transferOwnerShip(proposedOwner_);
     }
 
-    function acceptOwnership() onlyProposedOwner(msg.sender) external returns(bool) {
+    function acceptOwnership() onlyProposedOwner(msg.sender) public returns(bool) {
         return _acceptOwnership();
     }
 
-    function renounceOwnership() onlyOwner(msg.sender) external returns(bool) {
+    function renounceOwnership() onlyOwner(msg.sender) public returns(bool) {
         return _renounceOwnership();
     }
 

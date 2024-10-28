@@ -6,9 +6,14 @@ import {
     IERC20,
     ERC20Storage,
     ERC20Target,
+    IERC20Mintable,
     ERC20MintableTarget
 } from "daosys/tokens/erc20/types/ERC20MintableTarget.sol";
-import {OperatableTarget} from "daosys/access/operatable/types/OperatableTarget.sol";
+import {
+    IOwnable,
+    IOperatable,
+    OperatableTarget
+} from "daosys/access/operatable/types/OperatableTarget.sol";
 import {
     IERC20OperatableMintable
 } from "daosys/tokens/erc20/interfaces/IERC20OperatableMintable.sol";
