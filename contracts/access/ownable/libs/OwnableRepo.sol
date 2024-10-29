@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BUSL-1.1
+// SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
 struct OwnableLayout {
@@ -6,6 +6,10 @@ struct OwnableLayout {
     address proposedOwner;
 }
 
+/**
+ * @title OwnableRepo - Repository library for OwnableLayout.
+ * @author cyotee doge <doge.cyotee>
+ */
 library OwnableRepo {
 
     // tag::slot(OwnableLayout storage)[]
@@ -37,6 +41,8 @@ library OwnableRepo {
      * @dev "Binds" this struct to a storage slot.
      * @param slot_ The first slot to use in the range of slots used by the struct.
      * @return layout_ A struct from a Layout library bound to the provided slot.
+     * @custom:func-sig layout(bytes32)
+     * @custom:func-sig-hash 0x81366cef
      */
     function layout(
         bytes32 slot_

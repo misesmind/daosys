@@ -1,0 +1,23 @@
+# IOperatable
+ifndef::compositing[]
+:author: cyotee doge
+:email: doge.cyotee
+:revdate: 2022-04-08
+:revnumber: 0.1
+:revremark: Initial draft.
+:toc:
+:toclevels: 6
+:sectnums:
+:data-uri:
+:stem:
+:icons: font
+:root: ../../../../../
+// :imagesdir: images
+:compositing:
+endif::[]
+
+[source,solidity]
+.contracts/access/operatable/interface/IOperatable.sol
+----
+include::{root}contracts/access/operatable/interface/IOperatable.sol[]
+----

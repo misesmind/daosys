@@ -9,16 +9,28 @@ import {
 } from "daosys/context/initializers/interfaces/IContextInitializer.sol";
 import {ContextInitializerAdaptor} from "daosys/context/initializers/libs/ContextInitializerAdaptor.sol";
 import {DCDIFactoryService} from "daosys/dcdi/factory/libs/DCDIFactoryService.sol";
+import "daosys/introspection/erc165/mutable/types/MutableERC165Target.sol";
 /**
  * @title Context - Extendable arbitrary deployment factory.
  * @author cyotee doge <doge.cyotee>
- * @notice Allows anyone to deploy byte code to a deterministic address.
+ * @notice Allows anyone to deploy bytecode to a deterministic address.
  * @notice Provides a hookable deployment process to extend functionality.
  */
-contract Context is IContext {
+contract Context is MutableERC165Target, IContext {
 
     using ContextInitializerAdaptor for IContextInitializer;
     using DCDIFactoryService for bytes;
+
+    constructor() {
+        _initERC165(suppoertedInterfaces());
+    }
+
+    function suppoertedInterfaces()
+    public view virtual returns(bytes4[] memory interfaces) {
+        interfaces = new bytes4[](2);
+        interfaces[0] = type(IERC165).interfaceId;
+        interfaces[0] = type(IContext).interfaceId;
+    }
 
     /**
      * @inheritdoc IContext
