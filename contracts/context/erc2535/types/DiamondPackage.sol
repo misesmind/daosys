@@ -3,17 +3,29 @@ pragma solidity ^0.8.0;
 
 import "daosys/context/types/Package.sol";
 import {IDiamond} from "daosys/introspection/erc2535/interfaces/IDiamond.sol";
+import "daosys/context/erc2535/interfaces/IDiamondPackage.sol";
 
-abstract contract DiamondPackage is Package {
+abstract contract DiamondPackage is Package, IDiamondPackage {
 
     function initAccount()
-    public virtual override returns(bytes memory pkgData) {
+    public virtual override(IPackage, Package) returns(bytes memory pkgData) {
         pkgData = _loadPkgData();
         initAccount(pkgData);
     }
 
+    function suppoertedInterfaces()
+    public view virtual returns(bytes4[] memory interfaces);
+
     function facetCuts()
     public view virtual returns(IDiamond.FacetCut[] memory facetCuts_);
+
+    function diamondConfig()
+    external view returns(DiamondConfig memory config) {
+        config = DiamondConfig({
+            facetCuts_: facetCuts(),
+            interfaces: suppoertedInterfaces()
+        });
+    }
 
     function initAccount(
         bytes memory initArgs

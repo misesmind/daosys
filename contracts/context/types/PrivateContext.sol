@@ -5,22 +5,25 @@ pragma solidity ^0.8.0;
 // import "forge-std/console.sol";
 // import "forge-std/console2.sol";
 
-// import {DCDIFactoryService} from "daosys/dcdi/factory/libs/DCDIFactoryService.sol";
-// import {IContext} from "daosys/context/interfaces/IContext.sol";
-// import {IContextInitializer} from "daosys/context/intializers/interfaces/IContextInitializer.sol";
-// import {IPackage} from "daosys/context/interfaces/IPackage.sol";
-// import {OperatableTarget} from "daosys/access/operatable/types/OperatableTarget.sol";
-// import {ContextInitializerAdaptor} from "daosys/context/intializers/libs/ContextInitializerAdaptor.sol";
-// import {FactoryService} from "daosys/factory/libs/FactoryService.sol";
 import "daosys/context/operatable/types/OperatableContext.sol";
 import "daosys/dcdi/aware/types/DCDIAware.sol";
+import "daosys/context/interfaces/IPrivateContext.sol";
 
+/**
+ * @title PrivateContext - Nameable OperatableContext.
+ * @author cyotee doge <doge.cyotee>
+ * @dev MUST be deployed from another another Context.
+ */
 contract PrivateContext
 is
 OperatableContext,
-DCDIAware
+DCDIAware,
+IPrivateContext
 {
 
+    /**
+     * @inheritdoc IPrivateContext
+     */
     string public name;
 
     constructor() {

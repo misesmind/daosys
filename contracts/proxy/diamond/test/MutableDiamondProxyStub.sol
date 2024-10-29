@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import {MutableDiamondProxy, MutableERC2535Service} from "daosys/proxy/diamond/MutableDiamondProxy.sol";
+import {MutableDiamondProxy} from "daosys/proxy/diamond/MutableDiamondProxy.sol";
 import {IDiamond} from "daosys/introspection/erc2535/interfaces/IDiamond.sol";
 import {Address} from "daosys/primitives/Address.sol";
+import "daosys/introspection/erc2535/mutable/types/MutableDiamondLoupeTarget.sol";
 
 contract MutableDiamondProxyStub is MutableDiamondProxy {
 
     using Address for address;
-    using MutableERC2535Service for IDiamond.FacetCut[];
+    // using MutableERC2535Service for IDiamond.FacetCut[];
 
     constructor(
         IDiamond.FacetCut[] memory facetCuts,
@@ -16,7 +17,7 @@ contract MutableDiamondProxyStub is MutableDiamondProxy {
         bytes memory initCalldata
     ) {
         _initTarget();
-        facetCuts._processFacetCuts();
+        _processFacetCuts(facetCuts);
         if(initTarget != address(0)) {
             initTarget._delegateCall(initCalldata);
         }

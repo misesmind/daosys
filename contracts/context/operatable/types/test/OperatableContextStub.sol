@@ -7,10 +7,10 @@ pragma solidity ^0.8.0;
 
 import {DCDIFactoryService} from "daosys/dcdi/factory/libs/DCDIFactoryService.sol";
 import {IContext} from "daosys/context/interfaces/IContext.sol";
-import {IContextInitializer} from "daosys/context/intializers/interfaces/IContextInitializer.sol";
+import {IContextInitializer} from "daosys/context/initializers/interfaces/IContextInitializer.sol";
 import {IPackage} from "daosys/context/interfaces/IPackage.sol";
 import {OperatableTarget} from "daosys/access/operatable/types/OperatableTarget.sol";
-import {ContextInitializerAdaptor} from "daosys/context/intializers/libs/ContextInitializerAdaptor.sol";
+import {ContextInitializerAdaptor} from "daosys/context/initializers/libs/ContextInitializerAdaptor.sol";
 import {FactoryService} from "daosys/factory/libs/FactoryService.sol";
 import "daosys/context/operatable/types/OperatableContext.sol";
 

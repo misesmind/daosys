@@ -21,6 +21,15 @@ FacetDiamondPackage,
 ERC20OpertableMintableTarget
 {
 
+    function suppoertedInterfaces()
+    public view virtual override returns(bytes4[] memory interfaces) {
+        interfaces = new bytes4[](4);
+        interfaces[0] = type(IERC20).interfaceId;
+        interfaces[1] = type(IOwnable).interfaceId;
+        interfaces[2] = type(IOperatable).interfaceId;
+        interfaces[3] = type(IERC20Mintable).interfaceId;
+    }
+
     function facetFuncs()
     public pure virtual override returns(bytes4[] memory funcs) {
         funcs = new bytes4[](18);

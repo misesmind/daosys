@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import {DCDIAwareService} from "daosys/dcdi/aware/libs/DCDIAwareService.sol";
 import {IContext} from "daosys/context/interfaces/IContext.sol";
-import {IContextInitializer} from "daosys/context/intializers/interfaces/IContextInitializer.sol";
+import {IContextInitializer} from "daosys/context/initializers/interfaces/IContextInitializer.sol";
 
 library ContextInitializerService {
 

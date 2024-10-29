@@ -6,10 +6,15 @@ import {IContext} from "daosys/context/interfaces/IContext.sol";
 import {
     IPackage,
     IContextInitializer
-} from "daosys/context/intializers/interfaces/IContextInitializer.sol";
-import {ContextInitializerAdaptor} from "daosys/context/intializers/libs/ContextInitializerAdaptor.sol";
+} from "daosys/context/initializers/interfaces/IContextInitializer.sol";
+import {ContextInitializerAdaptor} from "daosys/context/initializers/libs/ContextInitializerAdaptor.sol";
 import {DCDIFactoryService} from "daosys/dcdi/factory/libs/DCDIFactoryService.sol";
-
+/**
+ * @title Context - Extendable arbitrary deployment factory.
+ * @author cyotee doge <doge.cyotee>
+ * @notice Allows anyone to deploy byte code to a deterministic address.
+ * @notice Provides a hookable deployment process to extend functionality.
+ */
 contract Context is IContext {
 
     using ContextInitializerAdaptor for IContextInitializer;

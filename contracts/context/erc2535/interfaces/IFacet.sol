@@ -3,7 +3,10 @@ pragma solidity ^0.8.0;
 
 interface IFacet {
 
+    function suppoertedInterfaces()
+    external view returns(bytes4[] memory interfaces);
+
     function facetFuncs()
-    external view virtual returns(bytes4[] memory funcs);
+    external view returns(bytes4[] memory funcs);
 
 }

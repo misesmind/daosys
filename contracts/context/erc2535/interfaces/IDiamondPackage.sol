@@ -7,12 +7,20 @@ import {IDiamond} from "daosys/introspection/erc2535/interfaces/IDiamond.sol";
 
 interface IDiamondPackage is IPackage {
 
-    function facetFuncs()
-    external view returns(bytes4[] memory funcs);
+    struct DiamondConfig {
+        IDiamond.FacetCut[] facetCuts_;
+        bytes4[] interfaces;
+    }
+
+    function suppoertedInterfaces()
+    external view returns(bytes4[] memory interfaces);
 
     // TODO Move to Diamond Package interface.
     function facetCuts()
     external view returns(IDiamond.FacetCut[] memory facetCuts_);
+
+    function diamondConfig()
+    external view returns(DiamondConfig memory config);
 
     function initAccount(
         bytes memory initArgs

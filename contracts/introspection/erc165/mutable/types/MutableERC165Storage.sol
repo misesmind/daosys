@@ -34,6 +34,16 @@ abstract contract MutableERC165Storage {
         _erc165().isSupportedInterface[_functionSelectors()._calcInterfaceId()] = true;
     }
 
+    function _initERC165(
+        bytes4[] memory supportedInterfaces_
+    ) internal {
+        // bytes4[] memory supportedInterfaces_ = _supportedInterfaces();
+        for(uint256 cursor = 0; cursor < supportedInterfaces_.length; cursor ++) {
+            _erc165().isSupportedInterface[supportedInterfaces_[cursor]] = true;
+        }
+        // _erc165().isSupportedInterface[_functionSelectors()._calcInterfaceId()] = true;
+    }
+
     function _supportedInterfaces()
     internal pure virtual returns(bytes4[] memory supportedInterfaces_)
     {

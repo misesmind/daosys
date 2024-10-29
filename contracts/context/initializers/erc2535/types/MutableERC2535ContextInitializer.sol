@@ -5,7 +5,7 @@ pragma solidity ^0.8.0;
 // import "forge-std/console.sol";
 // import "forge-std/console2.sol";
 
-import {IContextInitializer} from "daosys/context/intializers/interfaces/IContextInitializer.sol";
+import {IContextInitializer} from "daosys/context/initializers/interfaces/IContextInitializer.sol";
 import {Address} from "daosys/primitives/Address.sol";
 import {DCDIAware} from "daosys/dcdi/aware/types/DCDIAware.sol";
 import {ProxyResolverService} from "daosys/resolvers/proxy/libs/ProxyResolverService.sol";
@@ -15,7 +15,7 @@ import {
     IDiamondLoupe,
     MutableDiamondLoupeStorage
 } from "daosys/introspection/erc2535/mutable/types/MutableDiamondLoupeStorage.sol";
-import {ContextInitializerService} from "daosys/context/intializers/libs/ContextInitializerService.sol";
+import {ContextInitializerService} from "daosys/context/initializers/libs/ContextInitializerService.sol";
 import {FactoryService} from "daosys/factory/libs/FactoryService.sol";
 import {IPackage, PackageService} from "daosys/context/libs/PackageService.sol";
 import {ResolverProxy} from "daosys/proxy/resolver/ResolverProxy.sol";
@@ -48,12 +48,6 @@ IContextInitializer
     bytes constant PROXY_INIT_CODE = type(ResolverProxy).creationCode;
     bytes32 constant PROXY_INIT_CODE_HASH = keccak256(PROXY_INIT_CODE);
 
-    // IProxyResolver immutable resolver_;
-
-    // constructor() {
-    //     // resolver_ = abi.decode(_initData(), (IProxyResolver));
-    // }
-
     function initContext(
         IPackage pkg,
         bytes memory pkgArgs
@@ -62,44 +56,13 @@ IContextInitializer
         bytes32 salt_,
         bytes memory initData_
     ) {
-        // console.log("entering initContext");
-        // // 0x15cF58144EF33af1e14b5208015d11F9143E27b9
-        // console.log(
-        //     "Execution context: %s",
-        //     address(this)
-        // );
         salt_ = pkg._processArgs(pkgArgs);
-        // 0x404db9398374873bc26c0d105e2e7e6d5209aa005625ede1907ca590b9dcf37d
-        // console.log(
-        //     "salt = "
-        // );
-        // console.logBytes32(salt);
-        // 0x0d8fd63e6426e1660f7f5ace07d76ef320121a115835e17a28386486012b469d
-        // console.log(
-        //     "PROXY_INIT_CODE_HASH = "
-        // );
-        // console.logBytes32(PROXY_INIT_CODE_HASH);
-        // console.log(
-        //     "Deploying from %s",
-        //     address(this)
-        // );
         address consumer_ = address(this)
             ._create2AddressFrom(
                 PROXY_INIT_CODE_HASH,
                 salt_
             );
-        // console.log(
-        //     "Deploying to %s",
-        //     consumer_
-        // );
-        // 0xD0f6eDEdB507aF1665b9eEf0E6578DE3EEdb869c.
-        // 0xD0f6eDEdB507aF1665b9eEf0E6578DE3EEdb869c.
-        // console.log(
-        //     "Injecting context initer data for consumer %s.",
-        //     consumer_
-        // );
         bytes memory initerData_ = abi.encode(address(pkg));
-        // console.logBytes(initerData_);
         initerData_
             ._injectIniterData(
                 IContextInitializer(_self()),
@@ -108,7 +71,6 @@ IContextInitializer
         pkg._initContext(consumer_, pkgArgs);
         initData_ = abi.encode(_self());
         initCode = PROXY_INIT_CODE;
-        // console.log("exiting initContext");
     }
 
     function initAccount()
@@ -136,13 +98,24 @@ IContextInitializer
             )
         );
         // TODO add ERC165 support.
-        IDiamond.FacetCut[] memory pkgFacetCuts_ = IDiamondPackage(address(pkg)).facetCuts();
+        // IDiamond.FacetCut[] memory pkgFacetCuts_ = IDiamondPackage(address(pkg)).facetCuts();
+        // _processFacetCuts(
+        //     pkgFacetCuts_
+        // );
+        // bytes memory pkgData_ = pkg._initAccount();
+        // emit IDiamond.DiamondCut(
+        //     pkgFacetCuts_,
+        //     address(pkg),
+        //     pkgData_
+        // );
+        IDiamondPackage.DiamondConfig memory config = IDiamondPackage(address(pkg)).diamondConfig();
         _processFacetCuts(
-            pkgFacetCuts_
+            config.facetCuts_
         );
+        _initERC165(config.interfaces);
         bytes memory pkgData_ = pkg._initAccount();
         emit IDiamond.DiamondCut(
-            pkgFacetCuts_,
+            config.facetCuts_,
             address(pkg),
             pkgData_
         );

@@ -5,6 +5,9 @@ import "daosys/context/erc2535/interfaces/IFacet.sol";
 
 abstract contract Facet is IFacet {
 
+    function suppoertedInterfaces()
+    public view virtual returns(bytes4[] memory interfaces);
+
     function facetFuncs()
     public view virtual returns(bytes4[] memory funcs);
 

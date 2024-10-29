@@ -3,14 +3,16 @@ pragma solidity ^0.8.0;
 
 import "daosys/context/types/Package.sol";
 import "daosys/context/erc2535/types/DiamondPackage.sol";
+import "daosys/context/erc2535/types/Facet.sol";
 
 abstract contract FacetDiamondPackage
-is 
+is
+Facet,
 DiamondPackage
 {
 
-    function facetFuncs()
-    public view virtual returns(bytes4[] memory funcs);
+    function suppoertedInterfaces()
+    public view virtual override(Facet, DiamondPackage) returns(bytes4[] memory interfaces);
 
     function facetCuts()
     public view virtual override returns(IDiamond.FacetCut[] memory facetCuts_) {
