@@ -16,7 +16,7 @@ contract MutableDiamondProxyStub is MutableDiamondProxy {
         address initTarget,
         bytes memory initCalldata
     ) {
-        _initTarget();
+        // _initTarget();
         _processFacetCuts(facetCuts);
         if(initTarget != address(0)) {
             initTarget._delegateCall(initCalldata);
