@@ -5,12 +5,19 @@ import "daosys/access/operatable/types/OperatableTarget.sol";
 import "daosys/context/erc2535/types/Facet.sol";
 import "daosys/access/ownable/interfaces/IOwnable.sol";
 
+/**
+ * @title OperatableFacet - Facet for Diamond proxies to expose IOwnable and IOperatable.
+ * @author cyotee doge <doge.cyotee>
+ */
 contract OperatableFacet
 is
 OperatableTarget,
 Facet
 {
 
+    /**
+     * @inheritdoc IFacet
+     */
     function suppoertedInterfaces()
     public view virtual override returns(bytes4[] memory interfaces) {
         interfaces =  new bytes4[](2);
@@ -18,6 +25,9 @@ Facet
         interfaces[1] = type(IOperatable).interfaceId;
     }
 
+    /**
+     * @inheritdoc IFacet
+     */
     function facetFuncs()
     public view virtual override returns(bytes4[] memory funcs) {
         funcs = new bytes4[](5);

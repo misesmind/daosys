@@ -7,6 +7,8 @@ pragma solidity ^0.8.0;
  */
 interface IOperatable {
 
+    error NotOperator(address caller);
+
     /**
      * @param query Addres for which to query authorization as an operator.
      * @return Boolean indicating if query is authorrized as an operator

@@ -3,6 +3,8 @@ pragma solidity ^0.8.0;
 
 interface IDCDI {
 
+    error NotFromContext(address challenger);
+
     /**
      * @dev Contains all components used to calculate a CREATE2 address
      * @param origin The address of the contract that deployed the contract providing this struct.
