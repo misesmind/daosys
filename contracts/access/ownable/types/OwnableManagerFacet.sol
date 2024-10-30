@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import "daosys/access/ownable/types/OwnableTarget.sol";
 import "daosys/context/erc2535/types/Facet.sol";
 import "daosys/access/ownable/interfaces/IOwnableManager.sol";
+import "daosys/access/ownable/types/OwnableManagerTarget.sol";
 
 /**
  * @title OwnableManagerFacet - Facet for Diamonds expected to retain ownership of other contracts.
@@ -12,9 +13,8 @@ import "daosys/access/ownable/interfaces/IOwnableManager.sol";
  */
 contract OwnableManagerFacet
 is
-OwnableModifiers,
-Facet,
-IOwnableManager
+OwnableManagerTarget,
+Facet
 {
 
     /**
@@ -37,30 +37,30 @@ IOwnableManager
         funcs[2] = IOwnableManager.renounceOwnershipFor.selector;
     }
 
-    /**
-     * @inheritdoc IOwnableManager
-     */
-    function transferOwnershipFor(
-        IOwnable subject,
-        address proposedOwner_
-    ) public onlyOwner(msg.sender) returns(bool) {
-        return subject.transferOwnership(proposedOwner_);
-    }
+    // /**
+    //  * @inheritdoc IOwnableManager
+    //  */
+    // function transferOwnershipFor(
+    //     IOwnable subject,
+    //     address proposedOwner_
+    // ) public onlyOwner(msg.sender) returns(bool) {
+    //     return subject.transferOwnership(proposedOwner_);
+    // }
 
-    /**
-     * @inheritdoc IOwnableManager
-     */
-    function acceptOwnershipFor(IOwnable subject)
-    public onlyOwner(msg.sender) returns(bool) {
-        return subject.acceptOwnership();
-    }
+    // /**
+    //  * @inheritdoc IOwnableManager
+    //  */
+    // function acceptOwnershipFor(IOwnable subject)
+    // public onlyOwner(msg.sender) returns(bool) {
+    //     return subject.acceptOwnership();
+    // }
 
-    /**
-     * @inheritdoc IOwnableManager
-     */
-    function renounceOwnershipFor(IOwnable subject)
-    public onlyOwner(msg.sender) returns(bool) {
-        return subject.renounceOwnership();
-    }
+    // /**
+    //  * @inheritdoc IOwnableManager
+    //  */
+    // function renounceOwnershipFor(IOwnable subject)
+    // public onlyOwner(msg.sender) returns(bool) {
+    //     return subject.renounceOwnership();
+    // }
 
 }

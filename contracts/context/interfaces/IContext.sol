@@ -22,13 +22,13 @@ interface IContext {
      * @notice salt = keccak256(abi.encode(initCodeHash, initDataHash))
      * @notice Crunstructor arguments MUST be attached BEFORE call.
      * @dev IS DELEGATECALL SAFE.
-     * @param initCode Creation Code for deployment.
-     * @param initData Initialization data for DCDI injection for comsumption by new deployment.
+     * @param initCode_ Creation Code for deployment.
+     * @param initData_ Initialization data for DCDI injection for comsumption by new deployment.
      * @return deployment The adress of newly deployed bytecode.
      */
     function deployContract(
-        bytes memory initCode,
-        bytes memory initData
+        bytes memory initCode_,
+        bytes memory initData_
     ) external returns(address deployment);
 
     /**

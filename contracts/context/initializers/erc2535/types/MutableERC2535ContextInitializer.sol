@@ -7,7 +7,7 @@ pragma solidity ^0.8.0;
 
 import {IContextInitializer} from "daosys/context/initializers/interfaces/IContextInitializer.sol";
 import {Address} from "daosys/primitives/Address.sol";
-import {DCDIAware} from "daosys/dcdi/aware/types/DCDIAware.sol";
+import "daosys/dcdi/aware/types/DCDIAware.sol";
 import {ProxyResolverService} from "daosys/resolvers/proxy/libs/ProxyResolverService.sol";
 import {ProxyResolverAdaptor} from "daosys/resolvers/proxy/libs/ProxyResolverAdaptor.sol";
 import {PackageAdaptor} from "daosys/context/libs/PackageAdaptor.sol";
@@ -79,6 +79,7 @@ IContextInitializer
         _processFacetCuts(
             loupeFacetCuts_
         );
+        _initERC165(suppoertedInterfaces());
         bytes memory initerData_ = IContext(_origin())
             ._loadIniterData(
                 IContextInitializer(_self()),
@@ -126,6 +127,13 @@ IContextInitializer
         bytes4 functionSelector
     ) external view returns(address target_) {
         return _facetAddress(functionSelector);
+    }
+
+    function suppoertedInterfaces()
+    public view virtual returns(bytes4[] memory interfaces) {
+        interfaces = new bytes4[](2);
+        interfaces[0] = type(IDCDI).interfaceId;
+        interfaces[1] = type(IDiamondLoupe).interfaceId;
     }
 
     function facetCuts()

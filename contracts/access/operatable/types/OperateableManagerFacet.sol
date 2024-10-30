@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import "daosys/access/ownable/types/OwnableTarget.sol";
 import "daosys/context/erc2535/types/Facet.sol";
 import "daosys/access/operatable/interface/IOperateableManager.sol";
+import "daosys/access/operatable/types/OperateableManagerTarget.sol";
 
 /**
  * @title OperateableManagerFacet - Facet for Diamond proxies to expose IOperateableManager.
@@ -11,9 +12,8 @@ import "daosys/access/operatable/interface/IOperateableManager.sol";
  */
 contract OperateableManagerFacet
 is
-OwnableModifiers,
-Facet,
-IOperateableManager
+OperateableManagerTarget,
+Facet
 {
 
 
@@ -34,15 +34,15 @@ IOperateableManager
         funcs[0] = IOperateableManager.setOperator.selector;
     }
 
-    /**
-     * @inheritdoc IOperateableManager
-     */
-    function setOperator(
-        IOperatable subject,
-        address newOperator,
-        bool approval
-    ) public onlyOwner(msg.sender) returns(bool) {
-        return subject.setOperator(newOperator, approval);
-    }
+    // /**
+    //  * @inheritdoc IOperateableManager
+    //  */
+    // function setOperator(
+    //     IOperatable subject,
+    //     address newOperator,
+    //     bool approval
+    // ) public onlyOwner(msg.sender) returns(bool) {
+    //     return subject.setOperator(newOperator, approval);
+    // }
 
 }

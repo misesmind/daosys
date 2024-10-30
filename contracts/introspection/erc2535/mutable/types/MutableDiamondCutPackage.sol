@@ -12,9 +12,23 @@ MutableDiamondCutTarget,
 DiamondPackage
 {
 
+    function suppoertedInterfaces()
+    public view virtual
+    override
+    returns(bytes4[] memory interfaces) {
+        interfaces =  new bytes4[](2);
+        interfaces[0] = type(IOwnable).interfaceId;
+        interfaces[1] = type(IDiamondCut).interfaceId;
+    }
+
     function facetFuncs()
     public pure returns(bytes4[] memory funcs) {
         funcs = new bytes4[](1);
+        funcs[0] = IOwnable.owner.selector;
+        funcs[0] = IOwnable.proposedOwner.selector;
+        funcs[0] = IOwnable.transferOwnership.selector;
+        funcs[0] = IOwnable.acceptOwnership.selector;
+        funcs[0] = IOwnable.renounceOwnership.selector;
         funcs[0] = IDiamondCut.diamondCut.selector;
         return funcs;
     }
@@ -56,11 +70,13 @@ DiamondPackage
             )
         );
         _initOwner(owner_);
-        diamondCut(
-            diamondCut_,
-            initTarget,
-            initCalldata
-        );
+        if(diamondCut_.length > 0) {
+            diamondCut(
+                diamondCut_,
+                initTarget,
+                initCalldata
+            );
+        }
     }
 
     function diamondCut(
