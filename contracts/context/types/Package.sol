@@ -20,8 +20,9 @@ IPackage
     internal view virtual returns(bytes memory) {
         return PackageService
             ._loadPkgData(
-                IContext(_origin()),
-                IPackage(_self()),
+                // IContext(origin()),
+                IContext(msg.sender),
+                IPackage(self()),
                 address(this)
             );
     }
@@ -29,11 +30,7 @@ IPackage
     function processArgs(
         bytes memory pkgArgs
     ) public view virtual returns(bytes32 salt) {
-        // address yieldSource = abi.decode(
-        //     pkgArgs,
-        //     (address)
-        // );
-        return keccak256(bytes.concat(abi.encode(_self()), pkgArgs));
+        return keccak256(abi.encode(self(), pkgArgs));
     }
 
     function initContext(
@@ -42,7 +39,7 @@ IPackage
     ) public virtual returns(bool success) {
         PackageService._injectPkgData(
             initArgs,
-            IPackage(_self()),
+            IPackage(self()),
             consumer
         );
         return true;

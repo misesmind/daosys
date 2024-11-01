@@ -15,10 +15,20 @@ OperatableTarget,
 Facet
 {
 
+    // /**
+    //  * @inheritdoc IFacet
+    //  */
+    // function supportedInterfaces()
+    // public view virtual override returns(bytes4[] memory interfaces) {
+    //     interfaces =  new bytes4[](2);
+    //     interfaces[0] = type(IOwnable).interfaceId;
+    //     interfaces[1] = type(IOperatable).interfaceId;
+    // }
+
     /**
      * @inheritdoc IFacet
      */
-    function suppoertedInterfaces()
+    function facetInterfaces()
     public view virtual override returns(bytes4[] memory interfaces) {
         interfaces =  new bytes4[](2);
         interfaces[0] = type(IOwnable).interfaceId;

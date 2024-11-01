@@ -11,7 +11,10 @@ Facet,
 DiamondPackage
 {
 
-    function suppoertedInterfaces()
+    // function supportedInterfaces()
+    // public view virtual override(Facet, DiamondPackage) returns(bytes4[] memory interfaces);
+
+    function facetInterfaces()
     public view virtual override(Facet, DiamondPackage) returns(bytes4[] memory interfaces);
 
     function facetCuts()
@@ -19,7 +22,7 @@ DiamondPackage
         facetCuts_ = new IDiamond.FacetCut[](1);
         facetCuts_[0] = IDiamond.FacetCut({
             // address facetAddress;
-            facetAddress: _self(),
+            facetAddress: self(),
             // FacetCutAction action;
             action: IDiamond.FacetCutAction.Add,
             // bytes4[] functionSelectors;

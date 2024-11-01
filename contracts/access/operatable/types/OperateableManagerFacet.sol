@@ -19,7 +19,7 @@ Facet
 
     /**
      * @inheritdoc IFacet
-     */    function suppoertedInterfaces()
+     */    function facetInterfaces()
     public view virtual override returns(bytes4[] memory interfaces) {
         interfaces =  new bytes4[](1);
         interfaces[0] = type(IOperateableManager).interfaceId;

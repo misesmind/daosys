@@ -65,11 +65,11 @@ IContextInitializer
         bytes memory initerData_ = abi.encode(address(pkg));
         initerData_
             ._injectIniterData(
-                IContextInitializer(_self()),
+                IContextInitializer(self()),
                 consumer_
             );
         pkg._initContext(consumer_, pkgArgs);
-        initData_ = abi.encode(_self());
+        initData_ = abi.encode(self());
         initCode = PROXY_INIT_CODE;
     }
 
@@ -79,17 +79,17 @@ IContextInitializer
         _processFacetCuts(
             loupeFacetCuts_
         );
-        _initERC165(suppoertedInterfaces());
-        bytes memory initerData_ = IContext(_origin())
+        _initERC165(supportedInterfaces());
+        bytes memory initerData_ =
+        // IContext(origin())
+        IContext(msg.sender)
             ._loadIniterData(
-                IContextInitializer(_self()),
+                IContextInitializer(self()),
                 address(this)
             );
-        // console.log("Loaded context initer data.");
-        // console.logBytes(initerData_);
         emit IDiamond.DiamondCut(
             loupeFacetCuts_,
-            _self(),
+            self(),
             initerData_
         );
         IPackage pkg = IPackage(
@@ -98,17 +98,6 @@ IContextInitializer
                 (address)
             )
         );
-        // TODO add ERC165 support.
-        // IDiamond.FacetCut[] memory pkgFacetCuts_ = IDiamondPackage(address(pkg)).facetCuts();
-        // _processFacetCuts(
-        //     pkgFacetCuts_
-        // );
-        // bytes memory pkgData_ = pkg._initAccount();
-        // emit IDiamond.DiamondCut(
-        //     pkgFacetCuts_,
-        //     address(pkg),
-        //     pkgData_
-        // );
         IDiamondPackage.DiamondConfig memory config = IDiamondPackage(address(pkg)).diamondConfig();
         _processFacetCuts(
             config.facetCuts_
@@ -129,8 +118,10 @@ IContextInitializer
         return _facetAddress(functionSelector);
     }
 
-    function suppoertedInterfaces()
-    public view virtual returns(bytes4[] memory interfaces) {
+    function supportedInterfaces()
+    public view virtual
+    // override
+    returns(bytes4[] memory interfaces) {
         interfaces = new bytes4[](2);
         interfaces[0] = type(IDCDI).interfaceId;
         interfaces[1] = type(IDiamondLoupe).interfaceId;
@@ -138,18 +129,18 @@ IContextInitializer
 
     function facetCuts()
     public view returns(IDiamond.FacetCut[] memory facetCuts_) {
-        facetCuts_ = new IDiamond.FacetCut[](4);
+        facetCuts_ = new IDiamond.FacetCut[](1);
         facetCuts_[0] = IDiamond.FacetCut({
             // address facetAddress;
-            facetAddress: _self(),
+            facetAddress: self(),
             // FacetCutAction action;
             action: IDiamond.FacetCutAction.Add,
             // bytes4[] functionSelectors;
-            functionSelectors: loupeFuncs()
+            functionSelectors: facetFuncs()
         });
     }
 
-    function loupeFuncs()
+    function facetFuncs()
     public pure returns(bytes4[] memory funcs) {
         funcs = new bytes4[](4);
         funcs[0] = IDiamondLoupe.facets.selector;

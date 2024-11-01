@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import {AddressSet, AddressSetRepo} from "daosys/collections/sets/AddressSetRepo.sol";
-import {FacetSetLayout, IDiamondLoupe} from "daosys/introspection/erc2535/mutable/libs/FacetSetLayout.sol";
-import {IDiamondLoupe} from "daosys/introspection/erc2535/interfaces/IDiamondLoupe.sol";
+import "daosys/collections/sets/AddressSetRepo.sol";
+import "daosys/collections/sets/Bytes4SetRepo.sol";
+import "daosys/introspection/erc2535/mutable/libs/FacetSetLayout.sol";
+import "daosys/introspection/erc2535/interfaces/IDiamondLoupe.sol";
 
 
 struct MutableERC253Struct {
     FacetSetLayout.Struct facets;
-    mapping(address facet => bytes4[] functionSelectors) facetFunctionSelectors;
+    mapping(address facet => Bytes4Set functionSelectors) facetFunctionSelectors;
     AddressSet facetAddresses;
     mapping(bytes4 functionSelector => address facet) facetAddress;
 }
@@ -16,6 +17,7 @@ struct MutableERC253Struct {
 library MutableERC2535Layout {
 
     using AddressSetRepo for AddressSet;
+    using Bytes4SetRepo for Bytes4Set;
     using FacetSetLayout for FacetSetLayout.Struct;
 
 //   struct Struct {

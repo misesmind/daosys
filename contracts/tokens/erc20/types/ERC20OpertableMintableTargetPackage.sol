@@ -1,28 +1,34 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
+import "daosys/dcdi/interfaces/IDCDI.sol";
+import "daosys/introspection/erc165/interfaces/IERC165.sol";
 import "daosys/context/erc2535/types/FacetDiamondPackage.sol";
-import {
-    IERC20Errors,
-    IERC20,
-    ERC20Storage,
-    ERC20Target,
-    IERC20Mintable,
-    ERC20MintableTarget,
-    IOwnable,
-    IOperatable,
-    IERC20OperatableMintable,
-    ERC20OpertableMintableTarget
-} from "daosys/tokens/erc20/types/ERC20OpertableMintableTarget.sol";
+import "daosys/tokens/erc20/types/ERC20OpertableMintableTarget.sol";
 
 contract ERC20OpertableMintableTargetPackage
 is
-FacetDiamondPackage,
-ERC20OpertableMintableTarget
+ERC20OpertableMintableTarget,
+FacetDiamondPackage
 {
 
-    function suppoertedInterfaces()
-    public view virtual override returns(bytes4[] memory interfaces) {
+    // function supportedInterfaces()
+    // public view virtual override returns(bytes4[] memory interfaces) {
+    //     interfaces = new bytes4[](5);
+    //     // interfaces[0] = type(IERC165).interfaceId;
+    //     interfaces[0] = type(IDCDI).interfaceId;
+    //     interfaces[1] = type(IERC20).interfaceId;
+    //     interfaces[2] = type(IOwnable).interfaceId;
+    //     interfaces[3] = type(IOperatable).interfaceId;
+    //     interfaces[4] = type(IERC20Mintable).interfaceId;
+    // }
+
+    function facetInterfaces()
+    public view virtual 
+    override(
+        FacetDiamondPackage
+    )
+    returns(bytes4[] memory interfaces) {
         interfaces = new bytes4[](4);
         interfaces[0] = type(IERC20).interfaceId;
         interfaces[1] = type(IOwnable).interfaceId;
@@ -55,7 +61,6 @@ ERC20OpertableMintableTarget
         // funcs[17] = bytes4(keccak256(bytes("mint(address,uint256)")));
         // funcs[18] = bytes4(keccak256(bytes("burn(uint256,address)")));
         // funcs[19] = bytes4(keccak256(bytes("burn(address,uint256)")));
-        return funcs;
     }
 
     // function facetCuts()
@@ -63,7 +68,7 @@ ERC20OpertableMintableTarget
     //     facetCuts_ = new IDiamond.FacetCut[](1);
     //     facetCuts_[0] = IDiamond.FacetCut({
     //         // address facetAddress;
-    //         facetAddress: _self(),
+    //         facetAddress: self(),
     //         // FacetCutAction action;
     //         action: IDiamond.FacetCutAction.Add,
     //         // bytes4[] functionSelectors;

@@ -5,7 +5,7 @@ import {
     IPackage,
     IContextInitializer
 } from "daosys/context/initializers/interfaces/IContextInitializer.sol";
-// import "./IPackage.sol";
+import "daosys/dcdi/interfaces/IDCDI.sol";
 
 /**
  * @title IContext - Arbitrary deployment factory interface.
@@ -13,7 +13,7 @@ import {
  * @notice Allows anyone to deploy byte code to a deterministic address.
  * @notice Provides an optional hookable deployment process to extend functionality.
  */
-interface IContext {
+interface IContext is IDCDI {
 
     /**
      * @notice Deploys provided bytecode using Create2.

@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "daosys/context/types/Package.sol";
-import {IDiamond} from "daosys/introspection/erc2535/interfaces/IDiamond.sol";
+import "daosys/introspection/erc2535/interfaces/IDiamond.sol";
 import "daosys/context/erc2535/interfaces/IDiamondPackage.sol";
 
 abstract contract DiamondPackage is Package, IDiamondPackage {
@@ -13,7 +13,7 @@ abstract contract DiamondPackage is Package, IDiamondPackage {
         initAccount(pkgData);
     }
 
-    function suppoertedInterfaces()
+    function facetInterfaces()
     public view virtual returns(bytes4[] memory interfaces);
 
     function facetCuts()
@@ -23,7 +23,7 @@ abstract contract DiamondPackage is Package, IDiamondPackage {
     external view returns(DiamondConfig memory config) {
         config = DiamondConfig({
             facetCuts_: facetCuts(),
-            interfaces: suppoertedInterfaces()
+            interfaces: facetInterfaces()
         });
     }
 

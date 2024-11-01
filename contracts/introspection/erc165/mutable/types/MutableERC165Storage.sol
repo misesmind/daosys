@@ -24,15 +24,15 @@ abstract contract MutableERC165Storage {
         return MutableERC165Layout._layout(MutableERC165Layout_STORAGE_SLOT);
     }
 
-    function _initERC165(
-        // bytes4[] memory supportedInterfaces_
-    ) internal {
-        bytes4[] memory supportedInterfaces_ = _supportedInterfaces();
-        for(uint256 cursor = 0; cursor < supportedInterfaces_.length; cursor ++) {
-            _erc165().isSupportedInterface[supportedInterfaces_[cursor]] = true;
-        }
-        _erc165().isSupportedInterface[_functionSelectors()._calcInterfaceId()] = true;
-    }
+    // function _initERC165(
+    //     // bytes4[] memory supportedInterfaces_
+    // ) internal {
+    //     bytes4[] memory supportedInterfaces_ = _supportedInterfaces();
+    //     for(uint256 cursor = 0; cursor < supportedInterfaces_.length; cursor ++) {
+    //         _erc165().isSupportedInterface[supportedInterfaces_[cursor]] = true;
+    //     }
+    //     _erc165().isSupportedInterface[_functionSelectors()._calcInterfaceId()] = true;
+    // }
 
     function _initERC165(
         bytes4[] memory supportedInterfaces_
@@ -44,18 +44,18 @@ abstract contract MutableERC165Storage {
         // _erc165().isSupportedInterface[_functionSelectors()._calcInterfaceId()] = true;
     }
 
-    function _supportedInterfaces()
-    internal pure virtual returns(bytes4[] memory supportedInterfaces_)
-    {
-        supportedInterfaces_ = new bytes4[](1);
-        supportedInterfaces_[0] = type(IERC165).interfaceId;
-    }
+    // function _supportedInterfaces()
+    // internal pure virtual returns(bytes4[] memory supportedInterfaces_)
+    // {
+    //     supportedInterfaces_ = new bytes4[](1);
+    //     supportedInterfaces_[0] = type(IERC165).interfaceId;
+    // }
 
-    function _functionSelectors()
-    internal pure virtual returns(bytes4[] memory funcs_)
-    {
-        funcs_ = new bytes4[](1);
-        funcs_[0] = IERC165.supportsInterface.selector;
-    }
+    // function _functionSelectors()
+    // internal pure virtual returns(bytes4[] memory funcs_)
+    // {
+    //     funcs_ = new bytes4[](1);
+    //     funcs_[0] = IERC165.supportsInterface.selector;
+    // }
 
 }

@@ -12,7 +12,7 @@ abstract contract Facet is IFacet {
     /**
      * @inheritdoc IFacet
      */
-    function suppoertedInterfaces()
+    function facetInterfaces()
     public view virtual returns(bytes4[] memory interfaces);
 
     /**

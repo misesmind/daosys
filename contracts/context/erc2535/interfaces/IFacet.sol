@@ -10,7 +10,7 @@ interface IFacet {
     /**
      * @return interfaces The ERC165 interface IDs exposed by this Facet.
      */
-    function suppoertedInterfaces()
+    function facetInterfaces()
     external view returns(bytes4[] memory interfaces);
 
     /**

@@ -1,10 +1,15 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
-import {IDCDI} from "daosys/dcdi/interfaces/IDCDI.sol";
-import {DCDIAwareService} from "daosys/dcdi/aware/libs/DCDIAwareService.sol";
+import "daosys/dcdi/interfaces/IDCDI.sol";
+import "daosys/dcdi/aware/libs/DCDIAwareService.sol";
+import "daosys/introspection/erc165/mutable/types/MutableERC165Target.sol";
 
-abstract contract DCDIAware is IDCDI {
+abstract contract DCDIAware
+is
+// MutableERC165Target,
+IDCDI
+{
 
     using DCDIAwareService for address;
     using DCDIAwareService for IDCDI.Metadata;
@@ -33,34 +38,15 @@ abstract contract DCDIAware is IDCDI {
         // Embed own address
         SELF = address(this);
         // Load the injected metadata struct.
-        IDCDI.Metadata memory metadata_ = _origin()._queryMetadata(_self());
+        IDCDI.Metadata memory metadata_ = ORIGIN._queryMetadata(SELF);
         // Validate loaded metadata is valid for this contract.
-        require(_origin() == metadata_.origin);
-        require(_self() == metadata_._calcAddress());
+        require(ORIGIN == metadata_.origin);
+        require(SELF == metadata_._calcAddress());
         // Embed init code hash in contract bytecode.
         INIT_CODE_HASH = metadata_.initCodeHash;
         // Embed CREATE2 salt in contract bytecode.
         SALT = metadata_.salt;
-    }
-
-    /**
-     * @dev Normally loaded using DCDI and stored immutablly.
-     * @dev MUST be consistent regardless of Execution Context.
-     * @return initCodeHash_ The hash of the creation code used to deploy the exposing contract.
-     */
-    function _initCodeHash()
-    internal view virtual returns(bytes32 initCodeHash_) {
-        initCodeHash_ = INIT_CODE_HASH;
-    }
-
-    /**
-     * @dev Normally loaded using DCDI and stored immutablly.
-     * @dev MUST be consistent regardless of Execution Context.
-     * @return salt_ The salt used to deploy the exposing contract with CREATE2.
-     */
-    function _salt()
-    internal view virtual returns(bytes32 salt_) {
-        salt_ = SALT;
+        // _initERC165(supportedInterfaces());
     }
 
     /**
@@ -69,17 +55,7 @@ abstract contract DCDIAware is IDCDI {
     function origin()
     public view virtual
     returns(address origin_) {
-        origin_ = _origin();
-    }
-
-    /**
-     * @dev MUST be consistent regardless of Execution Context.
-     * @return origin_ The address that deployed the contract exposing this interface.
-     */
-    function _origin()
-    internal view virtual
-    returns(address origin_) {
-        origin_ = ORIGIN;
+        return ORIGIN;
     }
 
     /**
@@ -88,80 +64,59 @@ abstract contract DCDIAware is IDCDI {
     function self()
     public view virtual
     returns(address self_) {
-        self_ = _self();
-    }
-
-    /**
-     * @dev MUST be consistent regardless of Execution Context.
-     * @dev May be used when address is required for retrieving DCDI injected data.
-     * @return self_ own address.
-     */
-    function _self()
-    internal view virtual
-    returns(address self_) {
-        self_ = SELF;
+        return SELF;
     }
 
     /**
      * @inheritdoc IDCDI
      */
     function initCodeHash()
-    public view
+    public view virtual
     returns(bytes32 initCodeHash_) {
-        initCodeHash_ = _initCodeHash();
+        return INIT_CODE_HASH;
     }
 
     /**
      * @inheritdoc IDCDI
      */
     function salt()
-    public view
+    public view virtual
     returns(bytes32 salt_) {
-        salt_ = _salt();
+        return SALT;
     }
 
     /**
      * @inheritdoc IDCDI
      */
     function metadata()
-    public view
+    public view virtual
     returns(IDCDI.Metadata memory metadata_) {
-        metadata_ = _metadata();
-    }
-
-    /**
-     * @dev MUST be consistent regardless of Execution Context.
-     * @return metadata_ The full Metadata struct containing all CREATE2 variables used to deploy the exposing contract.
-     */
-    function _metadata()
-    internal view
-    returns(IDCDI.Metadata memory metadata_) {
-        metadata_ = IDCDI.Metadata({
-            origin: _origin(),
-            initCodeHash: _initCodeHash(),
-            salt: _salt()
+        return IDCDI.Metadata({
+            origin: origin(),
+            initCodeHash: initCodeHash(),
+            salt: salt()
         });
-        // metadata_ = _origin()._queryMetadata(_self());
-    }
-
-    /**
-     * @return initData_ The data injected to initialize this contract.
-     */
-    function _initData()
-    internal view returns(bytes memory initData_) {
-        initData_ = _self()._queryInitData(
-                origin(),
-                initCodeHash(),
-                salt()
-            );
     }
 
     /**
      * @inheritdoc IDCDI
      */
     function initData()
-    public view returns(bytes memory initData_) {
-        initData_ = _initData();
+    public view virtual
+    returns(bytes memory initData_) {
+        // initData_ = initData();
+        return self()._queryInitData(
+                origin(),
+                initCodeHash(),
+                salt()
+            );
     }
+
+    // function supportedInterfaces()
+    // public view virtual returns(bytes4[] memory interfaces) {
+    //     interfaces = new bytes4[](2);
+    //     interfaces[0] = type(IERC165).interfaceId;
+    //     interfaces[1] = type(IDCDI).interfaceId;
+    // }
 
 }

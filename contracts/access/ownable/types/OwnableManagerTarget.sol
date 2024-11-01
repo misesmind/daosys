@@ -20,7 +20,7 @@ IOwnableManager
     // /**
     //  * @inheritdoc IFacet
     //  */
-    // function suppoertedInterfaces()
+    // function supportedInterfaces()
     // public view virtual override returns(bytes4[] memory interfaces) {
     //     interfaces =  new bytes4[](1);
     //     interfaces[0] = type(IOwnableManager).interfaceId;

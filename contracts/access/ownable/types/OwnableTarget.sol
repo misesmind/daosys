@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "daosys/access/ownable/types/OwnableModifiers.sol";
-import {IOwnable} from "daosys/access/ownable/interfaces/IOwnable.sol";
+import "daosys/access/ownable/interfaces/IOwnable.sol";
 
 /**
  * @title OwnableTarget - Contract exposing IOwnable.

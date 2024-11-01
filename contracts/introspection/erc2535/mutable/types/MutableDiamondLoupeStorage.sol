@@ -15,6 +15,7 @@ import "daosys/primitives/UInt.sol";
 abstract contract MutableDiamondLoupeStorage is MutableERC165Storage {
 
     using AddressSetRepo for AddressSet;
+    using Bytes4SetRepo for Bytes4Set;
     using ERC165Utils for bytes4[];
     using FacetSetLayout for FacetSetLayout.Struct;
     using MutableERC2535Layout for MutableERC253Struct;
@@ -51,40 +52,40 @@ abstract contract MutableDiamondLoupeStorage is MutableERC165Storage {
         IDiamond.FacetCut memory facetCut
     ) internal {
         // facetCut._processFacetCut();
-        if(facetCut.action == IDiamond.FacetCutAction.Add ) {
-            _addFacet(
-                IDiamondLoupe.Facet({
-                    facetAddress: facetCut.facetAddress,
-                    functionSelectors: facetCut.functionSelectors
-                })
-            );
-        }
-        if(facetCut.action == IDiamond.FacetCutAction.Replace ) {
-            _replaceFacet(
-                IDiamondLoupe.Facet({
-                    facetAddress: facetCut.facetAddress,
-                    functionSelectors: facetCut.functionSelectors
-                })
-            );
-        }
-        if(facetCut.action == IDiamond.FacetCutAction.Remove ) {
-            _removeFacet(
-                IDiamondLoupe.Facet({
-                    facetAddress: facetCut.facetAddress,
-                    functionSelectors: facetCut.functionSelectors
-                })
-            );
+        if(facetCut.facetAddress == address(0)) {
+            return;
+        } else {
+            // Y u no switch?
+            if(facetCut.action == IDiamond.FacetCutAction.Add ) {
+                _addFacet(
+                    IDiamondLoupe.Facet({
+                        facetAddress: facetCut.facetAddress,
+                        functionSelectors: facetCut.functionSelectors
+                    })
+                );
+            }
+            if(facetCut.action == IDiamond.FacetCutAction.Replace ) {
+                _replaceFacet(
+                    IDiamondLoupe.Facet({
+                        facetAddress: facetCut.facetAddress,
+                        functionSelectors: facetCut.functionSelectors
+                    })
+                );
+            }
+            if(facetCut.action == IDiamond.FacetCutAction.Remove ) {
+                _removeFacet(
+                    IDiamondLoupe.Facet({
+                        facetAddress: facetCut.facetAddress,
+                        functionSelectors: facetCut.functionSelectors
+                    })
+                );
+            }
         }
     }
 
     function _addFacet(
         IDiamondLoupe.Facet memory facet
     ) internal {
-        // facet._addFacet();
-        // facet.functionSelectors._calcInterfaceId()._registerInterfaceSupport();
-        // FIXME
-        // _registerInterfaceSupport(facet.functionSelectors._calcInterfaceId());
-        // MutableERC2535Layout.Struct storage layout = storageRange._layout();
         for(uint256 cursor = 0; cursor < facet.functionSelectors.length; cursor++) {
             /*
             If the action is Add, update the function selector mapping for each functionSelectors item to the facetAddress.
@@ -92,7 +93,6 @@ abstract contract MutableDiamondLoupeStorage is MutableERC165Storage {
             */
             require(
                 _loupe().facetAddress[facet.functionSelectors[cursor]] == address(0),
-                
                 string.concat(
                     "Function ",
                     cursor._toString(),
@@ -103,7 +103,7 @@ abstract contract MutableDiamondLoupeStorage is MutableERC165Storage {
         }
         // layout._storeFacet(facet);
         _loupe().facets._add(facet);
-        _loupe().facetFunctionSelectors[facet.facetAddress] = facet.functionSelectors;
+        _loupe().facetFunctionSelectors[facet.facetAddress]._add(facet.functionSelectors);
         _loupe().facetAddresses._add(facet.facetAddress);
     }
 
@@ -114,22 +114,28 @@ abstract contract MutableDiamondLoupeStorage is MutableERC165Storage {
         // ERC165 state update not required because it does not care about implementation address.
         // MutableERC2535Layout.Struct storage layout = storageRange._layout();
         for(uint256 cursor = 0; cursor < facet.functionSelectors.length; cursor++) {
-        /*
-        If the action is Replace, update the function selector mapping for each functionSelectors item to the facetAddress.
-        If any of the functionSelectors had a value equal to facetAddress or the selector was unset, revert instead.
-        */
-        require(
-            _loupe().facetAddress[facet.functionSelectors[cursor]] != address(0)
-            ||
-            _loupe().facetAddress[facet.functionSelectors[cursor]] != facet.facetAddress,
-            "Function not previously set or redundant."
-        );
-        _loupe().facetAddress[facet.functionSelectors[cursor]] = facet.facetAddress;
+            /*
+            If the action is Replace, update the function selector mapping for each functionSelectors item to the facetAddress.
+            If any of the functionSelectors had a value equal to facetAddress or the selector was unset, revert instead.
+            */
+            require(
+                _loupe().facetAddress[facet.functionSelectors[cursor]] != address(0)
+                ||
+                _loupe().facetAddress[facet.functionSelectors[cursor]] != facet.facetAddress,
+                "Function not previously set or redundant."
+            );
+
+            address currentFacet = _loupe().facetAddress[facet.functionSelectors[cursor]];
+            _loupe().facetFunctionSelectors[currentFacet]._remove(facet.functionSelectors[cursor]);
+            if(_loupe().facetFunctionSelectors[currentFacet]._length() == 0) {
+                _loupe().facets._remove(facet.facetAddress);
+                _loupe().facetAddresses._remove(facet.facetAddress);
+            }
+            
+            _loupe().facetAddress[facet.functionSelectors[cursor]] = facet.facetAddress;
         }
-        // TODO code replacement
-        // layout._storeFacet(facet);
         _loupe().facets._add(facet);
-        _loupe().facetFunctionSelectors[facet.facetAddress] = facet.functionSelectors;
+        _loupe().facetFunctionSelectors[facet.facetAddress]._add(facet.functionSelectors);
         _loupe().facetAddresses._add(facet.facetAddress);
     }
 
@@ -139,15 +145,15 @@ abstract contract MutableDiamondLoupeStorage is MutableERC165Storage {
         // facet._removeFacet();
         // MutableERC2535Layout.Struct storage layout = storageRange._layout();
         for(uint256 cursor = 0; cursor < facet.functionSelectors.length; cursor++) {
-        /*
-        If the action is Remove, remove the function selector mapping for each functionSelectors item.
-        If any of the functionSelectors were previously unset, revert instead.
-        */
-        require(
-            _loupe().facetAddress[facet.functionSelectors[cursor]] != address(0),
-            "Function not previously set."
-        );
-        _loupe().facetAddress[facet.functionSelectors[cursor]] = facet.facetAddress;
+            /*
+            If the action is Remove, remove the function selector mapping for each functionSelectors item.
+            If any of the functionSelectors were previously unset, revert instead.
+            */
+            require(
+                _loupe().facetAddress[facet.functionSelectors[cursor]] != address(0),
+                "Function not previously set."
+            );
+            _loupe().facetAddress[facet.functionSelectors[cursor]] = facet.facetAddress;
         }
         // layout._removeFacet(facet);
         _loupe().facets._remove(facet.facetAddress);
@@ -174,7 +180,7 @@ abstract contract MutableDiamondLoupeStorage is MutableERC165Storage {
         address facetAddress
     ) internal view returns (bytes4[] memory facetFunctionSelectors_) {
         // facetFunctionSelectors_ = MutableERC2535Service._facetFunctionSelectors(_facet);
-        return _loupe().facetFunctionSelectors[facetAddress];
+        return _loupe().facetFunctionSelectors[facetAddress]._asArray();
     }
 
     /**

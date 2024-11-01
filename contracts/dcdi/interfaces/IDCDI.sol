@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
+// import "daosys/introspection/erc165/interfaces/IERC165.sol";
+
 interface IDCDI {
 
     error NotFromContext(address challenger);
@@ -59,5 +61,9 @@ interface IDCDI {
      */
     function initData()
     external view returns(bytes memory initData_);
+
+
+    // function supportedInterfaces()
+    // external view returns(bytes4[] memory interfaces);
 
 }

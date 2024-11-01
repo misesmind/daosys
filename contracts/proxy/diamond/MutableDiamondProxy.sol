@@ -15,18 +15,18 @@ contract MutableDiamondProxy is Proxy, MutableDiamondLoupeTarget {
         target_ = _facetAddress(msg.sig);
     }
 
-    function _supportedInterfaces()
-    internal pure virtual override returns(bytes4[] memory supportedInterfaces_)
-    {
-        supportedInterfaces_ = new bytes4[](1);
-        // supportedInterfaces_[0] = type(IERC165).interfaceId;
-    }
+    // function _supportedInterfaces()
+    // internal pure virtual override returns(bytes4[] memory supportedInterfaces_)
+    // {
+    //     supportedInterfaces_ = new bytes4[](1);
+    //     // supportedInterfaces_[0] = type(IERC165).interfaceId;
+    // }
 
-    function _functionSelectors()
-    internal pure virtual override returns(bytes4[] memory funcs_)
-    {
-        funcs_ = new bytes4[](1);
-        // funcs_[0] = IERC165.supportsInterface.selector;
-    }
+    // function _functionSelectors()
+    // internal pure virtual override returns(bytes4[] memory funcs_)
+    // {
+    //     funcs_ = new bytes4[](1);
+    //     // funcs_[0] = IERC165.supportsInterface.selector;
+    // }
 
 }

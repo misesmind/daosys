@@ -5,11 +5,12 @@ pragma solidity ^0.8.0;
 // import "forge-std/console.sol";
 // import "forge-std/console2.sol";
 
-import {Proxy} from "daosys/proxy/Proxy.sol";
-import {DCDIAware} from "daosys/dcdi/aware/types/DCDIAware.sol";
-import {Address} from "daosys/primitives/Address.sol";
-import {IProxyResolver} from "daosys/resolvers/proxy/interfaces/IProxyResolver.sol";
-import {ProxyResolverAdaptor} from "daosys/resolvers/proxy/libs/ProxyResolverAdaptor.sol";
+import "daosys/proxy/Proxy.sol";
+import "daosys/dcdi/aware/types/DCDIAware.sol";
+import "daosys/primitives/Address.sol";
+import "daosys/resolvers/proxy/interfaces/IProxyResolver.sol";
+import "daosys/resolvers/proxy/libs/ProxyResolverAdaptor.sol";
+import "daosys/dcdi/interfaces/IDCDI.sol";
 
 contract ResolverProxy
 is
@@ -23,18 +24,11 @@ Proxy
     IProxyResolver private immutable RESOLVER;
 
     constructor() {
-        // console.log("entering constructor");
-        // 0xE4D07d4b2Dc4b15c55A28ef592da7868145266b6
-        // console.log(
-        //     "Execution context: %s",
-        //     address(this)
-        // );
         RESOLVER = abi.decode(
-            _initData(),
+            initData(),
             (IProxyResolver)
         );
         RESOLVER._initAccount();
-        // console.log("exiting constructor");
     }
 
     /**
@@ -45,5 +39,11 @@ Proxy
     internal virtual override returns (address target_) {
         return RESOLVER._getTarget(msg.sig);
     }
+
+    // function supportedInterfaces()
+    // public view virtual override returns(bytes4[] memory interfaces) {
+    //     interfaces = new bytes4[](1);
+    //     interfaces[0] = type(IDCDI).interfaceId;
+    // }
 
 }
