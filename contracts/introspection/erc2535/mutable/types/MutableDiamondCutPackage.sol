@@ -9,23 +9,36 @@ import "daosys/introspection/erc2535/mutable/types/MutableDiamondCutTarget.sol";
 import "daosys/context/erc2535/types/DiamondPackage.sol";
 import "daosys/access/ownable/types/OwnableTarget.sol";
 import "daosys/context/erc2535/types/FacetDiamondPackage.sol";
+import "daosys/access/ownable/types/OwnableModifiers.sol";
+import "daosys/dcdi/interfaces/IDCDI.sol";
+import "daosys/context/erc2535/interfaces/IDiamondPackage.sol";
+import "daosys/introspection/erc165/mutable/types/MutableERC165Target.sol";
 
 contract MutableDiamondCutPackage
 is
-OwnableTarget,
+OwnableModifiers,
+MutableERC165Target,
 MutableDiamondCutTarget,
 // DiamondPackage
 FacetDiamondPackage
 {
+    address immutable ownableFacet;
 
-    // function supportedInterfaces()
-    // public view virtual
+    constructor() {
+        ownableFacet = abi.decode(initData(), (address));
+        _initERC165(supportedInterfaces());
+    }
+
+    function supportedInterfaces()
+    public view virtual
     // override
-    // returns(bytes4[] memory interfaces) {
-    //     interfaces =  new bytes4[](2);
-    //     interfaces[0] = type(IOwnable).interfaceId;
-    //     interfaces[1] = type(IDiamondCut).interfaceId;
-    // }
+    returns(bytes4[] memory interfaces) {
+        interfaces = new bytes4[](4);
+        interfaces[0] = type(IERC165).interfaceId;
+        interfaces[1] = type(IDCDI).interfaceId;
+        interfaces[2] = type(IFacet).interfaceId;
+        interfaces[3] = type(IDiamondPackage).interfaceId;
+    }
 
     function facetInterfaces()
     public view virtual
@@ -38,28 +51,30 @@ FacetDiamondPackage
 
     function facetFuncs()
     public pure virtual override returns(bytes4[] memory funcs) {
-        funcs = new bytes4[](6);
-        funcs[0] = IOwnable.owner.selector;
-        funcs[1] = IOwnable.proposedOwner.selector;
-        funcs[2] = IOwnable.transferOwnership.selector;
-        funcs[3] = IOwnable.acceptOwnership.selector;
-        funcs[4] = IOwnable.renounceOwnership.selector;
-        funcs[5] = IDiamondCut.diamondCut.selector;
-        // return funcs;
+        funcs = new bytes4[](1);
+        funcs[0] = IDiamondCut.diamondCut.selector;
     }
 
-    // function facetCuts()
-    // public view virtual override returns(IDiamond.FacetCut[] memory facetCuts_) {
-    //     facetCuts_ = new IDiamond.FacetCut[](1);
-    //     facetCuts_[0] = IDiamond.FacetCut({
-    //         // address facetAddress;
-    //         facetAddress: self(),
-    //         // FacetCutAction action;
-    //         action: IDiamond.FacetCutAction.Add,
-    //         // bytes4[] functionSelectors;
-    //         functionSelectors: facetFuncs()
-    //     });
-    // }
+    function facetCuts()
+    public view virtual override returns(IDiamond.FacetCut[] memory facetCuts_) {
+        facetCuts_ = new IDiamond.FacetCut[](2);
+        facetCuts_[0] = IDiamond.FacetCut({
+            // address facetAddress;
+            facetAddress: ownableFacet,
+            // FacetCutAction action;
+            action: IDiamond.FacetCutAction.Add,
+            // bytes4[] functionSelectors;
+            functionSelectors: IFacet(ownableFacet).facetFuncs()
+        });
+        facetCuts_[1] = IDiamond.FacetCut({
+            // address facetAddress;
+            facetAddress: self(),
+            // FacetCutAction action;
+            action: IDiamond.FacetCutAction.Add,
+            // bytes4[] functionSelectors;
+            functionSelectors: facetFuncs()
+        });
+    }
 
     // function initAccount()
     // public virtual override returns(bytes memory pkgData) {

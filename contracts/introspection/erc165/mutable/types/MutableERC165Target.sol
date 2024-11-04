@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import {MutableERC165Storage, IERC165} from "daosys/introspection/erc165/mutable/types/MutableERC165Storage.sol";
 
-abstract contract MutableERC165Target is IERC165, MutableERC165Storage {
+contract MutableERC165Target is IERC165, MutableERC165Storage {
 
     // function _initTarget()
     // internal virtual {

@@ -86,9 +86,10 @@ contract Context is MutableERC165Target, IDCDI, IContext {
 
     function supportedInterfaces()
     public view virtual returns(bytes4[] memory interfaces) {
-        interfaces = new bytes4[](2);
+        interfaces = new bytes4[](3);
         interfaces[0] = type(IERC165).interfaceId;
-        interfaces[0] = type(IContext).interfaceId;
+        interfaces[1] = type(IDCDI).interfaceId;
+        interfaces[2] = type(IContext).interfaceId;
     }
 
     /**

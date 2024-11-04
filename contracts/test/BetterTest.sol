@@ -14,6 +14,7 @@ import {
     FuzzingConstraints,
     BetterFuzzing
 } from "daosys/test/fuzzing/BetterFuzzing.sol";
+import "daosys/test/vm/VMAware.sol";
 
 /**
  * @dev This is an objectively better test.
@@ -21,5 +22,11 @@ import {
 contract BetterTest is Test, BetterFuzzing
 // , Plotter
 {
+
+    // modifier dirtiesState() {
+    //     uint256 snapShot = vm.snapshotState();
+    //     _;
+    //     vm.revertToState(snapShot);
+    // }
 
 }

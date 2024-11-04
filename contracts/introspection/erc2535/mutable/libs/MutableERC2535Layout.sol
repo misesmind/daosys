@@ -3,12 +3,12 @@ pragma solidity ^0.8.0;
 
 import "daosys/collections/sets/AddressSetRepo.sol";
 import "daosys/collections/sets/Bytes4SetRepo.sol";
-import "daosys/introspection/erc2535/mutable/libs/FacetSetLayout.sol";
+// import "daosys/introspection/erc2535/mutable/libs/FacetSetLayout.sol";
 import "daosys/introspection/erc2535/interfaces/IDiamondLoupe.sol";
 
 
 struct MutableERC253Struct {
-    FacetSetLayout.Struct facets;
+    // FacetSetLayout.Struct facets;
     mapping(address facet => Bytes4Set functionSelectors) facetFunctionSelectors;
     AddressSet facetAddresses;
     mapping(bytes4 functionSelector => address facet) facetAddress;
@@ -18,7 +18,7 @@ library MutableERC2535Layout {
 
     using AddressSetRepo for AddressSet;
     using Bytes4SetRepo for Bytes4Set;
-    using FacetSetLayout for FacetSetLayout.Struct;
+    // using FacetSetLayout for FacetSetLayout.Struct;
 
 //   struct Struct {
 //     FacetSetLayout.Struct facets;

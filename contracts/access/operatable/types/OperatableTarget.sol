@@ -2,14 +2,16 @@
 pragma solidity ^0.8.0;
 
 import "daosys/access/operatable/types/OperatableModifiers.sol";
+import "daosys/access/ownable/types/OwnableModifiers.sol";
 
 /**
  * @title OperatableTarget - Exposes IOperatable functions.
  */
 contract OperatableTarget
 is
+OwnableModifiers,
 OperatableModifiers,
-OwnableTarget,
+// OwnableTarget,
 IOperatable
 {
 

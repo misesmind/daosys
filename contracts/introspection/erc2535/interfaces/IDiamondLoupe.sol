@@ -15,6 +15,11 @@ interface IDiamondLoupe {
         bytes4[] functionSelectors;
     }
 
+    error FunctionAlreadyPresent(bytes4 functionSelector);
+    error FacetAlreadyPrresent(address facet);
+    error FunctionNotPresent(bytes4 functionSelector);
+    error FacetNotPresent(address facet);
+
     /**
      * @notice Gets all facet addresses and their four byte function selectors.
      * @return facets_ Facet

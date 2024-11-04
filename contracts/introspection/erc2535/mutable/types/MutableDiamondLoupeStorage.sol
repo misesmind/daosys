@@ -1,14 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import {
-    IDiamondLoupe
-} from "daosys/introspection/erc2535/interfaces/IDiamondLoupe.sol";
+import "daosys/introspection/erc2535/interfaces/IDiamondLoupe.sol";
 import "daosys/introspection/erc2535/interfaces/IDiamond.sol";
-import {
-    ERC165Utils,
-    MutableERC165Storage
-} from "daosys/introspection/erc165/mutable/types/MutableERC165Storage.sol";
+import "daosys/introspection/erc165/mutable/types/MutableERC165Storage.sol";
 import "daosys/introspection/erc2535/mutable/libs/MutableERC2535Layout.sol";
 import "daosys/primitives/UInt.sol";
 
@@ -17,7 +12,7 @@ abstract contract MutableDiamondLoupeStorage is MutableERC165Storage {
     using AddressSetRepo for AddressSet;
     using Bytes4SetRepo for Bytes4Set;
     using ERC165Utils for bytes4[];
-    using FacetSetLayout for FacetSetLayout.Struct;
+    // using FacetSetLayout for FacetSetLayout.Struct;
     using MutableERC2535Layout for MutableERC253Struct;
     using UInt for uint256;
     // using MutableERC2535Service for bytes4;
@@ -91,18 +86,21 @@ abstract contract MutableDiamondLoupeStorage is MutableERC165Storage {
             If the action is Add, update the function selector mapping for each functionSelectors item to the facetAddress.
             If any of the functionSelectors had a mapped facet, revert instead.
             */
-            require(
-                _loupe().facetAddress[facet.functionSelectors[cursor]] == address(0),
-                string.concat(
-                    "Function ",
-                    cursor._toString(),
-                    " previously set."
-                )
-            );
+            // require(
+            //     _loupe().facetAddress[facet.functionSelectors[cursor]] == address(0),
+            //     string.concat(
+            //         "Function ",
+            //         cursor._toString(),
+            //         " previously set."
+            //     )
+            // );
+            if(_loupe().facetAddress[facet.functionSelectors[cursor]] != address(0)) {
+                revert IDiamondLoupe.FunctionAlreadyPresent(facet.functionSelectors[cursor]);
+            }
             _loupe().facetAddress[facet.functionSelectors[cursor]] = facet.facetAddress;
         }
         // layout._storeFacet(facet);
-        _loupe().facets._add(facet);
+        // _loupe().facets._add(facet);
         _loupe().facetFunctionSelectors[facet.facetAddress]._add(facet.functionSelectors);
         _loupe().facetAddresses._add(facet.facetAddress);
     }
@@ -118,23 +116,29 @@ abstract contract MutableDiamondLoupeStorage is MutableERC165Storage {
             If the action is Replace, update the function selector mapping for each functionSelectors item to the facetAddress.
             If any of the functionSelectors had a value equal to facetAddress or the selector was unset, revert instead.
             */
-            require(
-                _loupe().facetAddress[facet.functionSelectors[cursor]] != address(0)
-                ||
-                _loupe().facetAddress[facet.functionSelectors[cursor]] != facet.facetAddress,
-                "Function not previously set or redundant."
-            );
+            // require(
+            //     _loupe().facetAddress[facet.functionSelectors[cursor]] != address(0)
+            //     ||
+            //     _loupe().facetAddress[facet.functionSelectors[cursor]] != facet.facetAddress,
+            //     "Function not previously set or redundant."
+            // );
+            if(_loupe().facetAddress[facet.functionSelectors[cursor]] == address(0)) {
+                revert IDiamondLoupe.FunctionNotPresent(facet.functionSelectors[cursor]);
+            }
+            if(_loupe().facetAddress[facet.functionSelectors[cursor]] == facet.facetAddress) {
+                revert IDiamondLoupe.FacetAlreadyPrresent(facet.facetAddress);
+            }
 
             address currentFacet = _loupe().facetAddress[facet.functionSelectors[cursor]];
             _loupe().facetFunctionSelectors[currentFacet]._remove(facet.functionSelectors[cursor]);
             if(_loupe().facetFunctionSelectors[currentFacet]._length() == 0) {
-                _loupe().facets._remove(facet.facetAddress);
+                // _loupe().facets._remove(facet.facetAddress);
                 _loupe().facetAddresses._remove(facet.facetAddress);
             }
             
             _loupe().facetAddress[facet.functionSelectors[cursor]] = facet.facetAddress;
         }
-        _loupe().facets._add(facet);
+        // _loupe().facets._add(facet);
         _loupe().facetFunctionSelectors[facet.facetAddress]._add(facet.functionSelectors);
         _loupe().facetAddresses._add(facet.facetAddress);
     }
@@ -149,14 +153,17 @@ abstract contract MutableDiamondLoupeStorage is MutableERC165Storage {
             If the action is Remove, remove the function selector mapping for each functionSelectors item.
             If any of the functionSelectors were previously unset, revert instead.
             */
-            require(
-                _loupe().facetAddress[facet.functionSelectors[cursor]] != address(0),
-                "Function not previously set."
-            );
+            // require(
+            //     _loupe().facetAddress[facet.functionSelectors[cursor]] != address(0),
+            //     "Function not previously set."
+            // );
+            if(_loupe().facetAddress[facet.functionSelectors[cursor]] == address(0)) {
+                revert IDiamondLoupe.FunctionNotPresent(facet.functionSelectors[cursor]);
+            }
             _loupe().facetAddress[facet.functionSelectors[cursor]] = facet.facetAddress;
         }
         // layout._removeFacet(facet);
-        _loupe().facets._remove(facet.facetAddress);
+        // _loupe().facets._remove(facet.facetAddress);
         // Does not actually delete values, just unmaps storage pointer.
         delete _loupe().facetFunctionSelectors[facet.facetAddress];
         _loupe().facetAddresses._remove(facet.facetAddress);
@@ -168,7 +175,16 @@ abstract contract MutableDiamondLoupeStorage is MutableERC165Storage {
      */
     function _facets() internal view returns (IDiamondLoupe.Facet[] memory facets_) {
         // facets_ = MutableERC2535Service._facets();
-        return _loupe().facets._setAsArray();
+        // return _loupe().facets._setAsArray();
+        uint256 facetAddrLen = _loupe().facetAddresses._length();
+        facets_ = new IDiamondLoupe.Facet[](facetAddrLen);
+        for(uint256 cursor = 0; cursor < facetAddrLen; cursor++) {
+            address currentFacet = _loupe().facetAddresses._index(cursor);
+            facets_[cursor] = IDiamondLoupe.Facet({
+                facetAddress: currentFacet,
+                functionSelectors: _loupe().facetFunctionSelectors[currentFacet]._asArray()
+            });
+        }
     }
 
     /**
