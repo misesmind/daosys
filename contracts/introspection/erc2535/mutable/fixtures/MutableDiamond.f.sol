@@ -22,6 +22,7 @@ contract MutableDiamondFixture {
                     ""
                 )
         );
+        return _loupeFacet;
     }
 
     MutableERC2535ContextInitializer internal _diamondIniter;
@@ -38,6 +39,7 @@ contract MutableDiamondFixture {
                     abi.encode(loupeFacet(context_))
                 )
         );
+        return _diamondIniter;
     }
 
     MutableDiamondCutPackage internal _diamondCutPkg;

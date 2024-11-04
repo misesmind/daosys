@@ -9,10 +9,10 @@ contract ContextDeploymentFixture {
 
     function context()
     public virtual returns(Context context_) {
-        if(address(_context) != address(0)) {
-            return _context;
+        if(address(_context) == address(0)) {
+            _context = new Context();
         }
-        _context = new Context();
+        return _context;
     }
 
 }
