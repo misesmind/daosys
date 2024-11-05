@@ -119,6 +119,10 @@ FacetDiamondPackage
         }
     }
 
+    function postDeploy(
+        address consumer
+    ) public virtual override(IPackage, Package) returns(bool success) {}
+
     function diamondCut(
         IDiamond.FacetCut[] memory diamondCut_,
         address initTarget,

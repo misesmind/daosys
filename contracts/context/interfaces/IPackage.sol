@@ -35,7 +35,7 @@ interface IPackage {
     ) external returns(bytes memory);
 
     function postDeploy(
-        address consumer
+        address consumer_
     ) external returns(bool success);
 
 }

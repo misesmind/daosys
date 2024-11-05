@@ -59,4 +59,8 @@ IPackage
     function initAccount()
     public virtual returns(bytes memory pkgData);
 
+    function postDeploy(
+        address consumer
+    ) public virtual returns(bool success);
+
 }

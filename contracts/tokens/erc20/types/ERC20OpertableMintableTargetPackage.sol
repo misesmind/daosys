@@ -105,4 +105,8 @@ FacetDiamondPackage
         _isOperator(owner_, true);
     }
 
+    function postDeploy(
+        address consumer
+    ) public virtual override(IPackage, Package) returns(bool success) {}
+
 }
