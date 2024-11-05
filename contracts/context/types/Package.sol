@@ -27,6 +27,17 @@ IPackage
             );
     }
 
+    function _loadPkgDataFor(address consumer)
+    internal view virtual returns(bytes memory) {
+        return PackageService
+            ._loadPkgData(
+                // IContext(origin()),
+                IContext(address(this)),
+                IPackage(self()),
+                consumer
+            );
+    }
+
     function processArgs(
         bytes memory pkgArgs
     ) public view virtual returns(bytes32 salt) {

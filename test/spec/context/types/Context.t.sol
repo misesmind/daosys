@@ -14,14 +14,14 @@ import "daosys/introspection/erc165/interfaces/IERC165.sol";
 // import "daosys/proxy/resolver/ResolverProxy.sol";
 import "daosys/dcdi/aware/behaviors/IDCDI.b.sol";
 import "daosys/introspection/erc165/behaviors/IERC165.b.sol";
-import "daosys/context/fixtures/ContextDeployment.f.sol";
+import "lib/daosys/contracts/context/fixtures/ContextTest.f.sol";
 
 contract ContextTest
 is
 BetterTest,
 IDCDIBehavior,
 IERC165Behavior,
-ContextDeploymentFixture
+ContextTestFixture
 {
     using AddressSetRepo for AddressSet;
     using Bytes4SetRepo for Bytes4Set;
@@ -53,18 +53,17 @@ ContextDeploymentFixture
         interfaces[1] = type(IDCDI).interfaceId;
         interfaces[2] = type(IContext).interfaceId;
     }
-
-    /* ---------------------------------------------------------------------- */
-    /*                        MutableDiamondLoupeFacet                        */
-    /* ---------------------------------------------------------------------- */
-
+    
     /* ---------------------------------------------------------------------- */
     /*                             Initialization                             */
     /* ---------------------------------------------------------------------- */
 
     function setUp()
-    public {
-        vm.createSelectFork("mainnet_infura", 19862653);
+    public virtual override
+    fork("mainnet_infura", 19862653)
+    {
+        // vm.createSelectFork("mainnet_infura", 19862653);
+        super.setUp();
 
         /* ------------------------------------------------------------------ */
         /*                               Context                              */

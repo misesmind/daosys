@@ -5,9 +5,6 @@ import {IPackage} from "daosys/context/interfaces/IPackage.sol";
 
 interface IContextInitializer {
 
-    function initAccount()
-    external returns(bool success);
-
     function initContext(
         IPackage pkg,
         bytes memory pkgArgs
@@ -16,5 +13,11 @@ interface IContextInitializer {
         bytes32 salt,
         bytes memory initData
     );
+
+    function initAccount()
+    external returns(bool success);
+
+    function postDeploy()
+    external returns(bool success);
 
 }

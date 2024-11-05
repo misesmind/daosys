@@ -1,8 +1,8 @@
 # DAOSYS
 ifndef::compositing[]
 :author: cyotee doge
-:email: doge.cyotee
-:revdate: 2022-04-08
+:email: doge@cyotee
+:revdate: 2024-11-04
 :revnumber: 0.1
 :revremark: Initial draft.
 :toc:
@@ -11,59 +11,44 @@ ifndef::compositing[]
 :data-uri:
 :stem:
 :icons: font
-:root: ../
-// :imagesdir: images
+:imagesdir: images/
+:root: ./
 :compositing:
 endif::[]
 
-## Usage
+image::Code_Not_the_Same.jpeg[align=center]
 
-### Build
+== Summary
 
-```shell
-$ forge build
-```
+DAOSYS is a Solidity development and run-time framework extending Foundry aiming to provide enterprise level support.
+Robust solutions to common problems and tools to simplify testing large code bases.
+The aim is to minimize the potential for developer error, favor reproducibility, and facilitate standards compliance.
 
-### Test
+DAOSYS adopts a declarative Context based architecture.
+Contexts are modular hookable factories.
+The hooks allow for defining logic at deployment.
+Deployments are handled using a Fixture based design.
+Behavior based modules simplify testing large architectures for standards compliance.
+Extensions to Foundry are provided to simplify usage when dealing with complex scenarios.
 
-```shell
-$ forge test
-```
+== Architecture
 
-### Format
+DAOSYS provides a modular factory in the Context.
 
-```shell
-$ forge fmt
-```
+.IContext Interrface
+[%collapsible]
+====
+[source,solidity]
+----
+include::contracts/context/interfaces/IContext.sol[]
+----
+====
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+.IContext Interrface
+[%collapsible]
+====
+[source,solidity]
+----
+include::contracts/context/interfaces/IContext.sol[]
+----
+====

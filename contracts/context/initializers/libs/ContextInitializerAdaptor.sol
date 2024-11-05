@@ -44,4 +44,10 @@ library ContextInitializerAdaptor {
         );
     }
 
+    function _postDeploy(
+
+    ) internal {
+        
+    }
+
 }

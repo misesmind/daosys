@@ -22,13 +22,13 @@ import "daosys/context/fixtures/ContextDeployment.f.sol";
 import "daosys/dcdi/aware/behaviors/IDCDI.b.sol";
 import "daosys/introspection/erc165/behaviors/IERC165.b.sol";
 import "daosys/context/erc2535/behaviors/IFacet.b.sol";
-import "daosys/introspection/erc2535/mutable/fixtures/MutableDiamond.f.sol";
+import "daosys/introspection/erc2535/mutable/fixtures/MutableDiamondDeployment.f.sol";
 
 contract MutableDiamondLoupeFacetTest
 is
 BetterTest,
 ContextDeploymentFixture,
-MutableDiamondFixture,
+MutableDiamondDeploymentFixture,
 IDCDIBehavior,
 IERC165Behavior,
 IFacetBehavior
@@ -48,17 +48,9 @@ IFacetBehavior
     /*                             Test Instances                             */
     /* ---------------------------------------------------------------------- */
 
-    // function context()
-    // public virtual override returns(Context context_) {
-    //     if(address(_context) != address(0)) {
-    //         return _context;
-    //     }
-    //     _context = new Context();
-    // }
-
     function loupeFacet()
-    public virtual returns(MutableDiamondLoupeFacet loupeFacet_) {
-        return loupeFacet(context());
+    public virtual override returns(MutableDiamondLoupeFacet loupeFacet_) {
+        return super.loupeFacet();
     }
 
     /* ---------------------------------------------------------------------- */

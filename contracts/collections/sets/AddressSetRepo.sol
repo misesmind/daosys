@@ -18,6 +18,7 @@ struct AddressSet {
 library AddressSetRepo {
 
     using Array for uint256;
+    using AddressSetRepo for AddressSet;
 
     /* ------------------------- EMBEDDED LIBRARIES ------------------------- */
 
@@ -263,6 +264,28 @@ library AddressSetRepo {
         AddressSet storage set
     ) internal view returns (address[] storage values) {
         values = set.values;
+    }
+
+    error InvalidPageSize(uint256 start, uint256 end);
+
+    function _range(
+        AddressSet storage set,
+        uint256 start,
+        uint256 end
+    ) internal view returns(address[] memory array) {
+        if(end < start) {
+            revert InvalidPageSize(start, end);
+        }
+        uint256 setLen = set._length();
+        require(setLen._isValidIndex(start));
+        require(setLen._isValidIndex(end));
+        uint256 returnLen = end - start + 1;
+        array = new address[](returnLen);
+        for(uint256 setCursor = start; setCursor <= end; setCursor++) {
+            for(uint256 returnCursor = 0; returnCursor < returnLen; returnCursor++) {
+                array[returnCursor] = set._index(setCursor);
+            }
+        }
     }
 
 }

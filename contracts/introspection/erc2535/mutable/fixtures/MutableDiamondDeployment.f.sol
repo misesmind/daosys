@@ -5,10 +5,21 @@ import "daosys/context/types/Context.sol";
 import "daosys/introspection/erc2535/mutable/types/MutableDiamondLoupeFacet.sol";
 import "daosys/context/initializers/erc2535/types/MutableERC2535ContextInitializer.sol";
 import "daosys/introspection/erc2535/mutable/types/MutableDiamondCutPackage.sol";
+import "daosys/context/fixtures/ContextDeployment.f.sol";
+import "daosys/access/ownable/fixtures/Ownable.f.sol";
 
-contract MutableDiamondFixture {
+contract MutableDiamondDeploymentFixture
+is
+// ContextDeploymentFixture
+OwnableFixture
+{
 
     MutableDiamondLoupeFacet internal _loupeFacet;
+
+    function loupeFacet()
+    public virtual returns(MutableDiamondLoupeFacet loupeFacet_) {
+        return loupeFacet(context());
+    }
 
     function loupeFacet(IContext context_)
     public virtual returns(MutableDiamondLoupeFacet loupeFacet_) {
@@ -27,6 +38,11 @@ contract MutableDiamondFixture {
 
     MutableERC2535ContextInitializer internal _diamondIniter;
 
+    function diamondIniter()
+    public virtual returns(MutableERC2535ContextInitializer diamondIniter_) {
+        return diamondIniter(context());
+    }
+
     function diamondIniter(IContext context_)
     public virtual returns(MutableERC2535ContextInitializer diamondIniter_) {
         if(address(_diamondIniter) != address(0)) {
@@ -44,18 +60,25 @@ contract MutableDiamondFixture {
 
     MutableDiamondCutPackage internal _diamondCutPkg;
 
+    function diamondCutPkg()
+    public returns(MutableDiamondCutPackage diamondCutPkg_) {
+        return diamondCutPkg(
+            context(),
+            address(ownableFacet())
+        );
+    }
+
     function diamondCutPkg(
         IContext context_,
-        address ownableFacet
-    )
-    public returns(MutableDiamondCutPackage diamondCutPkg_) {
+        address ownableFacet_
+    ) public returns(MutableDiamondCutPackage diamondCutPkg_) {
         if(address(_diamondCutPkg) == address(0)) {
             _diamondCutPkg = MutableDiamondCutPackage(
                 context_
                     .deployContract(
                         type(MutableDiamondCutPackage).creationCode,
                         // ""
-                        abi.encode(ownableFacet)
+                        abi.encode(ownableFacet_)
                     )
             );
         }

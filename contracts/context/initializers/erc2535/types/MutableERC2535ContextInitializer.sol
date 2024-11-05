@@ -119,6 +119,11 @@ IContextInitializer
         return true;
     }
 
+    function postDeploy()
+    public returns(bool success) {
+
+    }
+
     function getTarget(
         bytes4 functionSelector
     ) external view returns(address target_) {

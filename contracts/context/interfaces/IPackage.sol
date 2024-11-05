@@ -34,4 +34,8 @@ interface IPackage {
         // address origin_
     ) external returns(bytes memory);
 
+    function postDeploy(
+        address consumer
+    ) external returns(bool success);
+
 }

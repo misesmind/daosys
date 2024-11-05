@@ -5,14 +5,15 @@ pragma solidity ^0.8.0;
 
 import "daosys/primitives/UInt.sol";
 import "daosys/context/fixtures/ContextDeployment.f.sol";
-import "daosys/introspection/erc2535/mutable/fixtures/MutableDiamond.f.sol";
+import "daosys/introspection/erc2535/mutable/fixtures/MutableDiamondDeployment.f.sol";
 
 import "daosys/tokens/erc20/types/ERC20OpertableMintableTargetPackage.sol";
+import "daosys/introspection/erc2535/mutable/fixtures/MutableDiamondTest.f.sol";
 
 contract ERRC20TestFixture
 is
-ContextDeploymentFixture,
-MutableDiamondFixture
+// ContextDeploymentFixture,
+MutableDiamondTestFixtue
 {
 
     using UInt for uint256;
@@ -26,6 +27,12 @@ MutableDiamondFixture
     mapping(uint256 tokenId => IERC20OperatableMintable token) _deployedTokens;
 
     ERC20OpertableMintableTargetPackage _erc20Pkg;
+
+    function erc20Pkg()
+    public virtual returns(ERC20OpertableMintableTargetPackage erc20Pkg_) {
+        return erc20Pkg(context());
+        // return erc20Pkg(pachiraContext());
+    }
 
     function erc20Pkg(IContext context_)
     public virtual returns(ERC20OpertableMintableTargetPackage erc20Pkg_) {
@@ -43,6 +50,13 @@ MutableDiamondFixture
         return _erc20Pkg;
     }
 
+    function erc20Stub()
+    public virtual returns(IERC20OperatableMintable token) {
+        return erc20Stub(
+            address(this)
+        );
+    }
+
     function erc20Stub(
         IContext context_,
         IContextInitializer initer
@@ -52,6 +66,20 @@ MutableDiamondFixture
             context_,
             initer,
             address(this)
+        );
+    }
+
+    function erc20Stub(
+        address owner_
+    ) public virtual returns(IERC20OperatableMintable token) {
+        return erc20Stub(
+            context(),
+            diamondIniter(),
+            "",
+            "",
+            0,
+            0,
+            owner_
         );
     }
 
@@ -67,6 +95,24 @@ MutableDiamondFixture
             "",
             0,
             0,
+            owner_
+        );
+    }
+
+    function erc20Stub(
+        string memory tokenName,
+        string memory tokenSymbol,
+        uint8 tokenDecimals,
+        uint256 tokenTotalSupply,
+        address owner_
+    ) public virtual returns(IERC20OperatableMintable token) {
+        return erc20Stub(
+            context(),
+            diamondIniter(),
+            tokenName,
+            tokenSymbol,
+            tokenDecimals,
+            tokenTotalSupply,
             owner_
         );
     }

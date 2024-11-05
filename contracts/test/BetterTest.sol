@@ -19,7 +19,10 @@ import "daosys/test/vm/VMAware.sol";
 /**
  * @dev This is an objectively better test.
  */
-contract BetterTest is Test, BetterFuzzing
+contract BetterTest
+is
+Test,
+BetterFuzzing
 // , Plotter
 {
 
@@ -28,5 +31,13 @@ contract BetterTest is Test, BetterFuzzing
     //     _;
     //     vm.revertToState(snapShot);
     // }
+
+    modifier fork(
+        string memory networkName,
+        uint256 blockNumber
+    ) {
+        vm.createSelectFork(networkName, blockNumber);
+        _;
+    }
 
 }
