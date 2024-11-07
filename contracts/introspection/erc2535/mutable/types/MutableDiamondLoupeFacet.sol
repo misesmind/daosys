@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "daosys/introspection/erc2535/mutable/types/MutableDiamondLoupeTarget.sol";
 import "daosys/introspection/erc165/mutable/types/MutableERC165Target.sol";
-import "daosys/context/erc2535/types/Facet.sol";
+import "daosys/dcdi/context/erc2535/types/Facet.sol";
 import "daosys/dcdi/aware/types/DCDIAware.sol";
 
 contract MutableDiamondLoupeFacet

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import "daosys/context/types/Context.sol";
+import "daosys/dcdi/context/types/Context.sol";
 import "daosys/access/ownable/types/OwnableFacet.sol";
-import "daosys/context/fixtures/ContextDeployment.f.sol";
+import "daosys/dcdi/context/fixtures/ContextDeployment.f.sol";
 
 contract OwnableFixture
 is

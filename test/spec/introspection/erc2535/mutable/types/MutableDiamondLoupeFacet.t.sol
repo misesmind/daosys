@@ -14,14 +14,14 @@ import "daosys/introspection/erc2535/interfaces/IDiamondLoupe.sol";
 // import "daosys/access/ownable/types/OwnableFacet.sol";
 import "daosys/proxy/resolver/ResolverProxy.sol";
 // import "daosys/introspection/erc2535/mutable/types/MutableDiamondCutPackage.sol";
-// import "daosys/context/types/PrivateContext.sol";
+// import "daosys/dcdi/context/types/PrivateContext.sol";
 
 /* --------------------------------- Pachira -------------------------------- */
 
-import "daosys/context/fixtures/ContextDeployment.f.sol";
+import "daosys/dcdi/context/fixtures/ContextDeployment.f.sol";
 import "daosys/dcdi/aware/behaviors/IDCDI.b.sol";
 import "daosys/introspection/erc165/behaviors/IERC165.b.sol";
-import "daosys/context/erc2535/behaviors/IFacet.b.sol";
+import "daosys/dcdi/context/erc2535/behaviors/IFacet.b.sol";
 import "daosys/introspection/erc2535/mutable/fixtures/MutableDiamondDeployment.f.sol";
 
 contract MutableDiamondLoupeFacetTest

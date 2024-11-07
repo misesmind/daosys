@@ -62,8 +62,10 @@ interface IDCDI {
     function initData()
     external view returns(bytes memory initData_);
 
-
     // function supportedInterfaces()
     // external view returns(bytes4[] memory interfaces);
+
+    function postDeploy()
+    external returns(bool);
 
 }

@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-import "daosys/context/types/Context.sol";
+import "daosys/dcdi/context/types/Context.sol";
 import "daosys/introspection/erc2535/mutable/types/MutableDiamondLoupeFacet.sol";
-import "daosys/context/initializers/erc2535/types/MutableERC2535ContextInitializer.sol";
+import "daosys/dcdi/context/initializers/erc2535/types/MutableERC2535ContextInitializer.sol";
 import "daosys/introspection/erc2535/mutable/types/MutableDiamondCutPackage.sol";
-import "daosys/context/fixtures/ContextDeployment.f.sol";
+import "daosys/dcdi/context/fixtures/ContextDeployment.f.sol";
 import "daosys/access/ownable/fixtures/Ownable.f.sol";
 
 contract MutableDiamondDeploymentFixture

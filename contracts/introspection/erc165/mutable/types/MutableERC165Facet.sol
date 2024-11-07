@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "daosys/introspection/erc165/mutable/types/MutableERC165Target.sol";
-import "daosys/context/erc2535/types/Facet.sol";
+import "daosys/dcdi/context/erc2535/types/Facet.sol";
 
 contract MutableERC165Facet
 is MutableERC165Target, Facet {

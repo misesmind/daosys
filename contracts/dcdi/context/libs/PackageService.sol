@@ -3,43 +3,43 @@ pragma solidity ^0.8.0;
 
 import {DCDIAwareService} from "daosys/dcdi/aware/libs/DCDIAwareService.sol";
 import {IContext} from "daosys/dcdi/context/interfaces/IContext.sol";
-import {IProxyResolver} from "daosys/resolvers/proxy/interfaces/IProxyResolver.sol";
+import {IPackage} from "daosys/dcdi/context/interfaces/IPackage.sol";
 
-library ProxyResolverService {
+library PackageService {
 
     using DCDIAwareService for address;
     using DCDIAwareService for bytes;
 
-    using ProxyResolverService for IProxyResolver;
+    using PackageService for IPackage;
 
-    function _genResolverDataKey(
-        IProxyResolver resolver,
+    function _genPkgDataKey(
+        IPackage pkg,
         address consumer
     ) internal pure returns(bytes32) {
-        return keccak256(abi.encode(resolver, consumer));
+        return keccak256(abi.encode(pkg, consumer));
     }
 
-    function _injectResolverData(
+    function _injectPkgData(
         bytes memory data,
-        IProxyResolver resolver,
+        IPackage pkg,
         address consumer
     ) internal {
         data
             ._injectData(
                 consumer,
-                resolver._genResolverDataKey(consumer)
+                pkg._genPkgDataKey(consumer)
             );
     }
 
-    function _loadResolverData(
+    function _loadPkgData(
         IContext context,
-        IProxyResolver resolver,
+        IPackage pkg,
         address consumer
     ) internal view returns(bytes memory) {
         return address(context)
             ._queryInjectedData(
                 consumer,
-                resolver._genResolverDataKey(consumer)
+                pkg._genPkgDataKey(consumer)
             );
     }
 

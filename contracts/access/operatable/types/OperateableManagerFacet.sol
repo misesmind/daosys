@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "daosys/access/ownable/types/OwnableTarget.sol";
-import "daosys/context/erc2535/types/Facet.sol";
+import "daosys/dcdi/context/erc2535/types/Facet.sol";
 import "daosys/access/operatable/interface/IOperateableManager.sol";
 import "daosys/access/operatable/types/OperateableManagerTarget.sol";
 

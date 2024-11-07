@@ -6,7 +6,7 @@ import "daosys/test/vm/VMAware.sol";
 import "daosys/introspection/erc2535/mutable/fixtures/MutableDiamondDeployment.f.sol";
 
 import "daosys/introspection/erc2535/behaviors/IDiamondLoupe.b.sol";
-import "daosys/context/fixtures/ContextTest.f.sol";
+import "daosys/dcdi/context/fixtures/ContextTest.f.sol";
 
 contract MutableDiamondTestFixtue
 is

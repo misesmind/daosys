@@ -119,4 +119,7 @@ IDCDI
     //     interfaces[1] = type(IDCDI).interfaceId;
     // }
 
+    function postDeploy()
+    external virtual returns(bool) {}
+
 }

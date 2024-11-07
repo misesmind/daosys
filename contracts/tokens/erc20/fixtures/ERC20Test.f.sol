@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 /* --------------------------------- DAOSYS --------------------------------- */
 
 import "daosys/primitives/UInt.sol";
-import "daosys/context/fixtures/ContextDeployment.f.sol";
+import "daosys/dcdi/context/fixtures/ContextDeployment.f.sol";
 import "daosys/introspection/erc2535/mutable/fixtures/MutableDiamondDeployment.f.sol";
 
 import "daosys/tokens/erc20/types/ERC20OpertableMintableTargetPackage.sol";

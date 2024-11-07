@@ -6,12 +6,12 @@ import "forge-std/console.sol";
 // import "forge-std/console2.sol";
 
 import "daosys/introspection/erc2535/mutable/types/MutableDiamondCutTarget.sol";
-import "daosys/context/erc2535/types/DiamondPackage.sol";
+import "daosys/dcdi/context/erc2535/types/DiamondPackage.sol";
 import "daosys/access/ownable/types/OwnableTarget.sol";
-import "daosys/context/erc2535/types/FacetDiamondPackage.sol";
+import "daosys/dcdi/context/erc2535/types/FacetDiamondPackage.sol";
 import "daosys/access/ownable/types/OwnableModifiers.sol";
 import "daosys/dcdi/interfaces/IDCDI.sol";
-import "daosys/context/erc2535/interfaces/IDiamondPackage.sol";
+import "daosys/dcdi/context/erc2535/interfaces/IDiamondPackage.sol";
 import "daosys/introspection/erc165/mutable/types/MutableERC165Target.sol";
 
 contract MutableDiamondCutPackage
