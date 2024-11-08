@@ -58,6 +58,13 @@ library BetterUniV2Utils {
     // tag::_calcReserveShares[]
     /**
      * @dev Provides the owned balances of a given liquidity pool reserve.
+     * @dev Uses A/B nomclature to inddicate order DOES NOT matterr, simply correlate variables to the same tokens.
+     * @param ownedLPAmount Owned amount of LP token.
+     * @param lpTotalSupply LP token total supply.
+     * @param totalReserveA LP reserve of Token A
+     * @param totalReserveB LP reserve of Token B.
+     * @return ownedReserveA Owned share of Token A from LP reserve.
+     * @return ownedReserveB Owned share of Token B from LP reserve.
      */
     function _calcReserveShares(
         uint256 ownedLPAmount,
