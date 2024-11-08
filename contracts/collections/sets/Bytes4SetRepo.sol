@@ -118,8 +118,21 @@ library Bytes4SetRepo {
 
     function _asArray(
         Bytes4Set storage set
-    ) internal view returns (bytes4[] storage rawSet) {
+    ) internal view returns (bytes4[] memory rawSet) {
         rawSet = set.values;
+    }
+
+    /**
+     * @dev Provides the storage pointer os the underlying array of value.
+     * @dev DO NOT alter values via this pointer.
+     * @dev ONLY use to minimize memory usage when passing a reference internally for gas efficiency.
+     * @param set The storage pointer of the struct upon which this function should operate.
+     * @return values The members of the set copied to memory as an array.
+     */
+    function _values(
+        Bytes4Set storage set
+    ) internal view returns (bytes4[] storage values) {
+        values = set.values;
     }
 
     function _wipeSet(
