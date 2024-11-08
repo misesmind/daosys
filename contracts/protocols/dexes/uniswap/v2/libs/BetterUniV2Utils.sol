@@ -5,7 +5,7 @@ pragma solidity ^0.8.0;
 // import "forge-std/console.sol";
 // import "forge-std/console2.sol";
 
-import {Uint512, BetterMath} from "contracts/math/BetterMath.sol";
+import "contracts/math/BetterMath.sol";
 
 library BetterUniV2Utils {
 
@@ -55,6 +55,7 @@ library BetterUniV2Utils {
         ownedReserveA = ((ownedLPAmount * totalReserveA) / lpTotalSupply);
     }
 
+    // tag::_calcReserveShares[]
     /**
      * @dev Provides the owned balances of a given liquidity pool reserve.
      */
@@ -71,6 +72,7 @@ library BetterUniV2Utils {
         ownedReserveA = ((ownedLPAmount * totalReserveA) / lpTotalSupply);
         ownedReserveB = ((ownedLPAmount * totalReserveB) / lpTotalSupply);
     }
+    // end::_calcReserveShares[]
 
     // tag::_quote[]
     /**
@@ -127,27 +129,16 @@ library BetterUniV2Utils {
         uint reserveIn,
         uint reserveOut
     ) internal pure returns (uint amountOut) {
-        // console.log("enter _calcSaleProceeds");
-        // TODO refactor to custom error
-        // console.log("amountIn = %s", amountIn);
         require(amountIn > 0, "BetterUniV2Utils: INSUFFICIENT_INPUT_AMOUNT");
-        // TODO refactor to custom error
-        // console.log("reserveIn = %s", reserveIn);
-        // console.log("reserveOut = %s", reserveOut);
         require(
             reserveIn > 0 
             && reserveOut > 0,
             "BetterUniV2Utils: INSUFFICIENT_LIQUIDITY"
         );
         uint amountInWithFee = (amountIn * 997);
-        // console.log("amountInWithFee = %s", amountInWithFee);
         uint numerator = (amountInWithFee * reserveOut);
-        // console.log("numerator = %s", numerator);
         uint denominator = (reserveIn * 1000) + (amountInWithFee);
-        // console.log("denominator = %s", denominator);
         amountOut = numerator / denominator;
-        // console.log("amountOut = %s", amountOut);
-        // console.log("exit _calcSaleProceeds");
     }
     // end::_quoteSwapIn[]
 
@@ -158,9 +149,7 @@ library BetterUniV2Utils {
     ) internal pure returns(
         uint256 ownedReserveA
     ) {
-        // using balances ensures pro-rata distribution
         ownedReserveA = ((ownedLPAmount * totalReserveA) / lpTotalSupply);
-        // ownedReserveB = ((ownedLPAmount * totalReserveB) / lpTotalSupply);
     }
 
     /**
@@ -174,31 +163,18 @@ library BetterUniV2Utils {
         uint256 outRes,
         uint256 opRes
     ) internal pure returns(uint256 lpWithdrawAmt) {
-        // console.log("enter _calcWithdrawAmt");
-        // console.log("targetOutAmt = %s", targetOutAmt);
-        // console.log("lpTotalSupply = %s", lpTotalSupply);
-        // console.log("outRes = %s", outRes);
-        // console.log("opRes = %s", opRes);
         uint256 opTAmt = _calcEquiv(
             targetOutAmt,
             outRes,
             opRes
         );
-        // console.log("opTAmt = %s", opTAmt);
         lpWithdrawAmt = _calcDeposit(
             targetOutAmt,
             opTAmt,
-            // _calcEquiv(
-            //     targetOutAmt,
-            //     outRes,
-            //     opRes
-            // ),
             lpTotalSupply,
             outRes,
             opRes
         );
-        // console.log("lpWithdrawAmt = %s", lpWithdrawAmt);
-        // console.log("exit _calcWithdrawAmt");
     }
 
     function _calcSwapDepositAmtIn(
@@ -221,7 +197,6 @@ library BetterUniV2Utils {
         uint256 saleTokenReserve,
         uint256 opposingTokenReserve
     ) internal pure returns(uint256 lpProceeds) {
-        // uint256 amountToSwap = _calcSwapDepositAmtIn(saleTokenReserve, saleTokenAmount);
         uint256 amountToSwap = _calcSwapDepositAmtIn(saleTokenAmount, saleTokenReserve);
         uint256 saleTokenDeposit = saleTokenAmount - amountToSwap;
         uint256 opposingTokenDeposit = _calcSaleProceeds(
@@ -233,7 +208,6 @@ library BetterUniV2Utils {
         lpProceeds = _calcDeposit(
             saleTokenDeposit,
             opposingTokenDeposit,
-            // IUniswapV2Pair(pair).totalSupply(),
             lpTotalSupply,
             saleTokenReserve + amountToSwap,
             opposingTokenReserve - opposingTokenDeposit
