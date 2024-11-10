@@ -1,13 +1,11 @@
-// SPDX-License-Identifier: BUSL-1.1
+// SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
-// import {IDiamond} from "contracts/introspection/erc2535/interfaces/IDiamond.sol";
-
+/**
+ * @title IPackage = Generalized proxy intialization hooks.
+ * @author cyotee doge <doge.cyotee>
+ */
 interface IPackage {
-
-    // TODO Move to Diamond Package interface.
-    // function facetCuts()
-    // external view returns(IDiamond.FacetCut[] memory facetCuts_);
 
     /**
      * @dev Provides a preprocessing hook for packages to normalize and/or decorate user provided arguments.
@@ -21,19 +19,29 @@ interface IPackage {
     ) external view returns(bytes32 salt);
 
     /**
-     * @dev State changing processing hook for packages to initialize chain state for a new DomainMemberProxy instance.
-     * @param consumer The address oof the yet to be instantiated DomainMemberProxy.
-     * @param initArgs The processed arguments to be used to initialize chain state for a new DomainMemberProxy instance.
+     * @dev State changing processing hook for packages to initialize chain state for a new proxy instance.
+     * @param consumer The address oof the yet to be instantiated proxy.
+     * @param initArgs The processed arguments to be used to initialize chain state for a new proxy instance.
      */
     function initContext(
         address consumer,
         bytes memory initArgs
     ) external returns(bool success);
 
-    function initAccount(
-        // address origin_
-    ) external returns(bytes memory);
+    /**
+     * @dev Proxy intialization hooks.
+     * @dev DELEGATECALLed by a ContextInitializer inside the proxy's execution context.
+     * @return The ABI encoded data used to initialize the proxy. WILL BE emited in any relevant events.
+     */
+    function initAccount()
+    external returns(bytes memory);
 
+    /**
+     * @dev Post deploy hook.
+     * @dev Intended for an operations that MUST be taken AFTER deployment AND/OR within the context's execution context.
+     * @dev DELEGATECALLed by a ContextInitializer inside the context's execution context.
+     * @param consumer_ The address of tthe deployed proxy.
+     */
     function postDeploy(
         address consumer_
     ) external returns(bool success);

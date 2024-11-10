@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BUSL-1.1
+// SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
 /**
@@ -8,6 +8,9 @@ pragma solidity ^0.8.0;
 interface IFacet {
 
     /**
+     * @dev ONLY includes interface expected to be called through a proxy.
+     * @dev DOES NOT include ANY interface expected to be called directly.
+     * @dev Defines the functions in THIS contract mapped into deployed proxies.
      * @return interfaces The ERC165 interface IDs exposed by this Facet.
      */
     function facetInterfaces()

@@ -8,7 +8,6 @@ uint32 constant PPM_RESOLUTION = 1_000_000;
 
 uint256 constant WAD = 1e18; // The scalar of ETH and most ERC20s.
 
-// uint256 constant ONE_WAD = 1 * 10**18;
 uint256 constant ONE_WAD = 1e18;
 uint256 constant TEN_WAD = ONE_WAD * 10;
 uint256 constant HUNDRED_WAD = TEN_WAD * 10;

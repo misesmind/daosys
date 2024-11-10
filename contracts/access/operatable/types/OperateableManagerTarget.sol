@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BUSL-1.1
+// SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
 import "daosys/access/ownable/types/OwnableTarget.sol";
@@ -12,27 +12,9 @@ import "daosys/access/operatable/interface/IOperateableManager.sol";
 contract OperateableManagerTarget
 is
 OwnableModifiers,
-// Facet,
 IOperateableManager
 {
 
-
-    // /**
-    //  * @inheritdoc IFacet
-    //  */    function supportedInterfaces()
-    // public view virtual override returns(bytes4[] memory interfaces) {
-    //     interfaces =  new bytes4[](1);
-    //     interfaces[0] = type(IOperateableManager).interfaceId;
-    // }
-
-    // /**
-    //  * @inheritdoc IFacet
-    //  */
-    // function facetFuncs()
-    // public view virtual override returns(bytes4[] memory funcs) {
-    //     funcs = new bytes4[](1);
-    //     funcs[0] = IOperateableManager.setOperator.selector;
-    // }
 
     /**
      * @inheritdoc IOperateableManager
