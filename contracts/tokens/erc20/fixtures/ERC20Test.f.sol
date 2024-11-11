@@ -10,7 +10,7 @@ import "daosys/introspection/erc2535/mutable/fixtures/MutableDiamondDeployment.f
 import "daosys/tokens/erc20/types/ERC20OpertableMintableTargetPackage.sol";
 import "daosys/introspection/erc2535/mutable/fixtures/MutableDiamondTest.f.sol";
 
-contract ERRC20TestFixture
+contract ERC20TestFixture
 is
 // ContextDeploymentFixture,
 MutableDiamondTestFixtue
