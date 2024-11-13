@@ -31,6 +31,7 @@ library BetterUniV2Utils {
             );
     }
 
+    // tag::_calcWithdraw[]
     /**
      * @dev Provides the owned balances of a given liquidity pool reserve.
      */
@@ -46,6 +47,7 @@ library BetterUniV2Utils {
         ownedReserveA = ((ownedLPAmount * totalReserveA) / lpTotalSupply);
         ownedReserveB = ((ownedLPAmount * totalReserveB) / lpTotalSupply);
     }
+    // end::_calcWithdraw[]
 
     function _calcReserveShare(
         uint256 ownedLPAmount,

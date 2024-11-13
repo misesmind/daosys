@@ -23,6 +23,11 @@ IOperatable
         return _isOperator(query);
     }
 
+    function isOperatorFor(bytes4 func, address query)
+    public view returns(bool) {
+        return _operatable().isOperatoFor[func][query];
+    }
+
     /**
      * @notice Restricted to owner.
      * @inheritdoc IOperatable
@@ -34,6 +39,14 @@ IOperatable
     onlyOwner(msg.sender)
     returns(bool) {
         _isOperator(operator, status);
+        return true;
+    }
+
+    function setOperatorFor(bytes4 func, address newOperator, bool approval)
+    public 
+    onlyOwner(msg.sender)
+    returns(bool) {
+        _operatable().isOperatoFor[func][newOperator] = approval;
         return true;
     }
 

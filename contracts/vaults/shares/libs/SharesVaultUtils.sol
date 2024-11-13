@@ -25,7 +25,7 @@ library SharesVaultUtils {
     }
     // end::_decimalsOffset()[]
 
-    // tag::_convertToShares(uint256,uint256)[]
+    // tag::_convertToShares[]
     /**
      * @dev Internal conversion function (from assets to shares) with support for rounding direction.
      * @param assets The amount of assets from which to calculate equivalent shares.
@@ -45,7 +45,7 @@ library SharesVaultUtils {
             BetterMath.Rounding.Floor
         );
     }
-    // end::_convertToShares(uint256,uint256)[]
+    // end::_convertToShares[]
 
     // tag::_convertToShares(uint256,uint256)[]
     /**
@@ -94,7 +94,7 @@ library SharesVaultUtils {
     }
     // end::_convertToShares(uint256,uint256,Math.Rounding)[]
 
-    // tag::_convertToAssets(uint256,uint256)[]
+    // tag::_convertToAssets[]
     /**
      * @dev Internal conversion function (from shares to assets) with support for rounding direction.
      * @param shares The amount of shares from which to calculate the equivalent assets.
@@ -114,7 +114,7 @@ library SharesVaultUtils {
             BetterMath.Rounding.Floor
         );
     }
-    // end::_convertToAssets(uint256,uint256)[]
+    // end::_convertToAssets[]
 
     // tag::_convertToAssets(uint256,uint256)[]
     /**

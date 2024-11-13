@@ -3,21 +3,21 @@ pragma solidity ^0.8.0;
 
 import "daosys/access/ownable/types/OwnableTarget.sol";
 import "daosys/dcdi/context/erc2535/types/Facet.sol";
-import "daosys/access/operatable/interface/IOperateableManager.sol";
+import "daosys/access/operatable/interface/IOperatableManager.sol";
 
 /**
- * @title OperateableManagerFacet - Facet for Diamond proxies to expose IOperateableManager.
+ * @title OperateableManagerFacet - Facet for Diamond proxies to expose IOperatableManager.
  * @author cyotee doge <doge.cyotee>
  */
 contract OperateableManagerTarget
 is
 OwnableModifiers,
-IOperateableManager
+IOperatableManager
 {
 
 
     /**
-     * @inheritdoc IOperateableManager
+     * @inheritdoc IOperatableManager
      */
     function setOperator(
         IOperatable subject,

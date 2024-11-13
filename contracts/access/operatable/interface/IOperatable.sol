@@ -19,6 +19,9 @@ interface IOperatable {
     function isOperator(address query)
     external view returns(bool);
 
+    function isOperatorFor(bytes4 func, address query)
+    external view returns(bool);
+
     /**
      * @param newOperator Addrees for which to change authorization.
      * @param approval Authorization status to set for newOperator.
@@ -27,6 +30,9 @@ interface IOperatable {
      * @custom:func-sig-hash 558a7297
      */
     function setOperator(address newOperator, bool approval)
+    external returns(bool);
+
+    function setOperatorFor(bytes4 func, address newOperator, bool approval)
     external returns(bool);
 
 }

@@ -4,10 +4,10 @@ pragma solidity ^0.8.0;
 import "daosys/access/operatable/interface/IOperatable.sol";
 
 /**
- * @title IOperateableManager - Interface for managing operator authoritzation of contracts owned by contracts.
+ * @title IOperatableManager - Interface for managing operator authoritzation of contracts owned by contracts.
  * @author cyotee doge <doge.cyotee>
  */
-interface IOperateableManager {
+interface IOperatableManager {
 
     /**
      * @param subject Subject of onwership for which to change the authorization status of newOperator.

@@ -16,11 +16,15 @@ OperatableStorage
      * @param query Revert if query is NOT authorized as an operator.
      */
     modifier onlyOperator(address query) {
-        if(!_isOperator(query)) {
+        if(
+            !_isOperator(query)
+            && !_operatable().isOperatoFor[msg.sig][query]
+        ) {
             revert IOperatable.NotOperator(query);
         }
         _;
     }
+    
 
     /**
      * @param query Revert if query is NOT authroized as an operator OR ownership has been renounced.
@@ -28,6 +32,7 @@ OperatableStorage
     modifier onlyOperatorOrRenounced(address query) {
         if(
             !_isOperator(query)
+            && !_operatable().isOperatoFor[msg.sig][query]
             && _ownable().owner != address(0)
         ) {
             revert IOperatable.NotOperator(query);
@@ -41,6 +46,7 @@ OperatableStorage
     modifier onlyOwnerOrOperator(address query) {
         if(
             !_isOperator(query)
+            && !_operatable().isOperatoFor[msg.sig][query]
             && !_isOwner(query)
         ) {
             revert IOperatable.NotOperator(query);
@@ -54,6 +60,7 @@ OperatableStorage
     modifier onlyOwnerOrOperatorOrRenounced(address query) {
         if(
             !_isOperator(query)
+            && !_operatable().isOperatoFor[msg.sig][query]
             && !_isOwner(query)
             && _ownable().owner != address(0)
         ) {
