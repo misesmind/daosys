@@ -19,4 +19,11 @@ interface IOperatableManager {
         bool approval
     ) external returns(bool);
 
+    function setOperatorFor(
+        IOperatable subject,
+        bytes4 func, 
+        address newOperator,
+        bool approval
+    ) external returns(bool);
+
 }

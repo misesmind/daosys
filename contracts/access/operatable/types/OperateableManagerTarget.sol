@@ -27,4 +27,13 @@ IOperatableManager
         return subject.setOperator(newOperator, approval);
     }
 
+    function setOperatorFor(
+        IOperatable subject,
+        bytes4 func, 
+        address newOperator,
+        bool approval
+    ) public onlyOwner(msg.sender) returns(bool) {
+        return subject.setOperatorFor(func, newOperator, approval);
+    }
+
 }
