@@ -14,7 +14,7 @@ import "daosys/introspection/erc165/interfaces/IERC165.sol";
 // import "daosys/proxy/resolver/ResolverProxy.sol";
 import "daosys/dcdi/aware/behaviors/IDCDI.b.sol";
 import "daosys/introspection/erc165/behaviors/IERC165.b.sol";
-import "lib/daosys/contracts/context/fixtures/ContextTest.f.sol";
+import "daosys/dcdi/context/fixtures/ContextTest.f.sol";
 
 contract ContextTest
 is

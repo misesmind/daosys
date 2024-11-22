@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
+  
+struct Bytes32Set {
+    // 1-indexed to allow 0 to signify nonexistence
+    mapping( bytes32 => uint256 ) indexes;
+    bytes32[] values;
+}
 
 /**
- * @title Bytes32SetLayout - Struct and atomic operations for a set of 32 byte values
+ * @title Bytes32SetRepo - Struct and atomic operations for a set of 32 byte values
  * @author mises mind <misesmind@proton.me>
  */
-library Bytes32SetLayout {
+library Bytes32SetRepo {
 
-    using Bytes32SetLayout for Bytes32SetLayout.Struct;
-  
-    struct Struct {
-        // 1-indexed to allow 0 to signify nonexistence
-        mapping( bytes32 => uint256 ) indexes;
-        bytes32[] values;
-    }
+    using Bytes32SetRepo for Bytes32Set;
 
     /**
      * @dev Will rrevert is provided index is out of bounds.
@@ -22,7 +22,7 @@ library Bytes32SetLayout {
      * @return value The value from the set at the provided index.
      */
     function _index(
-        Bytes32SetLayout.Struct storage set,
+        Bytes32Set storage set,
         uint index
     ) internal view returns (bytes32 value) {
         require(set.values.length > index, "Bytes32Set: index out of bounds");
@@ -30,7 +30,7 @@ library Bytes32SetLayout {
     }
 
     function _contains(
-        Bytes32SetLayout.Struct storage set,
+        Bytes32Set storage set,
     bytes32 value
   ) internal view returns (bool success)
   {
@@ -38,7 +38,7 @@ library Bytes32SetLayout {
   }
 
   function _indexOf(
-    Bytes32SetLayout.Struct storage set,
+    Bytes32Set storage set,
     bytes32 value
   ) internal view returns (uint index) {
     unchecked {
@@ -47,13 +47,13 @@ library Bytes32SetLayout {
   }
 
   function _length(
-    Bytes32SetLayout.Struct storage set
+    Bytes32Set storage set
   ) internal view returns (uint length) {
     length = set.values.length;
   }
 
   function _add(
-    Bytes32SetLayout.Struct storage set,
+    Bytes32Set storage set,
     bytes32 value
   ) internal returns (bool success) {
     if (!_contains(set, value)) {
@@ -64,7 +64,7 @@ library Bytes32SetLayout {
   }
 
   function _addExclusive(
-    Bytes32SetLayout.Struct storage set,
+    Bytes32Set storage set,
     bytes32 value
   ) internal returns (bool success) {
     if (!_contains(set, value)) {
@@ -76,7 +76,7 @@ library Bytes32SetLayout {
   }
 
   function _add(
-    Bytes32SetLayout.Struct storage set,
+    Bytes32Set storage set,
     bytes32[] memory values
   ) internal returns (bool success) {
     for(uint256 iteration = 0; iteration < values.length; iteration++) {
@@ -86,7 +86,7 @@ library Bytes32SetLayout {
   }
 
   function _addExclusive(
-    Bytes32SetLayout.Struct storage set,
+    Bytes32Set storage set,
     bytes32[] memory values
   ) internal returns (bool success) {
     for(uint256 iteration = 0; iteration < values.length; iteration++) {
@@ -96,7 +96,7 @@ library Bytes32SetLayout {
   }
 
   function _remove(
-    Bytes32SetLayout.Struct storage set,
+    Bytes32Set storage set,
     bytes32 value
   ) internal returns (bool success) {
     uint valueIndex = set.indexes[value];
@@ -120,7 +120,7 @@ library Bytes32SetLayout {
   }
 
   function _remove(
-    Bytes32SetLayout.Struct storage set,
+    Bytes32Set storage set,
     bytes32[] memory values
   ) internal returns (bool success) {
     for(uint256 iteration = 0; iteration < values.length; iteration++) {
@@ -130,7 +130,7 @@ library Bytes32SetLayout {
   }
 
   function _values(
-    Bytes32SetLayout.Struct storage set
+    Bytes32Set storage set
   ) internal view returns (bytes32[] storage rawSet) {
     rawSet = set.values;
   }
