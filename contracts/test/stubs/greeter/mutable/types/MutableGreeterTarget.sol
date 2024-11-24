@@ -113,7 +113,7 @@ abstract contract MutableGreeterStorage {
 
 }
 
-contract MutableGreeterTTarget
+contract MutableGreeterTarget
 is
 MutableGreeterStorage
 ,IMutableGreeter

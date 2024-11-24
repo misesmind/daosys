@@ -20,3 +20,5 @@ cache_forge/
 lib/
 
 out/
+
+.vscode/

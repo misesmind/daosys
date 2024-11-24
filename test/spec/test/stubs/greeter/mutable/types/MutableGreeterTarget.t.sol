@@ -21,7 +21,7 @@ contract MutableGreeterTargetTest is DAOSYSTest {
         // TODO update to direct storage access.
         assertEq(
             keccak256(abi.encode(testMsg)),
-            keccak256(bi.encode(greeter.getMessage()))
+            keccak256(abi.encode(greeter.getMessage()))
         );
     }
 
@@ -32,7 +32,7 @@ contract MutableGreeterTargetTest is DAOSYSTest {
         // TODO update to direct storage access.
         assertEq(
             keccak256(abi.encode(testMsg)),
-            keccak256(bi.encode(greeter.getMessage()))
+            keccak256(abi.encode(greeter.getMessage()))
         );
     }
 
