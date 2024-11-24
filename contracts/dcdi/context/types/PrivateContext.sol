@@ -110,11 +110,14 @@ IPrivateContext
     }
 
     function postDeploy()
-    external virtual override(DCDIAware, Context) returns(bool) {}
+    public virtual override(DCDIAware, Context) returns(bool) {
+        return Context.postDeploy();
+    }
 
     function postDeploy(
-        address consumer_
-    ) external returns(bool success) {
+        // consumer_
+        address 
+    ) external pure returns(bool success) {
         return true;
     }
 

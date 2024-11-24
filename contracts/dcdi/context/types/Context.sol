@@ -140,7 +140,7 @@ IContext
     }
 
     function postDeploy()
-    external virtual override(IDCDI, IContext) returns(bool) {
+    public virtual override(IDCDI, IContext) returns(bool) {
         IDCDI(msg.sender)._postDeploy();
         return true;
     }

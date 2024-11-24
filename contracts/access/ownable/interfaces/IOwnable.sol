@@ -13,7 +13,7 @@ interface IOwnable {
 
     event TransferProposed(address indexed proposedOwner);
 
-    event OwnershipTransfered(
+    event OwnershipTransferred(
         address indexed prevOwner,
         address indexed newOwner
     );

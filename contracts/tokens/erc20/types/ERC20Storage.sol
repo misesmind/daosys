@@ -46,7 +46,7 @@ abstract contract ERC20Storage is IERC20Errors {
     // tag::_erc20()[]
     /**
      * @dev internal hook for the default storage range used by this library.
-     * @dev Other services will use their default storage range to ensure consistant storage usage.
+     * @dev Other services will use their default storage range to ensure consistent storage usage.
      * @return The default storage range used with repos.
      */
     function _erc20()

@@ -5,7 +5,7 @@ import "daosys/dcdi/context/types/Context.sol";
 import "daosys/introspection/erc2535/mutable/types/MutableDiamondLoupeFacet.sol";
 import "daosys/dcdi/context/initializers/erc2535/types/MutableERC2535ContextInitializer.sol";
 import "daosys/introspection/erc2535/mutable/types/MutableDiamondCutPackage.sol";
-import "daosys/dcdi/context/fixtures/ContextDeployment.f.sol";
+import "daosys/dcdi/context/fixtures/Context.f.sol";
 import "daosys/access/ownable/fixtures/Ownable.f.sol";
 
 contract MutableDiamondDeploymentFixture

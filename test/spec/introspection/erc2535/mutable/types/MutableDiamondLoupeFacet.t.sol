@@ -18,7 +18,7 @@ import "daosys/proxy/resolver/ResolverProxy.sol";
 
 /* --------------------------------- Pachira -------------------------------- */
 
-import "daosys/dcdi/context/fixtures/ContextDeployment.f.sol";
+import "daosys/dcdi/context/fixtures/Context.f.sol";
 import "daosys/dcdi/aware/behaviors/IDCDI.b.sol";
 import "daosys/introspection/erc165/behaviors/IERC165.b.sol";
 import "daosys/dcdi/context/erc2535/behaviors/IFacet.b.sol";
@@ -27,7 +27,7 @@ import "daosys/introspection/erc2535/mutable/fixtures/MutableDiamondDeployment.f
 contract MutableDiamondLoupeFacetTest
 is
 BetterTest,
-ContextDeploymentFixture,
+ContextFixture,
 MutableDiamondDeploymentFixture,
 IDCDIBehavior,
 IERC165Behavior,

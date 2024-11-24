@@ -5,7 +5,7 @@ import "daosys/test/vm/VMAware.sol";
 
 /* -------------------------------- Fixtures -------------------------------- */
 
-import "daosys/dcdi/context/fixtures/ContextDeployment.f.sol";
+import "daosys/dcdi/context/fixtures/Context.f.sol";
 
 /* -------------------------------- Behaviors ------------------------------- */
 
@@ -15,7 +15,7 @@ contract ContextTestFixture
 is
 VMAware,
 /* Fixtures */
-ContextDeploymentFixture,
+ContextFixture,
 /* Behaviors */
 IDCDIBehavior
 {

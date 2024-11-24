@@ -54,7 +54,7 @@ abstract contract OwnableStorage {
             revert IOwnable.NotProposed(newOwner);
         }
         _ownable().owner = newOwner;
-        emit IOwnable.OwnershipTransfered(
+        emit IOwnable.OwnershipTransferred(
             address(0),
             newOwner
         );
@@ -149,13 +149,13 @@ abstract contract OwnableStorage {
         address newOwner = _ownable().proposedOwner;
         _ownable().owner = newOwner;
         _ownable().proposedOwner = address(0);
-        emit IOwnable.OwnershipTransfered(prevOwner, newOwner);
+        emit IOwnable.OwnershipTransferred(prevOwner, newOwner);
         return true;
     }
 
     /**
-     * @dev Renouces ownership by transfering ownership to address(0).
-     * @return Boolean indicating succesful ownership transafer to address(0).
+     * @dev Renounces ownership by transferring ownership to address(0).
+     * @return Boolean indicating successful ownership transfer to address(0).
      */
     function _renounceOwnership() internal returns(bool) {
         // require(_ownable().proposedOwner == address(0), "MUST NOT have proposed owner");
@@ -164,7 +164,7 @@ abstract contract OwnableStorage {
         }
         address prevOwner = _ownable().owner;
         _ownable().owner = address(0);
-        emit IOwnable.OwnershipTransfered(prevOwner, address(0));
+        emit IOwnable.OwnershipTransferred(prevOwner, address(0));
         return true;
     }
     

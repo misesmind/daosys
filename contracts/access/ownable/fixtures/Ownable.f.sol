@@ -3,11 +3,11 @@ pragma solidity ^0.8.0;
 
 import "daosys/dcdi/context/types/Context.sol";
 import "daosys/access/ownable/types/OwnableFacet.sol";
-import "daosys/dcdi/context/fixtures/ContextDeployment.f.sol";
+import "daosys/dcdi/context/fixtures/Context.f.sol";
 
 contract OwnableFixture
 is
-ContextDeploymentFixture
+ContextFixture
 {
 
     OwnableFacet internal _ownableFacet;
