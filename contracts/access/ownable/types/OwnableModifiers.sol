@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "daosys/access/ownable/types/OwnableStorage.sol";
 
 /**
- * @title OwnableModifiers - Inheirtable modifiers for ownership status validation.
+ * @title OwnableModifiers - Inheritable modifiers for ownership status validation.
  * @author cyotee doge <doge.cyotee>
  * @notice Modifiers accept arguments to allow application to any variable.
  */

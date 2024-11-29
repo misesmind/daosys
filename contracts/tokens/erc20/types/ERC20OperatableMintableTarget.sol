@@ -18,7 +18,7 @@ import {
     IERC20OperatableMintable
 } from "daosys/tokens/erc20/interfaces/IERC20OperatableMintable.sol";
 
-contract ERC20OpertableMintableTarget is ERC20MintableTarget, OperatableTarget, IERC20OperatableMintable {
+contract ERC20OperatableMintableTarget is ERC20MintableTarget, OperatableTarget, IERC20OperatableMintable {
 
     function mint(
         uint256 amount,

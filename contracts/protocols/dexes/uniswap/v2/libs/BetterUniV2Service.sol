@@ -51,6 +51,30 @@ library BetterUniV2Service {
         (amount0, amount1) = pool.burn(address(this));
     }
 
+    function _withdrawSwapDirect(
+        IUniswapV2Pair pool,
+        uint256 amt,
+        IERC20 tokenOut,
+        IERC20 opToken,
+        // recipient
+        address 
+    ) internal returns(uint256 amountOut) {
+        (uint amount0, uint amount1) = pool
+        ._withdrawDirect(amt);
+        address token0 = pool.token0();
+
+        (
+            uint256 tokenOutWDAmt,
+            uint256 saleTokenWDAmt
+        ) = address(tokenOut) == address(token0)
+            ? (amount0, amount1)
+            : (amount1, amount0);
+        (uint256 proceedsAmount) = pool
+        ._swapDirect(opToken, saleTokenWDAmt);
+        amountOut = (tokenOutWDAmt + proceedsAmount);
+        // tokenOut._safeTransfer(recipient, amountOut);
+    }
+
     function _withdrawSwapDirectTo(
         IUniswapV2Pair pool,
         uint256 amt,

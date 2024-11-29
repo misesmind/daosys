@@ -1,9 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "daosys/protocols/dexes/uniswap/v2/interfaces/IUniswapV2Factory.sol";
-import "daosys/protocols/dexes/uniswap/v2/interfaces/IUniswapV2Pair.sol";
-import "daosys/protocols/dexes/uniswap/v2/stubs/UniV2PairStub.sol";
+import {
+    IUniswapV2Factory
+} from "daosys/protocols/dexes/uniswap/v2/interfaces/IUniswapV2Factory.sol";
+// import "daosys/protocols/dexes/uniswap/v2/interfaces/IUniswapV2Pair.sol";
+import {
+    IUniswapV2Pair,
+    UniV2PairStub
+} from "daosys/protocols/dexes/uniswap/v2/stubs/UniV2PairStub.sol";
 
 contract UniV2FactoryStub is IUniswapV2Factory {
     address public override feeTo;

@@ -19,6 +19,8 @@ contract MutableGreeterTargetTest is DAOSYSTest {
     ) public {
         greeter.setMessage(testMsg);
         // TODO update to direct storage access.
+        // stdstore
+        //     .target(address(greeter));
         assertEq(
             keccak256(abi.encode(testMsg)),
             keccak256(abi.encode(greeter.getMessage()))

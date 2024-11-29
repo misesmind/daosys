@@ -140,7 +140,7 @@ abstract contract ERC20Storage is IERC20Errors {
         // Decrease the total supply by `amount`.
         // Should naturally revert for underflow.
         ERC20Storage._totalSupply( ERC20Storage._totalSupply() - amount);
-        // Decrease the balance of the `acount` by `amouunt`.
+        // Decrease the balance of the `account` by `amount`.
         ERC20Storage._decreaseBalanceOf(account, amount);
     }
     // end::_burn(uint256,address)

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+ // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
 import "daosys/access/ownable/libs/OwnableRepo.sol";
@@ -20,7 +20,8 @@ abstract contract OwnableStorage {
 
     // Normally handled by usage for storage slot.
     // Included to facilitate automated audits.
-    address constant OwnableRepo_ID = address(OwnableRepo);
+    address constant OwnableRepo_ID
+        = address(OwnableRepo);
 
     /* ---------------------------------------------------------------------- */
     /*                                 STORAGE                                */
@@ -30,12 +31,16 @@ abstract contract OwnableStorage {
   
     // Defines the default offset applied to all provided storage ranges for use when operating on a struct instance.
     // Subtract 1 from hashed value to ensure future usage of relevant library address.
-    bytes32 constant internal OwnableRepo_STORAGE_RANGE_OFFSET = bytes32(uint256(keccak256(abi.encode(OwnableRepo_ID))) - 1);
+    bytes32 constant internal OwnableRepo_STORAGE_RANGE_OFFSET
+        = bytes32(uint256(keccak256(abi.encode(OwnableRepo_ID))) - 1);
 
     // The default storage range to use with the Repo libraries consumed by this library.
     // Service libraries are expected to coordinate operations in relation to a interface between other Services and Repos.
-    bytes32 internal constant OwnableRepo_STORAGE_RANGE = type(IOwnable).interfaceId;
-    bytes32 internal constant OwnableRepo_STORAGE_SLOT = OwnableRepo_STORAGE_RANGE ^ OwnableRepo_STORAGE_RANGE_OFFSET;
+    bytes32 internal constant OwnableRepo_STORAGE_RANGE
+        = type(IOwnable).interfaceId;
+    bytes32 internal constant OwnableRepo_STORAGE_SLOT
+        = OwnableRepo_STORAGE_RANGE
+        ^ OwnableRepo_STORAGE_RANGE_OFFSET;
 
     // tag::_ownable()[]
     function _ownable()
@@ -142,6 +147,7 @@ abstract contract OwnableStorage {
     function _acceptOwnership() internal returns(bool) {
         // Address(0) MAY NOT accept ownership.
         // Transfer to address(0) handled directly via renouncement.
+        // Check is included because proposed user defaults to address(0).
         if(msg.sender == address(0)) {
             revert IOwnable.NotProposed(msg.sender);
         }

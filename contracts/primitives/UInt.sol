@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "contracts/Constants.sol";
+
 /**
  * @title utility functions for uint256 operations
  * @author Nick Barry, mises mind <misesmind@proton.me>
@@ -9,7 +11,7 @@ pragma solidity ^0.8.0;
 library UInt {
 
     // Array of possible hexidecimal values.
-    bytes16 private constant HEX_SYMBOLS = "0123456789abcdef";
+    // bytes16 private constant HEX_SYMBOLS = "0123456789abcdef";
 
 
     /**
@@ -44,7 +46,7 @@ library UInt {
         uint256 value
     ) internal pure returns (string memory result) {
         if (value == 0) {
-        return "0";
+            return "0";
         }
 
         uint256 temp = value;
@@ -71,41 +73,52 @@ library UInt {
      * @param value The value to convert.
      * @return result The converted value.
      */
-  function _toHexString(
-    uint256 value
-  ) internal pure returns (string memory result) {
-    if (value == 0) {
-      return "0x00";
+    function _toHexString(
+        uint256 value
+    ) internal pure returns (string memory result) {
+        if (value == 0) {
+        return "0x00";
+        }
+
+        uint256 length = 0;
+
+        for (uint256 temp = value; temp != 0; temp >>= 8) {
+        unchecked {
+            length++;
+        }
+        }
+
+        return _toHexString(value, length);
     }
 
-    uint256 length = 0;
+    function _toHexString(
+        uint256 value,
+        uint256 length
+    ) internal pure returns (string memory valueAsString) {
+        bytes memory buffer = new bytes(2 * length + 2);
+        buffer[0] = "0";
+        buffer[1] = "x";
 
-    for (uint256 temp = value; temp != 0; temp >>= 8) {
-      unchecked {
-        length++;
-      }
+        unchecked {
+        for (uint256 i = 2 * length + 1; i > 1; --i) {
+            buffer[i] = HEX_SYMBOLS[value & 0xf];
+            value >>= 4;
+        }
+        }
+
+        require(value == 0, "UintUtils: hex length insufficient");
+
+        return string(buffer);
     }
 
-    return _toHexString(value, length);
-  }
-
-  function _toHexString(
-    uint256 value,
-    uint256 length
-  ) internal pure returns (string memory valueAsString) {
-    bytes memory buffer = new bytes(2 * length + 2);
-    buffer[0] = "0";
-    buffer[1] = "x";
-
-    unchecked {
-      for (uint256 i = 2 * length + 1; i > 1; --i) {
-        buffer[i] = HEX_SYMBOLS[value & 0xf];
-        value >>= 4;
-      }
+    /**
+     * @dev Returns true if the two strings are equal.
+     */
+    function _equal(
+        string memory a,
+        string memory b
+    ) internal pure returns (bool) {
+        return bytes(a).length == bytes(b).length && keccak256(bytes(a)) == keccak256(bytes(b));
     }
 
-    require(value == 0, "UintUtils: hex length insufficient");
-
-    return string(buffer);
-  }
 }

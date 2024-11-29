@@ -4,11 +4,11 @@ pragma solidity ^0.8.0;
 import "daosys/dcdi/interfaces/IDCDI.sol";
 import "daosys/introspection/erc165/interfaces/IERC165.sol";
 import "daosys/dcdi/context/erc2535/types/FacetDiamondPackage.sol";
-import "daosys/tokens/erc20/types/ERC20OpertableMintableTarget.sol";
+import "daosys/tokens/erc20/types/ERC20OperatableMintableTarget.sol";
 
-contract ERC20OpertableMintableTargetPackage
+contract ERC20OperatableMintableTargetPackage
 is
-ERC20OpertableMintableTarget,
+ERC20OperatableMintableTarget,
 FacetDiamondPackage
 {
 

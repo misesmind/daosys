@@ -1,11 +1,15 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
+import "daosys/test/vm/VMAware.sol";
 import "daosys/protocols/dexes/uniswap/v2/interfaces/IUniswapV2Factory.sol";
 import "daosys/protocols/dexes/uniswap/v2/interfaces/IUniswapV2Pair.sol";
 import "daosys/protocols/dexes/uniswap/v2/stubs/UniV2FactoryStub.sol";
 
-contract UniswapV2TestFixture {
+contract UniswapV2TestFixture
+is
+VMAware
+{
 
     IUniswapV2Factory internal _uniV2Factory;
 
@@ -14,6 +18,10 @@ contract UniswapV2TestFixture {
         // Singletons, whee!
         if(address(_uniV2Factory) == address(0)) {
             _uniV2Factory = new UniV2FactoryStub(address(this));
+            vm.label(
+                address(_uniV2Factory),
+                "UniV2FactoryStub"
+            );
         }
         uniV2Factory_ = _uniV2Factory;
     }
@@ -32,6 +40,12 @@ contract UniswapV2TestFixture {
                 tokenA,
                 tokenB
             ));
+            vm.label(
+                address(uniV2Pool_),
+                string.concat(
+                    
+                )
+            );
         }
 
         return uniV2Pool_;

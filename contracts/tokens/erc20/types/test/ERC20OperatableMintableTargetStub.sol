@@ -8,11 +8,11 @@ import {
     ERC20Target,
     ERC20MintableTarget,
     IERC20OperatableMintable,
-    ERC20OpertableMintableTarget
-} from "daosys/tokens/erc20/types/ERC20OpertableMintableTarget.sol";
+    ERC20OperatableMintableTarget
+} from "daosys/tokens/erc20/types/ERC20OperatableMintableTarget.sol";
 // import "contracts/tokens/erc20/interfaces/IERC20OperatableMintable.sol";
 
-contract ERC20OpertableMintableTargetStub is ERC20OpertableMintableTarget {
+contract ERC20OperatableMintableTargetStub is ERC20OperatableMintableTarget {
 
     constructor(
         string memory tokenName,

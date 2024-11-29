@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "daosys/access/operatable/types/OperatableStorage.sol";
 
 /**
- * @title OperatableModifiers - Inheritable modifiers for Operatorable validations.
+ * @title OperatableModifiers - Inheritable modifiers for Operatable validations.
  * @author cyotee doge <doge.cyotee>
  */
 contract OperatableModifiers

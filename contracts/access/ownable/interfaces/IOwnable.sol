@@ -33,7 +33,7 @@ interface IOwnable {
     function proposedOwner() external view returns(address);
 
     /**
-     * @param proposedOwner_ The address to propose for transfering ownership.
+     * @param proposedOwner_ The address to propose for transferring ownership.
      * @return Boolean indicating domain logic success.
      * @custom:func-sig transferOwnership(address)
      * @custom:func-sig-hash 0xf2fde38b
@@ -50,7 +50,7 @@ interface IOwnable {
     function acceptOwnership() external returns(bool);
 
     /**
-     * @notice Allows the owner to remove ownership claim without treansfer.
+     * @notice Allows the owner to remove ownership claim without transfer.
      * @notice Reverts if a proposed owner is set to other than address(0);
      * @return Boolean indicating domain logic success.
      * @custom:func-sig renounceOwnership()

@@ -7,13 +7,13 @@ import "daosys/primitives/UInt.sol";
 import "daosys/dcdi/context/fixtures/Context.f.sol";
 import "daosys/introspection/erc2535/mutable/fixtures/MutableDiamondDeployment.f.sol";
 
-import "daosys/tokens/erc20/types/ERC20OpertableMintableTargetPackage.sol";
+import "daosys/tokens/erc20/types/ERC20OperatableMintableTargetPackage.sol";
 import "daosys/introspection/erc2535/mutable/fixtures/MutableDiamondTest.f.sol";
 
 contract ERC20TestFixture
 is
 // ContextDeploymentFixture,
-MutableDiamondTestFixtue
+MutableDiamondTestFixture
 {
 
     using UInt for uint256;
@@ -26,25 +26,29 @@ MutableDiamondTestFixtue
 
     mapping(uint256 tokenId => IERC20OperatableMintable token) _deployedTokens;
 
-    ERC20OpertableMintableTargetPackage _erc20Pkg;
+    ERC20OperatableMintableTargetPackage _erc20Pkg;
 
     function erc20Pkg()
-    public virtual returns(ERC20OpertableMintableTargetPackage erc20Pkg_) {
+    public virtual returns(ERC20OperatableMintableTargetPackage erc20Pkg_) {
         return erc20Pkg(context());
         // return erc20Pkg(pachiraContext());
     }
 
     function erc20Pkg(IContext context_)
-    public virtual returns(ERC20OpertableMintableTargetPackage erc20Pkg_) {
+    public virtual returns(ERC20OperatableMintableTargetPackage erc20Pkg_) {
         if(address(_erc20Pkg) == address(0)) {
-            _erc20Pkg = ERC20OpertableMintableTargetPackage(
+            _erc20Pkg = ERC20OperatableMintableTargetPackage(
                 // pachiraContext()
                 // context()
                 context_
                     .deployContract(
-                        type(ERC20OpertableMintableTargetPackage).creationCode,
+                        type(ERC20OperatableMintableTargetPackage).creationCode,
                         ""
                     )
+            );
+            vm.label(
+                address(_erc20Pkg),
+                "ERC20OperatableMintableTargetPackage"
             );
         }
         return _erc20Pkg;
@@ -164,6 +168,10 @@ MutableDiamondTestFixtue
                 )
         );
         _deployedTokens[tokenId] = token;
+        vm.label(
+            address(token),
+            token.symbol()
+        );
         IOperatable(address(token)).setOperator(address(owner_), true);
     }
 

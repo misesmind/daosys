@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.0;
 
+uint8 constant ADDRESS_LENGTH = 20;
+
+// Array of possible hexadecimal values.
+bytes16 constant HEX_SYMBOLS = "0123456789abcdef";
+
 uint256 constant MAX_UINT256 = type(uint256).max;
 int256 constant MAX_INT256 = type(int256).max;
 

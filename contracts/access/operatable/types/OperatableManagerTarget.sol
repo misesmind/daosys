@@ -6,10 +6,10 @@ import "daosys/dcdi/context/erc2535/types/Facet.sol";
 import "daosys/access/operatable/interface/IOperatableManager.sol";
 
 /**
- * @title OperateableManagerFacet - Facet for Diamond proxies to expose IOperatableManager.
+ * @title OperatableManagerFacet - Facet for Diamond proxies to expose IOperatableManager.
  * @author cyotee doge <doge.cyotee>
  */
-contract OperateableManagerTarget
+contract OperatableManagerTarget
 is
 OwnableModifiers,
 IOperatableManager

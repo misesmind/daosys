@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.8;
 
-import { Bytecode } from "daosys/primitives/Bytecode.sol";
-import {
-  UInt
-} from "daosys/primitives/UInt.sol";
+import "daosys/primitives/Bytecode.sol";
+import "daosys/primitives/UInt.sol";
+
+// import "daosys/Constants.sol";
+// import "contracts/primitives/UInt.sol";
 
 /**
  * @title Library with standardized operations involving address variables.
@@ -40,6 +41,16 @@ library Address {
     function _toString(address account)
     internal pure returns (string memory accountAsString) {
         accountAsString = uint256(uint160(account))._toHexString(20);
+    }
+
+    /**
+     * @dev Converts an `address` with fixed length of 20 bytes to its not checksummed ASCII `string` hexadecimal
+     * representation.
+     */
+    function _toHexString(
+        address addr
+    ) internal pure returns (string memory) {
+        return UInt._toHexString(uint256(uint160(addr)), ADDRESS_LENGTH);
     }
 
     function _toUint256(
