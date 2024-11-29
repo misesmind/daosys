@@ -4,7 +4,10 @@ pragma solidity ^0.8.0;
 
 import "daosys/access/erc5267/IERC5267.sol";
 import "daosys/cryptography/eip712/EIP712Storage.sol";
-
+/**
+ * @title ERC5267Target - ERC712 domain declaration standardization contract.
+ * @author cyotee doge <doge.cyotee>
+ */
 contract ERC5267Target
 is
 EIP712Storage

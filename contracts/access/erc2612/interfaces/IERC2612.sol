@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: MIT
 // OpenZeppelin Contracts (last updated v5.0.0) (token/ERC20/extensions/IERC20Permit.sol)
-
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.0;
 
 /**
+ * @title IERC2612 - "Gasless" spending limit approval interface.
+ * @author OpenZeppelin
  * @dev Interface of the ERC-20 Permit extension allowing approvals to be made via signatures, as defined in
  * https://eips.ethereum.org/EIPS/eip-2612[ERC-2612].
  *

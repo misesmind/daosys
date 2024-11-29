@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 struct OperatableLayout {
     mapping(address => bool) isOperator;
-    mapping(bytes4 func => mapping(address => bool)) isOperatoFor;
+    mapping(bytes4 func => mapping(address => bool)) isOperatorFor;
 }
 
 /**

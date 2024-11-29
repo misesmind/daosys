@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BUSL-1.1
+// SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.0;
 
 import {
@@ -14,11 +14,18 @@ import {
     IOperatable,
     OperatableTarget
 } from "daosys/access/operatable/types/OperatableTarget.sol";
+import "daosys/access/operatable/types/OperatableModifiers.sol";
 import {
     IERC20OperatableMintable
 } from "daosys/tokens/erc20/interfaces/IERC20OperatableMintable.sol";
 
-contract ERC20OperatableMintableTarget is ERC20MintableTarget, OperatableTarget, IERC20OperatableMintable {
+contract ERC20OperatableMintableTarget
+is
+ERC20MintableTarget
+,OperatableModifiers
+,OperatableTarget
+,IERC20OperatableMintable
+{
 
     function mint(
         uint256 amount,

@@ -18,9 +18,9 @@ import "daosys/dcdi/context/fixtures/ContextTest.f.sol";
 
 contract ContextTest
 is
-BetterTest,
-IDCDIBehavior,
+// IDCDIBehavior,
 IERC165Behavior,
+BetterTest,
 ContextTestFixture
 {
     using AddressSetRepo for AddressSet;

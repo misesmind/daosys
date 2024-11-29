@@ -9,15 +9,15 @@ import "daosys/access/erc5267/ERC5267Target.sol";
 import "daosys/tokens/erc20/types/ERC20Target.sol";
 
 struct ERC2612Layout {
+    // Stores signature nonces per account.
     mapping(address account => uint256) nonces;
 }
 
+/**
+ * @title ERC2612Repo - Diamond storage repository library.
+ * @author cyotee doge <doge.cyotee>
+ */
 library ERC2612Repo {
-
-    // /**
-    //  * @dev The nonce used for an `account` is not the expected current nonce.
-    //  */
-    // error CountUsed(address account, uint256 currentNonce);
 
     // tag::slot[]
     /**
@@ -77,20 +77,33 @@ library ERC2612Repo {
 
 
 /**
- * @dev Provides tracking nonces for addresses. Nonces will only increment.
+ * @title ERC2612Storage - Inheritable storage contract for ERC2612.
+ * @author cyotee doge <doge.cyotee>
+ * @dev Provides tracking nonces for addresses.
+ * @dev Nonces will only increment.
  */
 abstract contract ERC2612Storage {
 
+    // Bind library to storage struct.
     using ERC2612Repo for ERC2612Layout;
 
+    // Repositories are deployed to "declare" a "datatype" for use by future proxies.
     address constant ERC2612Repo_ID = address(ERC2612Repo);
+    // Hash the Repository address derive an offset from the "service" storage slot range.
+    // Offset hash value to obfuscate original value.
+    // Expectation is to make it harder to obfuscate storage access in an upgrade.
     bytes32 constant internal ERC2612Repo_STORAGE_RANGE_OFFSET
         = bytes32(uint256(keccak256(abi.encode(ERC2612Repo_ID))) - 1);
+    // Declare the "range" of storage slots "reserved" for a "service" exposing an interface.
     bytes32 internal constant ERC2612Repo_STORAGE_RANGE
         = type(IERC2612).interfaceId;
+    // Calculate the actual first slot to use with the repository when exposing a "service".
     bytes32 internal constant ERC2612Repo_STORAGE_SLOT
         = ERC2612Repo_STORAGE_RANGE ^ ERC2612Repo_STORAGE_RANGE_OFFSET;
     
+    /**
+     * @return Diamond storage struct bound to the declared "service" slot.
+     */
     function _permit()
     internal pure virtual returns(ERC2612Layout storage) {
         return ERC2612Repo._layout(ERC2612Repo_STORAGE_SLOT);
@@ -100,17 +113,6 @@ abstract contract ERC2612Storage {
      * @dev The nonce used for an `account` is not the expected current nonce.
      */
     error InvalidAccountNonce(address account, uint256 currentNonce);
-
-    // mapping(address account => uint256) private _nonces;
-
-    // /**
-    //  * @dev Returns the next unused nonce for an address.
-    //  */
-    // function nonces(
-    //     address owner
-    // ) internal view virtual returns (uint256) {
-    //     return _permit().nonces[owner];
-    // }
 
     /**
      * @dev Consumes a nonce.
@@ -140,6 +142,8 @@ abstract contract ERC2612Storage {
 }
 
 /**
+ * @title ERC2612Target - "Gasless" spending limit approval contract.
+ * @author OpenZeppelin
  * @dev Implementation of the ERC20 Permit extension allowing approvals to be made via signatures, as defined in
  * https://eips.ethereum.org/EIPS/eip-2612[EIP-2612].
  *
@@ -150,9 +154,9 @@ abstract contract ERC2612Storage {
 contract ERC2612Target
 is
 ERC20Target
-, ERC5267Target
-, ERC2612Storage
-, IERC2612
+,ERC5267Target
+,ERC2612Storage
+,IERC2612
 {
     bytes32 private constant PERMIT_TYPEHASH
         = keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");

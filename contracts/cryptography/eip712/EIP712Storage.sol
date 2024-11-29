@@ -171,9 +171,6 @@ abstract contract EIP712Storage
      *
      * - `name`: the user readable name of the signing domain, i.e. the name of the DApp or the protocol.
      * - `version`: the current major version of the signing domain.
-     *
-     * NOTE: These parameters cannot be changed except through a xref:learn::upgrading-smart-contracts.adoc[smart
-     * contract upgrade].
      */
     function _initEIP721(
         string memory name, string memory version

@@ -2,6 +2,10 @@
 // OpenZeppelin Contracts (last updated v5.0.0) (interfaces/IERC5267.sol)
 pragma solidity ^0.8.0;
 
+/**
+ * @title IERC5267 - ERC712 domain declaration standardization.
+ * @author OpenZeppelin
+ */
 interface IERC5267 {
     /**
      * @dev MAY be emitted to signal that the domain could have changed.
