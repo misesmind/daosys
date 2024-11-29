@@ -8,13 +8,12 @@ cache_path  = 'cache_forge'
 fs_permissions = [{ access = "read-write", path = "./"}]
 remappings = [
     "ds-test/=lib/forge-std/lib/ds-test/src/",
-    "eth-gas-reporter/=node_modules/eth-gas-reporter/",
     "forge-std/=lib/forge-std/src/",
     # "forge-std/=lib/daosys/lib/forge-std/src/",
     "hardhat/=node_modules/hardhat/",
-    "solplot/=lib/solplot/",
-    "daosys/=contracts/",
-    "halmos-cheatcodes/=lib/halmos-cheatcodes/src/"
+    # "solplot/=lib/solplot/",
+    "daosys/=contracts/"
+    # "halmos-cheatcodes/=lib/halmos-cheatcodes/src/"
 ]
     # The Solc instance to use if any.
     # This takes precedence over `auto_detect_solc`, if a version is set then this overrides auto-detection.
