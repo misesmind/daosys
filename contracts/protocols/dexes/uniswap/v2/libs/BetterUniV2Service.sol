@@ -77,13 +77,13 @@ library BetterUniV2Service {
 
     function _withdrawSwapDirectTo(
         IUniswapV2Pair pool,
-        uint256 amt,
+        uint256 lpBurnAmt,
         IERC20 tokenOut,
         IERC20 opToken,
         address recipient
     ) internal returns(uint256 amountOut) {
         (uint amount0, uint amount1) = pool
-        ._withdrawDirect(amt);
+        ._withdrawDirect(lpBurnAmt);
         address token0 = pool.token0();
 
         (
