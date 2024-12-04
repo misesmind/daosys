@@ -66,9 +66,13 @@ contract Mooniswap is IERC20, ERC20, ReentrancyGuard, Ownable {
     mapping(IERC20 => VirtualBalance.Data) public virtualBalancesForAddition;
     mapping(IERC20 => VirtualBalance.Data) public virtualBalancesForRemoval;
 
-    constructor(IERC20[] memory assets, string memory name, string memory symbol) ERC20(name, symbol) {
-        require(bytes(name).length > 0, "Mooniswap: name is empty");
-        require(bytes(symbol).length > 0, "Mooniswap: symbol is empty");
+    constructor(
+        IERC20[] memory assets,
+        string memory name_,
+        string memory symbol_
+    ) ERC20(name_, symbol_) {
+        require(bytes(name_).length > 0, "Mooniswap: name is empty");
+        require(bytes(symbol_).length > 0, "Mooniswap: symbol is empty");
         require(assets.length == 2, "Mooniswap: only 2 tokens allowed");
 
         factory = IFactory(msg.sender);
@@ -124,8 +128,8 @@ contract Mooniswap is IERC20, ERC20, ReentrancyGuard, Ownable {
             realBalances[i] = _tokens[i].uniBalanceOf(address(this)).sub(_tokens[i].isETH() ? msg.value : 0);
         }
 
-        uint256 totalSupply = totalSupply();
-        if (totalSupply == 0) {
+        uint256 totalSupply_ = totalSupply();
+        if (totalSupply_ == 0) {
             fairSupply = BASE_SUPPLY.mul(99);
             _mint(address(this), BASE_SUPPLY); // Donate up to 1%
 
@@ -138,25 +142,25 @@ contract Mooniswap is IERC20, ERC20, ReentrancyGuard, Ownable {
             // Pre-compute fair supply
             fairSupply = type(uint256).max;
             for (uint i = 0; i < amounts.length; i++) {
-                fairSupply = Math.min(fairSupply, totalSupply.mul(amounts[i]).div(realBalances[i]));
+                fairSupply = Math.min(fairSupply, totalSupply_.mul(amounts[i]).div(realBalances[i]));
             }
         }
 
         uint256 fairSupplyCached = fairSupply;
         for (uint i = 0; i < amounts.length; i++) {
             require(amounts[i] > 0, "Mooniswap: amount is zero");
-            uint256 amount = (totalSupply == 0) ? amounts[i] :
-                realBalances[i].mul(fairSupplyCached).add(totalSupply - 1).div(totalSupply);
+            uint256 amount = (totalSupply_ == 0) ? amounts[i] :
+                realBalances[i].mul(fairSupplyCached).add(totalSupply_ - 1).div(totalSupply);
             require(amount >= minAmounts[i], "Mooniswap: minAmount not reached");
 
             _tokens[i].uniTransferFromSenderToThis(amount);
-            if (totalSupply > 0) {
+            if (totalSupply_ > 0) {
                 uint256 confirmed = _tokens[i].uniBalanceOf(address(this)).sub(realBalances[i]);
-                fairSupply = Math.min(fairSupply, totalSupply.mul(confirmed).div(realBalances[i]));
+                fairSupply = Math.min(fairSupply, totalSupply_.mul(confirmed).div(realBalances[i]));
             }
         }
 
-        if (totalSupply > 0) {
+        if (totalSupply_ > 0) {
             for (uint i = 0; i < amounts.length; i++) {
                 virtualBalancesForRemoval[_tokens[i]].scale(realBalances[i], totalSupply.add(fairSupply), totalSupply);
                 virtualBalancesForAddition[_tokens[i]].scale(realBalances[i], totalSupply.add(fairSupply), totalSupply);
@@ -177,24 +181,24 @@ contract Mooniswap is IERC20, ERC20, ReentrancyGuard, Ownable {
     }
 
     function withdrawFor(uint256 amount, uint256[] memory minReturns, address payable to) public {
-        uint256 totalSupply = totalSupply();
+        uint256 totalSupply_ = totalSupply();
         _burn(msg.sender, amount);
 
         for (uint i = 0; i < tokens.length; i++) {
             IERC20 token = tokens[i];
 
             uint256 preBalance = token.uniBalanceOf(address(this));
-            uint256 value = preBalance.mul(amount).div(totalSupply);
+            uint256 value = preBalance.mul(amount).div(totalSupply_);
             // token.uniTransfer(payable(address(msg.sender)), value);
             token.uniTransfer(payable(address(to)), value);
             require(i >= minReturns.length || value >= minReturns[i], "Mooniswap: result is not enough");
 
-            virtualBalancesForAddition[token].scale(preBalance, totalSupply.sub(amount), totalSupply);
-            virtualBalancesForRemoval[token].scale(preBalance, totalSupply.sub(amount), totalSupply);
+            virtualBalancesForAddition[token].scale(preBalance, totalSupply_.sub(amount), totalSupply_);
+            virtualBalancesForRemoval[token].scale(preBalance, totalSupply_.sub(amount), totalSupply_);
         }
 
         // emit Withdrawn(msg.sender, amount);
-emit Withdrawn(to, amount);
+        emit Withdrawn(to, amount);
     }
 
     /// @notice Same as `swapFor` but for `msg.sender`

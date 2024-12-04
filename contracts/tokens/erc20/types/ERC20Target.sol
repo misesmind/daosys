@@ -19,7 +19,7 @@ contract ERC20Target is ERC20Storage, IERC20 {
      * @inheritdoc IERC20
      */
     function name()
-    external view virtual returns (string memory) {
+    public view virtual returns (string memory) {
         return _name();
     }
     // end::name[]
@@ -29,7 +29,7 @@ contract ERC20Target is ERC20Storage, IERC20 {
      * @inheritdoc IERC20
      */
     function symbol()
-    external view virtual returns (string memory tokenSymbol) {
+    public view virtual returns (string memory tokenSymbol) {
         tokenSymbol = _symbol();
     }
     // end::symbol[]
@@ -39,7 +39,7 @@ contract ERC20Target is ERC20Storage, IERC20 {
      * @inheritdoc IERC20
      */
     function decimals()
-    external view virtual returns (uint8) {
+    public view virtual returns (uint8) {
         return _decimals();
     }
     // end::decimals[]
@@ -49,7 +49,7 @@ contract ERC20Target is ERC20Storage, IERC20 {
      * @inheritdoc IERC20
      */
     function totalSupply()
-    external view virtual returns (uint256 supply) {
+    public view virtual returns (uint256 supply) {
         supply = _totalSupply();
     }
     // end::totalSupply[]
@@ -60,7 +60,7 @@ contract ERC20Target is ERC20Storage, IERC20 {
      */
     function balanceOf(
         address account
-    ) external view virtual returns (uint256 balance) {
+    ) public view virtual returns (uint256 balance) {
         return _balanceOf(account);
     }
     // end::balanceOf[]
@@ -72,7 +72,7 @@ contract ERC20Target is ERC20Storage, IERC20 {
     function allowance(
         address owner,
         address spender
-    ) external view virtual returns (uint256) {
+    ) public view virtual returns (uint256) {
         return _allowance(owner, spender);
     }
     // end::allowance[]
@@ -85,7 +85,7 @@ contract ERC20Target is ERC20Storage, IERC20 {
     function approve(
         address spender,
         uint256 amount
-    ) external virtual returns (bool result) {
+    ) public virtual returns (bool result) {
         _approve(msg.sender, spender, amount);
         // Emit the required event.
         emit IERC20.Approval(msg.sender, spender, amount);

@@ -127,6 +127,16 @@ abstract contract ERC20Storage is IERC20Errors {
     }
     // end::_mint(uint256,address)
 
+    function _mint(
+        address account,
+        uint256 amount
+    ) internal virtual returns (uint256 mintedAmount) {
+        return ERC20Storage._mint(
+            amount,
+            account
+        );
+    }
+
     // tag::_burn(uint256,address)
     /**
      * @dev Normalizes argument order to ERC4626.
@@ -144,6 +154,16 @@ abstract contract ERC20Storage is IERC20Errors {
         ERC20Storage._decreaseBalanceOf(account, amount);
     }
     // end::_burn(uint256,address)
+
+    function _burn(
+        address account,
+        uint256 amount
+    ) internal virtual {
+        _burn(
+            amount,
+            account
+        );
+    }
 
     // tag::_increaseBalanceOf(address,uint256)[]
     /**
