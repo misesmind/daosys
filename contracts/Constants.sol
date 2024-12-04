@@ -30,6 +30,8 @@ uint256 constant ONEB_WAD = HUNDREDM_WAD * 10;
 uint256 constant TWOB_WAD = ONEB_WAD * 2;
 uint256 constant TENB_WAD = ONEB_WAD * 10;
 
+uint256 constant ULTRA_WAD = type(uint256).max;
+
 string constant CSV = ".csv";
 string constant SVG = ".svg";
 string constant PLOT_CORRELATOR = "x-axis";
