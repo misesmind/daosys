@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 /**
- * @title IPackage = Generalized proxy intialization hooks.
+ * @title IPackage = Generalized proxy initialization hooks.
  * @author cyotee doge <doge.cyotee>
  */
 interface IPackage {

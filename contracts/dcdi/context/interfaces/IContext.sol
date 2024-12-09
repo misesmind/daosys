@@ -20,7 +20,7 @@ interface IContext is IDCDI {
      * @notice Uses DCDI to inject provided initData.
      * @notice Deployment simulates the Create deployment process.
      * @notice salt = keccak256(abi.encode(initCodeHash, initDataHash))
-     * @notice Crunstructor arguments MUST be attached BEFORE call.
+     * @notice Constructor arguments MUST be attached BEFORE call.
      * @dev IS DELEGATECALL SAFE.
      * @param initCode_ Creation Code for deployment.
      * @param initData_ Initialization data for DCDI injection for comsumption by new deployment.
