@@ -2,9 +2,9 @@
 
 pragma solidity ^0.8.0;
 
-import "../math/SafeMath.sol";
+import "daosys/protocols/dexes/mooniswap/math/SafeMath.sol";
 // import "contracts/tokens/erc20/interfaces/IERC20.sol";
-import "../erc20/SafeERC20.sol";
+import "daosys/protocols/dexes/mooniswap/erc20/SafeERC20.sol";
 
 
 

@@ -60,7 +60,7 @@ library BetterUniV2Utils {
     // tag::_calcReserveShares[]
     /**
      * @dev Provides the owned balances of a given liquidity pool reserve.
-     * @dev Uses A/B nomclature to inddicate order DOES NOT matterr, simply correlate variables to the same tokens.
+     * @dev Uses A/B nomenclature to indicate order DOES NOT matter, simply correlate variables to the same tokens.
      * @param ownedLPAmount Owned amount of LP token.
      * @param lpTotalSupply LP token total supply.
      * @param totalReserveA LP reserve of Token A
@@ -131,14 +131,17 @@ library BetterUniV2Utils {
      * @param amountIn The amount of token for which too quote a sale.
      * @param reserveIn The LP reserve of the sale token.
      * @param reserveOut The LP reserve of the proceeds tokens.
-     * @return amountOut The proceeds of selling `amountin`.
+     * @return amountOut The proceeds of selling `amountIn`.
      */
     function _calcSaleProceeds(
         uint amountIn,
         uint reserveIn,
         uint reserveOut
     ) internal pure returns (uint amountOut) {
-        require(amountIn > 0, "BetterUniV2Utils: INSUFFICIENT_INPUT_AMOUNT");
+        require(
+            amountIn > 0,
+            "BetterUniV2Utils: INSUFFICIENT_INPUT_AMOUNT"
+        );
         require(
             reserveIn > 0 
             && reserveOut > 0,

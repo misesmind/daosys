@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import {Math} from "../math/Math.sol";
-import {SafeMath} from "../math/SafeMath.sol";
+import {Math} from "daosys/protocols/dexes/mooniswap/math/Math.sol";
+import {SafeMath} from "daosys/protocols/dexes/mooniswap/math/SafeMath.sol";
 
 library VirtualBalance {
+    
     using SafeMath for uint256;
 
     struct Data {

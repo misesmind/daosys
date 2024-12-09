@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
-import {ERC20} from "contracts/protocols/dexes/mooniswap/erc20/ERC20.sol";
+import {ERC20} from "daosys/protocols/dexes/mooniswap/erc20/ERC20.sol";
 // import "hardhat/console.sol";
 
 /**

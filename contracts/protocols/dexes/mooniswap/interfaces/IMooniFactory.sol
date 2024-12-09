@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 // import "contracts/tokens/erc20/interfaces/IERC20.sol";
-import "./IMooniPair.sol";
+import "daosys/protocols/dexes/mooniswap/interfaces/IMooniPair.sol";
 
 
 interface IMooniFactory {

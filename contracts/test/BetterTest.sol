@@ -18,6 +18,7 @@ import {
 } from "daosys/test/fuzzing/BetterFuzzing.sol";
 import "contracts/test/forking/BetterForking.sol";
 import "daosys/test/vm/VMAware.sol";
+import "daosys/protocols/dexes/uniswap/v2/libs/BetterUniV2Utils.sol";
 
 /**
  * @title BetterTest - An objectively better test.
@@ -52,6 +53,16 @@ Test
     // ) {
     //     vm.createSelectFork(networkName, blockNumber);
     //     _;
+    // }
+
+    // function assertEq(
+    //     string memory expected,
+    //     string memory value
+    // ) public pure {
+    //     assertEq(
+    //         expected,
+    //         value
+    //     );
     // }
 
 }

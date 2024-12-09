@@ -2,23 +2,29 @@
 
 pragma solidity ^0.8.0;
 
-import "./access/Ownable.sol";
-import "./security/ReentrancyGuard.sol";
-import {Math} from "./math/Math.sol";
-import "./math/SafeMath.sol";
-import {ERC20} from "./erc20/ERC20.sol";
+import "daosys/protocols/dexes/mooniswap/access/Ownable.sol";
+import "daosys/protocols/dexes/mooniswap/security/ReentrancyGuard.sol";
+import {Math} from "daosys/protocols/dexes/mooniswap/math/Math.sol";
+import "daosys/protocols/dexes/mooniswap/math/SafeMath.sol";
+import {ERC20} from "daosys/protocols/dexes/mooniswap/erc20/ERC20.sol";
 // import {IERC20} from "contracts/tokens/erc20/interfaces/IERC20.sol";
-import "./libraries/UniERC20.sol";
-import "./libraries/Sqrt.sol";
-import {IFactory} from "./interfaces/IFactory.sol";
-import {VirtualBalance} from "./libraries/VirtualBalance.sol";
+import "daosys/protocols/dexes/mooniswap/libraries/UniERC20.sol";
+// import "./libraries/Sqrt.sol";
+import {IFactory} from "daosys/protocols/dexes/mooniswap/interfaces/IFactory.sol";
+import {VirtualBalance} from "daosys/protocols/dexes/mooniswap/libraries/VirtualBalance.sol";
+import {BetterMath} from "daosys/math/BetterMath.sol";
+// import {DualElasticConstProdPoolStub} from "daosys/pools/const-prod/elastic/dual/types/DualElasticConstProdPoolStub.sol";
 
-
-
-
-
-contract Mooniswap is IERC20, ERC20, ReentrancyGuard, Ownable {
-    using Sqrt for uint256;
+contract Mooniswap
+is
+IERC20
+,ERC20
+,ReentrancyGuard
+,Ownable
+// ,DualElasticConstProdPoolStorage
+{
+    using BetterMath for uint256;
+    // using Sqrt for uint256;
     using SafeMath for uint256;
     using UniERC20 for IERC20;
     using VirtualBalance for VirtualBalance.Data;
@@ -130,7 +136,7 @@ contract Mooniswap is IERC20, ERC20, ReentrancyGuard, Ownable {
 
         uint256 totalSupply_ = totalSupply();
         if (totalSupply_ == 0) {
-            fairSupply = BASE_SUPPLY.mul(99);
+            fairSupply = (BASE_SUPPLY * 99);
             _mint(address(this), BASE_SUPPLY); // Donate up to 1%
 
             // Use the greatest token amount but not less than 99k for the initial supply
@@ -150,7 +156,8 @@ contract Mooniswap is IERC20, ERC20, ReentrancyGuard, Ownable {
         for (uint i = 0; i < amounts.length; i++) {
             require(amounts[i] > 0, "Mooniswap: amount is zero");
             uint256 amount = (totalSupply_ == 0) ? amounts[i] :
-                realBalances[i].mul(fairSupplyCached).add(totalSupply_ - 1).div(totalSupply);
+                // realBalances[i].mul(fairSupplyCached).add(totalSupply_ - 1).div(totalSupply);
+                ((realBalances[i] * fairSupplyCached) + (totalSupply_ - 1)) / totalSupply_;
             require(amount >= minAmounts[i], "Mooniswap: minAmount not reached");
 
             _tokens[i].uniTransferFromSenderToThis(amount);
@@ -162,8 +169,8 @@ contract Mooniswap is IERC20, ERC20, ReentrancyGuard, Ownable {
 
         if (totalSupply_ > 0) {
             for (uint i = 0; i < amounts.length; i++) {
-                virtualBalancesForRemoval[_tokens[i]].scale(realBalances[i], totalSupply.add(fairSupply), totalSupply);
-                virtualBalancesForAddition[_tokens[i]].scale(realBalances[i], totalSupply.add(fairSupply), totalSupply);
+                virtualBalancesForRemoval[_tokens[i]].scale(realBalances[i], totalSupply_.add(fairSupply), totalSupply_);
+                virtualBalancesForAddition[_tokens[i]].scale(realBalances[i], totalSupply_.add(fairSupply), totalSupply_);
             }
         }
 
@@ -217,27 +224,46 @@ contract Mooniswap is IERC20, ERC20, ReentrancyGuard, Ownable {
         require(msg.value == (src.isETH() ? amount : 0), "Mooniswap: wrong value usage");
 
         Balances memory balances = Balances({
-            src: src.uniBalanceOf(address(this)).sub(src.isETH() ? msg.value : 0),
+            src: src
+            .uniBalanceOf(address(this))
+            // .sub(src.isETH() ? msg.value : 0),
+            - (src.isETH() ? msg.value : 0),
             dst: dst.uniBalanceOf(address(this))
         });
 
         // catch possible airdrops and external balance changes for deflationary tokens
-        uint256 srcAdditionBalance = Math.max(virtualBalancesForAddition[src].current(balances.src), balances.src);
-        uint256 dstRemovalBalance = Math.min(virtualBalancesForRemoval[dst].current(balances.dst), balances.dst);
+        uint256 srcAdditionBalance = BetterMath
+        ._max(
+            virtualBalancesForAddition[src]
+            .current(balances.src),
+            balances.src
+        );
+        uint256 dstRemovalBalance = BetterMath
+        ._min(
+            virtualBalancesForRemoval[dst]
+            .current(balances.dst),
+            balances.dst
+        );
 
         src.uniTransferFromSenderToThis(amount);
-        uint256 confirmed = src.uniBalanceOf(address(this)).sub(balances.src);
-        result = _getReturn(src, dst, confirmed, srcAdditionBalance, dstRemovalBalance);
+        // uint256 confirmed = src.uniBalanceOf(address(this)).sub(balances.src);
+        uint256 confirmed = src.uniBalanceOf(address(this))
+             - (balances.src);
+        result = _getReturn(src, dst, confirmed, 
+            srcAdditionBalance, dstRemovalBalance);
         require(result > 0 && result >= minReturn, "Mooniswap: return is not enough");
         // dst.uniTransfer(payable(address(msg.sender)), result);
         dst.uniTransfer(payable(address(receiver)), result);
 
         // Update virtual balances to the same direction only at imbalanced state
         if (srcAdditionBalance != balances.src) {
-            virtualBalancesForAddition[src].set(srcAdditionBalance.add(confirmed));
+            virtualBalancesForAddition[src]
+            // .set(srcAdditionBalance.add(confirmed));
+            .set((srcAdditionBalance + confirmed));
         }
         if (dstRemovalBalance != balances.dst) {
-            virtualBalancesForRemoval[dst].set(dstRemovalBalance.sub(result));
+            virtualBalancesForRemoval[dst]
+            .set((dstRemovalBalance - result));
         }
 
         // Update virtual balances to the opposite direction
@@ -261,8 +287,8 @@ contract Mooniswap is IERC20, ERC20, ReentrancyGuard, Ownable {
         emit Swapped(receiver, address(src), address(dst), confirmed, result, balances.src, balances.dst, totalSupply(), referral);
 
         // Overflow of uint128 is desired
-        volumes[src].confirmed += uint128(confirmed);
-        volumes[src].result += uint128(result);
+        unchecked{volumes[src].confirmed += uint128(confirmed);}
+        unchecked{volumes[src].result += uint128(result);}
     }
 
     function rescueFunds(IERC20 token, uint256 amount) external {
@@ -287,8 +313,10 @@ contract Mooniswap is IERC20, ERC20, ReentrancyGuard, Ownable {
         uint256 dstBalance
     ) internal view returns(uint256 returnAmount) {
         if (isToken[src] && isToken[dst] && src != dst && amount > 0) {
-            uint256 taxedAmount = amount.sub(amount.mul(fee()).div(FEE_DENOMINATOR));
-            return taxedAmount.mul(dstBalance).div(srcBalance.add(taxedAmount));
+            // uint256 taxedAmount = amount.sub(amount.mul(fee()).div(FEE_DENOMINATOR));
+            uint256 taxedAmount = (amount - ((amount * fee()) / FEE_DENOMINATOR));
+            // return taxedAmount.mul(dstBalance).div(srcBalance.add(taxedAmount));
+            return ((taxedAmount * dstBalance) / (srcBalance + taxedAmount));
         }
     }
 }

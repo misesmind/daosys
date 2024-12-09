@@ -92,10 +92,17 @@ contract MooniFactory is Ownable {
     }
 
     function deployTokens(IERC20 tokenA, IERC20 tokenB) public returns(Mooniswap pool) {
-        require(tokenA != tokenB, "Factory: not support same tokens");
-        require(pools[tokenA][tokenB] == Mooniswap(address(0)), "Factory: pool already exists");
+        require(
+            tokenA != tokenB
+            , "Factory: not support same tokens"
+        );
+        require(
+            pools[tokenA][tokenB] == Mooniswap(address(0)),
+            "Factory: pool already exists"
+        );
 
-        (IERC20 token1, IERC20 token2) = sortTokens(tokenA, tokenB);
+        (IERC20 token1, IERC20 token2)
+            = sortTokens(tokenA, tokenB);
         IERC20[] memory tokens = new IERC20[](2);
         tokens[0] = token1;
         tokens[1] = token2;

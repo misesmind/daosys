@@ -58,13 +58,13 @@ library SharesVaultUtils {
         uint256 assets,
         uint256 reserve,
         uint256 totalShares,
-        uint8 deccimalOffset
+        uint8 decimalOffset
     ) internal pure returns (uint256 shares) {
         shares = _convertToShares(
             assets,
             reserve,
             totalShares,
-            deccimalOffset,
+            decimalOffset,
             BetterMath.Rounding.Floor
         );
     }

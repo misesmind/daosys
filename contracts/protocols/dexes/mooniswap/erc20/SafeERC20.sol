@@ -4,10 +4,10 @@
 pragma solidity ^0.8.0;
 
 // import "contracts/tokens/erc20/interfaces/IERC20.sol";
-import "../utils/Address.sol";
+import "daosys/protocols/dexes/mooniswap/utils/Address.sol";
 
 
-import "contracts/tokens/erc20/interfaces/IERC20.sol";
+import "daosys/tokens/erc20/interfaces/IERC20.sol";
 
 /**
  * @title SafeERC20

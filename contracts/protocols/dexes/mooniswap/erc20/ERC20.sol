@@ -4,11 +4,11 @@
 pragma solidity ^0.8.0;
 
 // import "contracts/tokens/erc20/interfaces/IERC20.sol";
-import "./IERC20Metadata.sol";
-import "../utils/Context.sol";
+// import "./IERC20Metadata.sol";
+import "daosys/protocols/dexes/mooniswap/utils/Context.sol";
 
 
-import "contracts/tokens/erc20/interfaces/IERC20.sol";
+import "daosys/tokens/erc20/interfaces/IERC20.sol";
 
 /**
  * @dev Implementation of the {IERC20} interface.
