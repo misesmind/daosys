@@ -23,12 +23,16 @@ interface IOwnableManager {
      * @param subject Subject of ownership for which to accept a proposed ownership transfer.
      * @return Boolean indicating success acceptance of a proposed ownership transfer.
      */
-    function acceptOwnershipFor(IOwnable subject) external returns(bool);
+    function acceptOwnershipFor(
+        IOwnable subject
+    ) external returns(bool);
 
     /**
      * @param subject Subject og ownership for which to renounce wonershop by transfering to address(0);
      * @return Boolean indicating successful renouncement.
      */
-    function renounceOwnershipFor(IOwnable subject) external returns(bool);
+    function renounceOwnershipFor(
+        IOwnable subject
+    ) external returns(bool);
 
 }
