@@ -9,11 +9,16 @@ import {DCDIFactoryService} from "daosys/dcdi/factory/libs/DCDIFactoryService.so
 import {IContext} from "daosys/dcdi/context/interfaces/IContext.sol";
 import {IContextInitializer} from "daosys/dcdi/context/initializers/interfaces/IContextInitializer.sol";
 import {IPackage} from "daosys/dcdi/context/interfaces/IPackage.sol";
-import "daosys/access/operatable/types/OperatableModifiers.sol";
+import {
+    OperatableModifiers
+} from "daosys/access/operatable/types/OperatableModifiers.sol";
 import {OperatableTarget} from "daosys/access/operatable/types/OperatableTarget.sol";
 import {ContextInitializerAdaptor} from "daosys/dcdi/context/initializers/libs/ContextInitializerAdaptor.sol";
 import {FactoryService} from "daosys/factory/libs/FactoryService.sol";
 import "daosys/dcdi/context/types/Context.sol";
+import {
+    OwnableTarget
+} from "contracts/access/ownable/types/OwnableTarget.sol";
 
 /**
  * @title OperatableContext - Limits deployments ot ONE Owner and MANY Operators.
@@ -22,6 +27,7 @@ import "daosys/dcdi/context/types/Context.sol";
 contract OperatableContext
 is
 Context
+,OwnableTarget
 ,OperatableModifiers
 ,OperatableTarget
 {
