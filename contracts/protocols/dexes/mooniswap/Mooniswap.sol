@@ -13,7 +13,7 @@ import "daosys/protocols/dexes/mooniswap/libraries/UniERC20.sol";
 import {IFactory} from "daosys/protocols/dexes/mooniswap/interfaces/IFactory.sol";
 import {VirtualBalance} from "daosys/protocols/dexes/mooniswap/libraries/VirtualBalance.sol";
 import {BetterMath} from "daosys/math/BetterMath.sol";
-// import {DualElasticConstProdPoolStub} from "daosys/pools/const-prod/elastic/dual/types/DualElasticConstProdPoolStub.sol";
+// import {DualElasticConstProdPoolStub} from "daosys/pools/const-prod/elastic/dual/types/DualElasticConstProdPoolFacetDiamondPackage.sol";
 
 contract Mooniswap
 is
