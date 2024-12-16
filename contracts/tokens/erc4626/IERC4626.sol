@@ -54,6 +54,16 @@ interface IERC4626 is IERC20 {
      */
     error ERC4626ExceededMaxRedeem(address owner, uint256 shares, uint256 max);
 
+    error ExpectedSharesNotMet(
+        uint256 expected,
+        uint256 actual
+    );
+
+    error ExpectedAssetsNotMet(
+        uint256 expected,
+        uint256 actual
+    );
+
     /* ------------------------------ FUNCTIONS ----------------------------- */
 
     // tag::asset[]
@@ -259,5 +269,5 @@ interface IERC4626 is IERC20 {
         address owner
     ) external returns (uint256 assetAmount);
     // end::redeem[]
-    
+
 }
