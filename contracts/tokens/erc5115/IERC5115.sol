@@ -46,7 +46,8 @@ interface IERC5115 is IERC20 {
 
     // tag::deposit[]
     /**
-     * @custom:sig deposit(address,address,uint256,uint256,bool)
+     * @custom:funcsig deposit(address,address,uint256,uint256,bool)
+     * @custom:funcsel db6f344c
      */
     function deposit(
         address receiver,
@@ -59,7 +60,8 @@ interface IERC5115 is IERC20 {
 
     // tag::redeem[]
     /**
-     * @custom:sig redeem(address,uint256,address,uint256,bool)
+     * @custom:funcsig redeem(address,uint256,address,uint256,bool)
+     * @custom:funcsel 769f8e5d
      */
     function redeem(
         address receiver,
@@ -74,21 +76,24 @@ interface IERC5115 is IERC20 {
     /**
      * @dev This method updates and returns the latest exchange rate, which is the exchange rate from SY token amount
      * @dev into asset amount, scaled by a fixed scaling factor of 1e18.
-     * @custom:sig exchangeRate()
+     * @custom:funcsig exchangeRate()
+     * @custom:funcsel 3ba0b9a9
      */
     function exchangeRate() external view returns (uint256 res);
     // end::exchangeRate[]
 
     // tag::getTokensIn[]
     /**
-     * @custom:sig getTokensIn()
+     * @custom:funcsig getTokensIn()
+     * @custom:funcsel 213cae63
      */
     function getTokensIn() external view returns (address[] memory res);
     // end::getTokensIn[]
 
     // tag::getTokensOut[]
     /**
-     * @custom:sig getTokensOut()
+     * @custom:funcsig getTokensOut()
+     * @custom:funcsel 071bc3c9
      */
     function getTokensOut() external view returns (address[] memory res);
     // end::getTokensOut[]
@@ -100,14 +105,16 @@ interface IERC5115 is IERC20 {
      * @notice MUST NOT revert.
      * @notice MUST reflect the exact underlying yield-bearing token address if the SY token is a wrapped token.
      * @notice MAY return 0x or zero address if the SY token is natively implemented, and not from wrapping.
-     * @custom:sig yieldToken()
+     * @custom:funcsig yieldToken()
+     * @custom:funcsel 76d5de85
      */
     function yieldToken() external view returns (address);
     // end::yieldToken[]
 
     // tag::previewDeposit[]
     /**
-     * @custom:sig previewDeposit(address,uint256)
+     * @custom:funcsig previewDeposit(address,uint256)
+     * @custom:funcsel b8f82b26
      */
     function previewDeposit(
         address tokenIn,
@@ -117,7 +124,8 @@ interface IERC5115 is IERC20 {
 
     // tag::previewRedeem[]
     /**
-     * @custom:sig previewRedeem(address,uint256)
+     * @custom:funcsig previewRedeem(address,uint256)
+     * @custom:funcsel cbe52ae3
      */
     function previewRedeem(
         address tokenOut,
