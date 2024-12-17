@@ -404,8 +404,8 @@ abstract contract ERC20Storage is IERC20Errors {
     // tag::_transfer(address,address,uint256)[]
     /**
      * @dev DOES NOT emit event as that is for exposing implementation.
-     * @param sender The account to tansfer `amount` to `recipient`.
-     * @param recipient The account to be transfered `amount` from `sender`.
+     * @param sender The account to transfer `amount` to `recipient`.
+     * @param recipient The account to be transferred `amount` from `sender`.
      * @param amount The amount to transfer from `sender` to `recipient`.
      */
     function _transfer(

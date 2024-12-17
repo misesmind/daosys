@@ -19,7 +19,8 @@ remappings = [
     # This takes precedence over `auto_detect_solc`, if a version is set then this overrides auto-detection.
 solc = "0.8.28"
     # The EVM version by hardfork name
-evm_version = 'paris'
+# evm_version = 'paris'
+evm_version = 'cancun'
     # Whether or not Forge should auto-detect the solc version to use
 # auto_detect_solc = true
     # Print the sizes of the compiled contracts
