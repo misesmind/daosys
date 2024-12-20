@@ -270,7 +270,7 @@ library Math {
     }
 
     /**
-     * @dev Expects percentage to be trailed by 00,
+     * @dev Expects percentage to be trailed by 0,
      */
     function _percentageAmount(uint256 total_, uint256 percentage_)
     internal pure returns ( uint256 percentAmount_ ) {
@@ -278,7 +278,7 @@ library Math {
     }
 
     /*
-     * Expects percentage to be trailed by 00,
+     * Expects percentage to be trailed by 0,
      */
     function _substractPercentage( uint256 total_, uint8 percentageToSub_ )
     internal pure returns ( uint256 result_ ) {

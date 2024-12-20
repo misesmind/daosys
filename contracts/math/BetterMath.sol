@@ -528,10 +528,6 @@ library BetterMath {
         return uint8(rounding) % 2 == 1;
     }
 
-    /* ---------------------------------------------------------------------- */
-    /*                        REFACTORED CODE IS ABOVE                        */
-    /* ---------------------------------------------------------------------- */
-
     function _proportionalSplit(
         uint256 ownedShares,
         uint256 totalShares,
@@ -544,6 +540,10 @@ library BetterMath {
         shareA = ((ownedShares * totalReserveA) / totalShares);
         shareB = ((ownedShares * totalReserveB) / totalShares);
     }
+
+    /* ---------------------------------------------------------------------- */
+    /*                          Percentage Operations                         */
+    /* ---------------------------------------------------------------------- */
 
     /**
      * @dev Expects percentage to be trailed by 0,
@@ -569,6 +569,11 @@ library BetterMath {
     function _percentageAmountExpanded(uint256 total_, uint256 percentage_)
     internal pure returns ( uint256 percentAmount_ ) {
         return ( ( total_ * percentage_ ) / 100000 );
+    }
+
+    function _percentageOfTotalExpanded(uint256 part_, uint256 total_)
+    internal pure returns ( uint256 percent_ ) {
+        return ( (part_ * 100000) / total_ );
     }
 
     function _convertDecimalsFromTo(
