@@ -191,7 +191,7 @@ library AddressSetRepo {
     }
 
     /**
-     * @dev Writen to be idempotent.
+     * @dev Written to be idempotent.
      * @dev Sets care about ensuring desired state.
      * @dev Desired state is for address to not be present in the set.
      * @dev If address is not present, desired state has been achieved.

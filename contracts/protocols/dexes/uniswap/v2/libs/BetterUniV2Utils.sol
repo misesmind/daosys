@@ -151,6 +151,8 @@ library BetterUniV2Utils {
         uint numerator = (amountInWithFee * reserveOut);
         uint denominator = (reserveIn * 1000) + (amountInWithFee);
         amountOut = numerator / denominator;
+        // amountOut
+        //     = ((amountIn * 997) * reserveOut) / ((reserveIn * 1000) + ((amountIn * 997)))
     }
     // end::_quoteSwapIn[]
 

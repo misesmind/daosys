@@ -549,6 +549,7 @@ library BetterMath {
      * @dev Expects percentage to be trailed by 0,
      */
     // 1 = 0.1%
+    // 3 = 0.3%
     // 10 = 1%
     // 30 = 3%
     // 50 = 5%
@@ -561,7 +562,10 @@ library BetterMath {
     /**
      * @dev Expects percentage to be trailed by 000,
      */
+    // 10 = 0.01%
+    // 30 = 0.03%
     // 100 = 0.1%
+    // 300 = 0.3%
     // 1000 = 1%
     // 3000 = 3%
     // 5000 = 5%
@@ -705,7 +709,12 @@ library BetterMath {
     /**
      * @notice Calculates x * y / denominator with full precision, following the selected rounding direction.
      */
-    function _mulDiv(uint256 x, uint256 y, uint256 denominator, Rounding rounding)
+    function _mulDiv(
+        uint256 x, 
+        uint256 y, 
+        uint256 denominator, 
+        Rounding rounding
+    )
     internal pure returns (uint256) {
         uint256 result = _mulDiv(x, y, denominator);
         if (_unsignedRoundsUp(rounding) && mulmod(x, y, denominator) > 0) {
