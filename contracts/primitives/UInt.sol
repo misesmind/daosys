@@ -5,7 +5,7 @@ import "contracts/Constants.sol";
 
 /**
  * @title utility functions for uint256 operations
- * @author Nick Barry, mises mind <misesmind@proton.me>
+ * @author Nick Barry, cyotee doge <doge.cyotee>
  * @dev derived from https://github.com/OpenZeppelin/openzeppelin-contracts/ (MIT license)
  */
 library UInt {

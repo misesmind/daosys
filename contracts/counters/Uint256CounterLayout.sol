@@ -7,7 +7,7 @@ struct Uint256CounterStruct {
 
 /**
  * @title Uint256CounterLayout - Storage layout for counting in uint256 storage operations.
- * @author mises mind <misesmind@proton.me>
+ * @author cyotee doge <doge.cyotee>
  */
 library Uint256CounterLayout {
 

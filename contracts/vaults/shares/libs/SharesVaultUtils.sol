@@ -5,7 +5,7 @@ import {BetterMath} from "daosys/math/BetterMath.sol";
 
 /**
  * @title SharesVautlUtils - Utility functions for shares based vaults.
- * @author misesmind <misesmind@proton.me>
+ * @author misesmind <doge.cyotee>
  * @notice Provides commons functions fo vaults that use a variable supply of shares.
  * @notice Shares based vault can be seen in ERC4626, and LP tokens.
  */

@@ -9,7 +9,7 @@ struct Bytes32Set {
 
 /**
  * @title Bytes32SetRepo - Struct and atomic operations for a set of 32 byte values
- * @author mises mind <misesmind@proton.me>
+ * @author cyotee doge <doge.cyotee>
  */
 library Bytes32SetRepo {
 

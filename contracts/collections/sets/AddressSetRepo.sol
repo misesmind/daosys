@@ -12,7 +12,7 @@ struct AddressSet {
 
 /**
  * @title AddressSetRepo - Struct and atomic operations for a set of address values;
- * @author mises mind <misesmind@proton.me>
+ * @author cyotee doge <doge.cyotee>
  * @dev Distinct from OpenZepplin to allow for operations upon an array of the same type.
  */
 library AddressSetRepo {

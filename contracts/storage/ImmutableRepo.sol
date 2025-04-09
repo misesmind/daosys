@@ -6,7 +6,7 @@ import {Bytecode} from "daosys/primitives/Bytecode.sol";
 
 /**
  * @title Library to serve as the primary integration point for consumers of immutable blob storage.
- * @author mises mind
+ * @author cyotee doge
  * @dev Implemented as internal functions to simplify development.
  * @dev Will be externalized as part of unit testing.
  */

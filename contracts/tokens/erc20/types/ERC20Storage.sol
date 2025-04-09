@@ -10,7 +10,7 @@ import {ERC20Layout, ERC20Repo} from "daosys/tokens/erc20/libs/ERC20Repo.sol";
 
 /**
  * @title ERC20Storage Diamond Storage ERC20 logic.
- * @author mises mind <misesmind@proton.me>
+ * @author cyotee doge <doge.cyotee>
  * @notice Implements ERC20 compliant logic following Diamond Storage.
  * @notice May be inherited into other contracts to simplify proxy safe implmentations.
  */

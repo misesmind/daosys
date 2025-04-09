@@ -8,7 +8,7 @@ import {
 
 /**
  * @title A library for deploying contracts EIP-3171 style.
- * @author mises mind <misesmind@proton.me>
+ * @author cyotee doge <doge.cyotee>
  * @author Agustin Aguilar <aa@horizon.io>
  * @dev source - https://raw.githubusercontent.com/0xsequence/create3/master/contracts/Create3.sol
  * @notice originally published under Unlicense

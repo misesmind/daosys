@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 /**
  * @title ERC165Utils Standardized operations to support ERC165.
- * @author mises mind <misesmind@proton.me>
+ * @author cyotee doge <doge.cyotee>
  */
 library ERC165Utils {
 

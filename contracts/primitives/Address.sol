@@ -9,7 +9,7 @@ import "daosys/primitives/UInt.sol";
 
 /**
  * @title Library with standardized operations involving address variables.
- * @author various, mises mind <misesmind@proton.me>
+ * @author various, cyotee doge <doge.cyotee>
  * @dev Attribution to many parties that contributed to the various libraries consolidated into this library.
  */
 library Address {

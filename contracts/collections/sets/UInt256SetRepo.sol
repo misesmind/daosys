@@ -12,7 +12,7 @@ struct UInt256Set {
 
 /**
  * @title UInt256SetRepo - Struct and atomic operations for a set of uint256 values;
- * @author mises mind <misesmind@proton.me>
+ * @author cyotee doge <doge.cyotee>
  * @dev Tracks the largest value in the Set.
  */
 library UInt256SetRepo {

@@ -9,7 +9,7 @@ import {
 
 /**
  * @title ERC20Target - Proxy Logic target exposing ERC20 standard.
- * @author mises mind <misesmind@proton.me>
+ * @author cyotee doge <doge.cyotee>
  * @dev Expects to be initialized.
  */
 contract ERC20Target is ERC20Storage, IERC20 {

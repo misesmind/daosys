@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 /**
  * @title Bytes32 - Standardized operations for bytes32.
- * @author mises mind <misesmind@proton.me>
+ * @author cyotee doge <doge.cyotee>
  */
 library Bytes32 {
 
